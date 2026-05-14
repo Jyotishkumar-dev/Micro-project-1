@@ -14,18 +14,22 @@ html{
 
 /* BODY */
 body{
+
     font-family: 'Outfit', sans-serif;
 
     background:
-    radial-gradient(circle at top left, #6d28d9, transparent 30%),
-    radial-gradient(circle at bottom right, #7c3aed, transparent 30%),
-    #09090f;
+    linear-gradient(
+    135deg,
+    #05010d 0%,
+    #140320 35%,
+    #1d0630 60%,
+    #2a0845 100%
+    );
 
     color: white;
 
     overflow-x: hidden;
 }
-
 /* NAVBAR */
 nav{
 
@@ -36,7 +40,7 @@ nav{
     justify-content: space-between;
     align-items: center;
 
-    padding: 20px 8%;
+    padding: 16px 8%;
 
     background: rgba(10,10,20,0.6);
 
@@ -165,17 +169,17 @@ body::after{
 /* HERO SECTION */
 header{
 
-    min-height: 100vh;
+    min-height: 90vh;
 
     display: flex;
-
     flex-direction: column;
 
     justify-content: center;
-
     align-items: center;
 
     text-align: center;
+
+    padding-top: 120px;
 }
 
 header{
@@ -206,51 +210,41 @@ header::before{
 }
 
 .profile-image{
-    width: 220px;
-    height: 220px;
+
+    width: 210px;
+    height: 210px;
 
     border-radius: 50%;
 
     object-fit: cover;
+
     object-position: center 15%;
 
-    border: 5px solid white;
+    border: 5px solid rgba(255,255,255,0.9);
 
     margin-bottom: 25px;
 
     box-shadow:
-    0 0 30px rgba(168,85,247,0.5),
-    0 0 80px rgba(168,85,247,0.25);
+    0 0 25px rgba(168,85,247,0.35);
 }
 
 header h1{
 
-    font-size: 5.2rem;
+    font-size: 5rem;
 
     font-weight: 700;
 
     letter-spacing: -2px;
 
-    line-height: 1.1;
-
-    margin-top: 20px;
-
-    margin-bottom: 15px;
-
     background: linear-gradient(
-        to right,
-        #ffffff,
-        #f3e8ff,
-        #d8b4fe
+    to right,
+    #ffffff,
+    #f3e8ff,
+    #c084fc
     );
 
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
-
-    text-shadow:
-    0 0 20px rgba(168,85,247,0.25);
-
 }
 #typing-text{
 
@@ -554,7 +548,7 @@ footer{
 
         gap: 20px;
 
-        padding: 20px;
+        padding: 14px 5%;
     }
 
     nav ul{
@@ -568,7 +562,7 @@ footer{
 
     header h1{
 
-        font-size: 3.5rem;
+        font-size: 4rem;
         font-family: 'outfit', sans-serif;
 
 
@@ -577,8 +571,8 @@ footer{
 
     .profile-image{
 
-        width: 140px;
-        height: 140px;
+        width: 180px;
+        height: 180px;
     }
 
     section h2{
