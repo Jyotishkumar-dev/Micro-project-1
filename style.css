@@ -179,7 +179,13 @@ header{
 
     text-align: center;
 
-    padding-top: 120px;
+    
+
+    padding-top: 170px;
+
+
+
+    
 }
 
 header{
@@ -527,6 +533,13 @@ footer{
 /* MOBILE RESPONSIVE */
 @media(max-width:768px){
 
+    
+
+    header{
+
+        padding-top: 220px;
+    }
+
     .logo{
 
         font-size: 3rem;
@@ -684,3 +697,22 @@ h1,h2,h3{
     color: #d1d5db;
     margin-top: 10px;
 }
+
+nav{
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 14px 6%;
+
+    background: rgba(10,10,20,0.75);
+
+    backdrop-filter: blur(14px);
+
+    z-index: 1000;
+}
+
