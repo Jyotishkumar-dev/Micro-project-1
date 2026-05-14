@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    font-family: 'segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 10px;
+    background-color: #fdfdff;
+    color: #333;
+}
+/*2. HEADER - the top dark bar */
+header {
+    background-color: #502c36;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+
+
+
+/* NAVBAR STYLING */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #282852;
+    color: white;
+    padding: 15px 30px;
+
+}
+ 
+nav h2{
+    margin: 0;
+    border: none;
+
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+}
+ 
+nav u1{
+    display: flex;
+    list-style-type: none;
+    gap: 20px;
+}
+
+nav u1 li{
+    background: none;
+    border: none;
+    padding: 0;
+}
+ 
+nav ul li a {
+    color: white;
+    font-weight: bold;
+
+}
+nav u1 li a:hover{
+    color: #3498db;
+
+}
+
+#project p {
+    font-style: italic;
+    color: #9b9393
+
+}
+
+.profile-image{
+    width:150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit:cover;
+    border: 5px solid white;
+    margin-bottom:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,3) ;
+}
