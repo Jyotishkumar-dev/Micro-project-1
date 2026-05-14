@@ -206,19 +206,19 @@ header::before{
 }
 
 .profile-image{
-    width: 180px;
-    height: 180px;
+    width: 190px;
+    height: 190px;
 
     border-radius: 50%;
+
     object-fit: cover;
+    object-position: top;
 
     border: 5px solid white;
 
-    margin-bottom: 20px;
-
     box-shadow:
-    0 0 30px rgba(31, 103, 211, 0.5),
-    0 0 80px rgba(54, 15, 91, 0.25);
+    0 0 30px rgba(168,85,247,0.5),
+    0 0 80px rgba(168,85,247,0.25);
 }
 
 header h1{
