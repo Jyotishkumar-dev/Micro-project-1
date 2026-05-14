@@ -1,131 +1,332 @@
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jyotish Kumar | Portfolio</title>
+
+    <!-- CSS LINK -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
 <body>
+
+    <!-- NAVBAR -->
+    <nav>
+
+        <h2 class="logo">My Portfolio</h2>
+
+        <ul>
+
+            <li><a href="#about">About</a></li>
+
+            <li><a href="#skills">Skills</a></li>
+
+            <li><a href="#projects">Projects</a></li>
+
+            <li><a href="#contact">Contact</a></li>
+
+        </ul>
+
+    </nav>
 
     <!-- HERO SECTION -->
     <header>
 
-        <img src="my_pic.jpeg" alt="Jyotish Kumar" class="profile-image">
+        <img src="my_pic.jpeg"
+             alt="JYOTISH KUMAR"
+             class="profile-image">
 
         <h1>Jyotish Kumar</h1>
 
-        <p class="tagline">
-            DSA in JAVA & Full Stack Developer
+        <h2 id="typing-text"></h2>
+
+        <p class="hero-description">
+
+            Passionate developer focused on
+            AI/ML, Full Stack Development ,
+            and modern web technologies.
+
         </p>
 
         <div class="hero-buttons">
-            <a href="#projects" class="btn">View Projects</a>
 
+            <!-- LINKEDIN BUTTON -->
             <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/"
                target="_blank"
-               class="btn secondary-btn">
+               class="btn">
+
                LinkedIn
+
             </a>
+
+            <!-- GITHUB BUTTON -->
+            <a href="https://github.com/Jyotishkumar-dev"
+               target="_blank"
+               class="btn secondary-btn">
+
+               GitHub
+
+            </a>
+
+            <!-- RESUME BUTTON -->
+            <a href="resume.pdf"
+               download
+               class="btn">
+
+               Download Resume
+
+            </a>
+
         </div>
 
     </header>
 
-    <!-- CSS FILE LINK -->
-    <link rel="stylesheet" href="style.css">
+    <!-- ABOUT SECTION -->
+<section id="about" class="hidden">
 
-    <!-- ABOUT -->
-    <section id="about">
+    <h2>About Me</h2>
 
-        <h2>About Me</h2>
+    <div class="about-box">
 
-        <p>
-            I am a passionate B.Tech CST student focused on
-            AI/ML, Full Stack Development, and Problem Solving.
+        <p class="about-text">
 
-            I enjoy building modern web applications,
-            learning new technologies, and creating impactful digital products.
+            I’m <span>Jyotish Kumar</span>,
+            a passionate developer focused on
+            creating impactful digital products
+            and solving real-world problems
+            through technology.
+
         </p>
 
-    </section>
+        <p class="college-text">
+
+            Pursuing B.Tech CST from
+            <span>SAGE University Indore</span>
+            powered by
+            <span>ALTA School of Technology</span>
+
+        </p>
+
+        <p class="learning-text">
+
+            Currently learning Full Stack Development,
+            Java DSA, AI/ML, and modern frontend technologies.
+
+        </p>
+
+    </div>
+
+</section>
+
+<section id="stats" class="hidden">
+
+    <div class="stats-container">
+
+        <div class="stat-box">
+
+            <h2>5+</h2>
+
+            <p>Projects</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <h2>10+</h2>
+
+            <p>Certificates</p>
+
+        </div>
+
+        <div class="stat-box">
+
+            <h2>100+</h2>
+
+            <p>DSA Problems</p>
+
+        </div>
+
+    </div>
+
+</section>
 
     <!-- SKILLS -->
-    <section id="skills">
+    <section id="skills" class="hidden">
 
         <h2>Technical Skills</h2>
 
         <div class="skills-container">
 
             <div class="skill-card">HTML5</div>
+
             <div class="skill-card">CSS3</div>
+
             <div class="skill-card">JavaScript</div>
+
             <div class="skill-card">Java</div>
+
             <div class="skill-card">C++</div>
+
             <div class="skill-card">DSA</div>
-            <div class="skill-card">OOPs</div>
+
             <div class="skill-card">Git & GitHub</div>
+
+            <div class="skill-card">OOPs</div>
 
         </div>
 
     </section>
 
     <!-- EXPERIENCE -->
-    <section id="experience">
+    <section id="experience" class="hidden">
 
         <h2>Experience</h2>
 
         <div class="card">
+
             <h3>Techfest IIT Bombay</h3>
+
             <p>College Ambassador</p>
+
         </div>
 
         <div class="card">
-            <h3>UDBHAV'26 Hackathon Organizing member</h3>
+
+            <h3>UDBHAV'26 Hackathon</h3>
+
             <p>Graphics Core Team</p>
+
         </div>
 
     </section>
 
     <!-- PROJECTS -->
-    <section id="projects">
+    <section id="projects" class="hidden">
 
         <h2>Projects</h2>
 
-        <div class="card">
-            <h3>Portfolio Website</h3>
+        <div class="projects-container">
 
-            <p>
-                Personal portfolio website built using
-                HTML and CSS.
-            </p>
-        </div>
+            <!-- PROJECT 1 -->
+            <div class="project-card">
 
-        <div class="card">
-            <h3>More Projects Coming Soon...</h3>
+                
+                
+
+                <h3>Portfolio Website</h3>
+
+                <p>
+
+                    Modern portfolio website built
+                    using HTML and CSS.
+
+                </p>
+
+            </div>
+
+            <!-- PROJECT 2 -->
+            <div class="project-card">
+
+                
+                
+                <h3>Upcoming Project</h3>
+
+                <p>
+
+                    More projects coming soon.
+
+                </p>
+
+            </div>
+
         </div>
 
     </section>
 
-    <!-- CERTIFICATIONS -->
-    <section id="certifications">
+    <section id="github" class="hidden">
 
-        <h2>Certifications</h2>
+    <h2>GitHub Activity</h2>
 
-        <div class="card">
-            <h3>AI/ML Workshop - IIT Patna</h3>
-        </div>
+    <div class="github-box">
 
-    </section>
+        <h3>Consistent Learning & Building</h3>
+
+        <p>
+
+            Regularly practicing DSA,
+            frontend development,
+            and working on real-world projects.
+
+        </p>
+
+        <a href="https://github.com/Jyotishkumar-dev"
+           target="_blank"
+           class="btn">
+
+           Visit GitHub
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="hidden">
+
+    <h2>Certifications</h2>
+
+    <div class="card">
+
+        <h3>AI/ML Workshop - IIT Patna</h3>
+
+    </div>
+
+    <div class="card">
+
+        <h3>C++ Essentials 1 - Cisco</h3>
+
+    </div>
+
+    <div class="card">
+
+        <h3>TCS iON Young Professional</h3>
+
+    </div>
+
+</section>
 
     <!-- CONTACT -->
-    <section id="contact">
+    <section id="contact" class="hidden">
 
         <h2>Contact Me</h2>
 
-        <p>Email: 
+        <p>
+
+            Email:
             <a href="mailto:jyotishyt58@gmail.com">
+
                 jyotishyt58@gmail.com
+
             </a>
+
         </p>
 
         <p>
+
             LinkedIn:
             <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/"
                target="_blank">
+
                Visit Profile
+
             </a>
+
         </p>
 
     </section>
@@ -134,9 +335,63 @@
     <footer>
 
         <p>
-            © 2026 Jyotish Kumar | All Rights Reserved
+
+            © 2026 Jyotish Kumar.
+            All Rights Reserved.
+
         </p>
 
     </footer>
 
+    <!-- TYPING EFFECT -->
+   <script>
+
+const text = "DSA (Java) & Full Stack Learner.";
+
+const typingElement = document.getElementById("typing-text");
+
+let index = 0;
+
+typingElement.innerHTML = "";
+
+function typeEffect(){
+
+    if(index < text.length){
+
+        typingElement.innerHTML += text.charAt(index);
+
+        index++;
+
+        setTimeout(typeEffect, 100);
+    }
+}
+
+typeEffect();
+
+</script>
+
+<script>
+
+const hiddenElements = document.querySelectorAll('.hidden');
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach((entry) => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add('show');
+
+        }
+
+    });
+
+});
+
+hiddenElements.forEach((el) => observer.observe(el));
+
+</script>
+
 </body>
+
+</html>
