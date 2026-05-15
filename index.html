@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- GOOGLE FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -37,6 +36,10 @@
     <!-- HERO SECTION -->
     <header>
 
+        <p class="intro-text">
+           Hello, I'm
+        </p>
+
         <img src="my_pic.jpeg"
              alt="JYOTISH KUMAR"
              class="profile-image">
@@ -47,10 +50,13 @@
 
         <p class="hero-description">
 
-            Passionate developer focused on
-            AI/ML, Full Stack Development ,
-            and modern web technologies.
+            <p class="hero-description">
 
+           Passionate Full Stack Developer focused on
+           building modern, responsive and user-friendly
+           web applications using clean design and efficient code.
+
+</p>
         </p>
 
         <div class="hero-buttons">
@@ -346,7 +352,7 @@
     <!-- TYPING EFFECT -->
    <script>
 
-const text = "DSA (Java) & Full Stack Learner.";
+const text = "Full Stack Developer & Java DSA Enthusiast";
 
 const typingElement = document.getElementById("typing-text");
 
@@ -372,23 +378,23 @@ typeEffect();
 
 <script>
 
-const hiddenElements = document.querySelectorAll('.hidden');
+const hiddenElements =
+document.querySelectorAll(".hidden");
 
-const observer = new IntersectionObserver((entries) => {
+const observer =
+new IntersectionObserver((entries)=>{
 
-    entries.forEach((entry) => {
+    entries.forEach((entry)=>{
 
         if(entry.isIntersecting){
 
-            entry.target.classList.add('show');
-
+            entry.target.classList.add("show");
         }
-
     });
-
 });
 
-hiddenElements.forEach((el) => observer.observe(el));
+hiddenElements.forEach((el)=>
+observer.observe(el));
 
 </script>
 
