@@ -952,3 +952,19 @@ button:hover{
 
     transition: 0.3s ease;
 }
+
+#particles-js{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: linear-gradient(to bottom, #090014, #12002b);
+}
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: transparent;
+}
