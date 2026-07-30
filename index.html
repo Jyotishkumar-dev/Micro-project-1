@@ -4,9 +4,16 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jyotish Kumar — Software Engineer & AI Product Builder</title>
+    <meta name="description" content="Jyotish Kumar — B.Tech Computer Science (Data Science & ML) student building production-grade full-stack and AI products, including SmartAttend AI.">
+    <meta name="keywords" content="Jyotish Kumar, Software Engineer, Full Stack Developer, AI Product Engineer, SmartAttend, React Developer, Java DSA">
+    <meta name="author" content="Jyotish Kumar">
 
-    <title>Jyotish Kumar | Full-Stack Developer & AI/ML Enthusiast</title>
-    <meta name="description" content="Portfolio of Jyotish Kumar — full-stack developer building SmartAttend and an AI Career Intelligence Platform.">
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="Jyotish Kumar — Software Engineer & AI Product Builder">
+    <meta property="og:description" content="B.Tech CS (Data Science & ML) student building production-grade full-stack and AI products.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="my_pic2.jpeg">
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
@@ -14,83 +21,111 @@
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- THEME (applied before paint to avoid flash) -->
+    <script>
+        (function(){
+            const saved = localStorage.getItem("theme");
+            const theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
 
 </head>
 
 <body>
 
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <!-- PARTICLES BACKGROUND -->
-    <div id="particles-js"></div>
+    <div id="particles-js" aria-hidden="true"></div>
 
     <!-- NAVBAR -->
     <nav>
 
-        <a href="#top" class="logo">JK<span>.</span></a>
+        <a href="#top" class="logo">Jyotish<span>.</span></a>
 
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-        </button>
+        <div class="nav-right">
 
-        <ul id="navLinks">
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Stack</a></li>
-            <li><a href="#projects">Builds</a></li>
-            <li><a href="#experience">Log</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
+                <i class="fa-solid fa-sun icon-sun"></i>
+                <i class="fa-solid fa-moon icon-moon"></i>
+            </button>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+        </div>
 
     </nav>
+
+    <main id="main">
 
     <!-- HERO SECTION -->
     <header id="top">
 
         <div class="hero-grid">
 
-            <!-- TERMINAL PANEL -->
-            <div class="terminal-window">
-                <div class="terminal-bar">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                    <span class="terminal-title">~/jyotish-kumar — zsh</span>
-                </div>
-                <div class="terminal-body">
-                    <p class="term-line"><span class="prompt">$</span> whoami</p>
-                    <h1>Jyotish Kumar</h1>
-                    <p class="term-line role-line"><span class="prompt">&gt;</span> <span id="typing-text"></span><span class="cursor">&#9608;</span></p>
-                    <p class="hero-description">
-                        B.Tech CS student shipping full-stack, AI-assisted products —
-                        from a college attendance SaaS with role-based access
-                        to an in-progress career-intelligence platform.
-                        Clean architecture, typed code, no shortcuts.
-                    </p>
+            <div class="hero-copy">
+                <p class="eyebrow">Software Engineer in the making</p>
 
-                    <div class="hero-buttons">
-                        <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/" target="_blank" class="btn">
-                            <i class="fa-brands fa-linkedin"></i> LinkedIn
-                        </a>
-                        <a href="https://github.com/Jyotishkumar-dev" target="_blank" class="btn secondary-btn">
-                            <i class="fa-brands fa-github"></i> GitHub
-                        </a>
-                        <a href="resume.pdf" download class="btn secondary-btn">
-                            <i class="fa-solid fa-arrow-down"></i> Resume
-                        </a>
-                    </div>
+                <h1>Jyotish Kumar</h1>
+
+                <p class="hero-description">
+                    B.Tech Computer Science student specializing in
+                    <strong>Data Science &amp; Machine Learning</strong>, building
+                    production-grade full-stack and AI products —
+                    on a deliberate path toward a software engineering
+                    role at a top product company.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn">View Projects</a>
+                    <a href="resume.pdf" download class="btn secondary-btn">
+                        <i class="fa-solid fa-arrow-down"></i> Resume
+                    </a>
+                </div>
+
+                <div class="social-row">
+                    <a href="https://github.com/Jyotishkumar-dev" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="mailto:jyotishyt58@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <!-- TODO: replace # with real LeetCode profile URL -->
+                    <a href="#" target="_blank" aria-label="LeetCode"><i class="fa-solid fa-code"></i></a>
+                    <!-- TODO: replace # with real YouTube channel URL -->
+                    <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
-            <!-- PROFILE -->
-            <div class="profile-panel">
+            <div class="hero-visual">
                 <div class="profile-frame">
-                    <img src="my_pic2.jpeg" alt="Jyotish Kumar" class="profile-image">
+                    <img src="my_pic2.jpeg" alt="Portrait of Jyotish Kumar" class="profile-image">
                 </div>
-                <div class="status-chip">
-                    <span class="pulse"></span> Available for internships
+
+                <div class="float-card float-status">
+                    <span class="pulse"></span> Open to internships
                 </div>
+
+                <a href="https://attendance-management-system-projec-steel.vercel.app/login" target="_blank" class="float-card float-project">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <div>
+                        <strong>SmartAttend AI</strong>
+                        <span>Live product</span>
+                    </div>
+                </a>
             </div>
 
         </div>
@@ -100,110 +135,117 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="hidden">
 
-        <p class="eyebrow">// 01 — about</p>
-        <h2>Who I am</h2>
+        <p class="eyebrow">About</p>
+        <h2>From a tier-3 college to building real products</h2>
 
-        <div class="about-box">
+        <div class="about-grid">
 
-            <p class="about-text">
-                I'm <span>Jyotish Kumar</span>, a developer who likes turning
-                real, messy problems — attendance tracking, job-market noise —
-                into products with clean data models and interfaces people
-                actually enjoy using.
-            </p>
+            <div class="about-box">
+                <p class="about-text">
+                    I'm <span>Jyotish Kumar</span>, a Computer Science student
+                    who treats every project as practice for the engineer I'm
+                    trying to become — someone who can design, build, deploy,
+                    and scale software that people actually use.
+                </p>
 
-            <p class="college-text">
-                Pursuing <span>B.Tech in Computer Science &amp; Technology</span> at
-                <span>SAGE University Indore</span>, powered by
-                <span>ALTA School of Technology</span>.
-            </p>
+                <p class="about-text">
+                    I'm not building projects just for a resume line. My goal
+                    is to become an <span>AI Product Engineer</span> —
+                    someone who combines software engineering, AI, product
+                    thinking, and system design to ship useful, AI-powered
+                    products, and eventually earn a role at a top product
+                    company.
+                </p>
 
-            <p class="learning-text">
-                Currently deep in Full-Stack Development, Java &amp; DSA, AI/ML,
-                and modern frontend tooling — learning in public and shipping
-                alongside it.
-            </p>
+                <p class="college-text">
+                    Pursuing <span>B.Tech in Computer Science &amp; Technology</span>,
+                    specializing in <span>Data Science &amp; Machine Learning</span>,
+                    at <span>SAGE University Indore</span>, powered by
+                    <span>ALTA School of Technology</span>.
+                </p>
+            </div>
 
-            <div class="tag-row">
-                <span class="tag">AI/ML Enthusiast</span>
-                <span class="tag">Full-Stack Developer</span>
-                <span class="tag">Java DSA</span>
-                <span class="tag">Problem Solver</span>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <i class="fa-solid fa-seedling"></i>
+                    <h3>First principles</h3>
+                    <p>Understanding how things work before using them.</p>
+                </div>
+                <div class="philosophy-card">
+                    <i class="fa-solid fa-hammer"></i>
+                    <h3>Build, don't just watch</h3>
+                    <p>Projects over tutorials, every time.</p>
+                </div>
+                <div class="philosophy-card">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h3>Clean architecture</h3>
+                    <p>Production-quality code and best practices.</p>
+                </div>
+                <div class="philosophy-card">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                    <h3>Consistency over intensity</h3>
+                    <p>Small, compounding progress, shared in public.</p>
+                </div>
             </div>
 
         </div>
 
-    </section>
-
-    <!-- STATS -->
-    <section id="stats" class="hidden">
-        <div class="stats-container">
-            <div class="stat-box">
-                <h2>2</h2>
-                <p>SaaS platforms in build</p>
-            </div>
-            <div class="stat-box">
-                <h2>5+</h2>
-                <p>Certifications</p>
-            </div>
-            <div class="stat-box">
-                <h2>10+</h2>
-                <p>DSA problems solved</p>
-            </div>
-            <div class="stat-box">
-                <h2>5</h2>
-                <p>User roles designed (RBAC)</p>
-            </div>
-        </div>
     </section>
 
     <!-- SKILLS -->
     <section id="skills" class="hidden">
 
-        <p class="eyebrow">// 02 — stack</p>
+        <p class="eyebrow">Skills</p>
         <h2>Technical Stack</h2>
 
-        <div class="skills-group">
-            <p class="skills-label">Languages</p>
-            <div class="skills-container">
-                <div class="skill-card">Java</div>
-                <div class="skill-card">TypeScript</div>
-                <div class="skill-card">JavaScript</div>
-                <div class="skill-card">C++</div>
-                <div class="skill-card">SQL</div>
-            </div>
-        </div>
+        <div class="skills-grid">
 
-        <div class="skills-group">
-            <p class="skills-label">Frontend</p>
-            <div class="skills-container">
-                <div class="skill-card">React</div>
-                <div class="skill-card">Vite</div>
-                <div class="skill-card">Tailwind CSS</div>
-                <div class="skill-card">Framer Motion</div>
-                <div class="skill-card">HTML5 &amp; CSS3</div>
+            <div class="skills-group">
+                <p class="skills-label"><i class="fa-solid fa-code"></i> Languages</p>
+                <div class="skills-container">
+                    <div class="skill-card">Java</div>
+                    <div class="skill-card">TypeScript</div>
+                    <div class="skill-card">JavaScript</div>
+                    <div class="skill-card">Python</div>
+                    <div class="skill-card">C++</div>
+                    <div class="skill-card">SQL</div>
+                </div>
             </div>
-        </div>
 
-        <div class="skills-group">
-            <p class="skills-label">Backend &amp; Data</p>
-            <div class="skills-container">
-                <div class="skill-card">Node.js</div>
-                <div class="skill-card">Express</div>
-                <div class="skill-card">PostgreSQL</div>
-                <div class="skill-card">Drizzle ORM</div>
-                <div class="skill-card">MySQL</div>
-                <div class="skill-card">JWT &amp; RBAC</div>
+            <div class="skills-group">
+                <p class="skills-label"><i class="fa-solid fa-display"></i> Frontend</p>
+                <div class="skills-container">
+                    <div class="skill-card">React</div>
+                    <div class="skill-card">Next.js</div>
+                    <div class="skill-card">Tailwind CSS</div>
+                    <div class="skill-card">Vite</div>
+                    <div class="skill-card">HTML5 &amp; CSS3</div>
+                </div>
             </div>
-        </div>
 
-        <div class="skills-group">
-            <p class="skills-label">Foundations &amp; Tools</p>
-            <div class="skills-container">
-                <div class="skill-card">Data Structures &amp; Algorithms</div>
-                <div class="skill-card">OOP</div>
-                <div class="skill-card">Git &amp; GitHub</div>
+            <div class="skills-group">
+                <p class="skills-label"><i class="fa-solid fa-server"></i> Backend &amp; Data</p>
+                <div class="skills-container">
+                    <div class="skill-card">Node.js</div>
+                    <div class="skill-card">Express.js</div>
+                    <div class="skill-card">REST APIs</div>
+                    <div class="skill-card">JWT Auth</div>
+                    <div class="skill-card">PostgreSQL</div>
+                    <div class="skill-card">Prisma &amp; Drizzle ORM</div>
+                </div>
             </div>
+
+            <div class="skills-group">
+                <p class="skills-label"><i class="fa-solid fa-robot"></i> AI &amp; Foundations</p>
+                <div class="skills-container">
+                    <div class="skill-card">LLM Applications</div>
+                    <div class="skill-card">Prompt Engineering</div>
+                    <div class="skill-card">OpenAI &amp; Gemini APIs</div>
+                    <div class="skill-card">Data Structures &amp; Algorithms</div>
+                    <div class="skill-card">Git &amp; GitHub</div>
+                </div>
+            </div>
+
         </div>
 
     </section>
@@ -211,70 +253,82 @@
     <!-- PROJECTS -->
     <section id="projects" class="hidden">
 
-        <p class="eyebrow">// 03 — builds</p>
-        <h2>Projects</h2>
+        <p class="eyebrow">Projects</p>
+        <h2>Featured Work</h2>
 
         <div class="projects-container">
 
-            <!-- PROJECT 1 -->
-            <div class="project-card">
-                <span class="status-badge building">In active build</span>
-                <h3>SmartAttend</h3>
-                <p class="project-sub">AI-powered college attendance management SaaS</p>
+            <!-- CASE STUDY 1 -->
+            <article class="project-card project-card--wide">
+                <div class="project-info">
+                    <span class="status-badge shipped">Live</span>
+                    <h3>SmartAttend AI</h3>
+                    <p class="project-sub">AI-powered college attendance management SaaS</p>
+                    <p>
+                        Colleges still track attendance by hand. SmartAttend
+                        replaces that with a multi-role platform — student,
+                        faculty, HOD and admin dashboards, attendance
+                        analytics, and a visual attendance calendar — secured
+                        with JWT access/refresh tokens and bcrypt-hashed
+                        credentials across five distinct roles.
+                    </p>
+                    <div class="tag-row small">
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Tailwind CSS</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Prisma / Drizzle</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://attendance-management-system-projec-steel.vercel.app/login" target="_blank" class="btn">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/Jyotishkumar-dev" target="_blank" class="btn secondary-btn">
+                            <i class="fa-brands fa-github"></i> Source
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CASE STUDY 2 -->
+            <article class="project-card">
+                <span class="status-badge building">Hackathon build</span>
+                <h3>HackathonOS</h3>
+                <p class="project-sub">SQUIDHACK 2026 · Team "The Last Commit"</p>
                 <p>
-                    A full-stack attendance platform with five distinct roles —
-                    student, faculty, HOD, admin, super admin — backed by
-                    JWT auth, bcrypt, and audit-logged records. Frontend runs
-                    on React 19 and Tailwind v4 with a dark glassmorphism
-                    design system.
+                    An operating system for running hackathons end to end —
+                    registration, QR entry, team matching, mentor booking,
+                    a judge dashboard, a live leaderboard, certificates,
+                    project submission, and a sponsor dashboard, built with
+                    a team under hackathon time pressure.
                 </p>
                 <div class="tag-row small">
-                    <span class="tag">Node.js</span>
-                    <span class="tag">Express</span>
-                    <span class="tag">PostgreSQL</span>
-                    <span class="tag">Drizzle ORM</span>
-                    <span class="tag">React 19</span>
-                    <span class="tag">Tailwind v4</span>
+                    <span class="tag">Team Project</span>
+                    <span class="tag">Full-Stack</span>
+                    <span class="tag">Real-time</span>
                 </div>
-            </div>
+            </article>
 
-            <!-- PROJECT 2 -->
-            <div class="project-card">
+            <!-- CASE STUDY 3 -->
+            <article class="project-card">
                 <span class="status-badge planning">Phase 1 — foundation</span>
                 <h3>AI Career Intelligence Platform</h3>
                 <p class="project-sub">Autonomous market-intelligence agents for career decisions</p>
                 <p>
-                    A career-intelligence SaaS being built on a monorepo:
-                    NestJS and Prisma on the backend, React 19, Vite and
-                    shadcn/ui on the frontend, with Argon2id-hashed JWT auth
-                    and a CI/CD pipeline from day one.
+                    A career-intelligence SaaS on a monorepo: NestJS and
+                    Prisma on the backend, React 19, Vite and shadcn/ui on
+                    the frontend, with Argon2id-hashed JWT auth and CI/CD
+                    from day one.
                 </p>
                 <div class="tag-row small">
                     <span class="tag">NestJS</span>
                     <span class="tag">Prisma</span>
                     <span class="tag">React 19</span>
                     <span class="tag">shadcn/ui</span>
-                    <span class="tag">Monorepo</span>
                 </div>
-            </div>
-
-            <!-- PROJECT 3 -->
-            <div class="project-card">
-                <span class="status-badge shipped">Shipped</span>
-                <h3>This Portfolio</h3>
-                <p class="project-sub">Personal site, built from scratch</p>
-                <p>
-                    Hand-written HTML, CSS and vanilla JS — no framework,
-                    no template. Particle background, scroll reveals and a
-                    terminal-inspired hero, tuned to be fast and fully
-                    responsive.
-                </p>
-                <div class="tag-row small">
-                    <span class="tag">HTML5</span>
-                    <span class="tag">CSS3</span>
-                    <span class="tag">Vanilla JS</span>
-                </div>
-            </div>
+            </article>
 
         </div>
 
@@ -283,10 +337,18 @@
     <!-- EXPERIENCE -->
     <section id="experience" class="hidden">
 
-        <p class="eyebrow">// 04 — log</p>
-        <h2>Experience</h2>
+        <p class="eyebrow">Experience</p>
+        <h2>Experience &amp; Leadership</h2>
 
         <div class="log-list">
+
+            <div class="log-entry">
+                <span class="log-marker"></span>
+                <div class="log-content">
+                    <h3>SQUIDHACK 2026</h3>
+                    <p>Team Member, "The Last Commit" — built HackathonOS</p>
+                </div>
+            </div>
 
             <div class="log-entry">
                 <span class="log-marker"></span>
@@ -304,6 +366,14 @@
                 </div>
             </div>
 
+            <div class="log-entry">
+                <span class="log-marker"></span>
+                <div class="log-content">
+                    <h3>College Leadership</h3>
+                    <p>Graphics Team Member · Room Coordinator · Hackathon Organizing Team</p>
+                </div>
+            </div>
+
         </div>
 
     </section>
@@ -311,49 +381,63 @@
     <!-- CERTIFICATIONS -->
     <section id="certifications" class="hidden">
 
-        <p class="eyebrow">// 05 — certified</p>
+        <p class="eyebrow">Certifications</p>
         <h2>Certifications</h2>
 
         <div class="cert-grid">
-
             <div class="card">
                 <i class="fa-solid fa-brain"></i>
                 <h3>AI/ML Workshop</h3>
                 <p>IIT Patna</p>
             </div>
-
             <div class="card">
                 <i class="fa-solid fa-code"></i>
                 <h3>C++ Essentials 1</h3>
                 <p>Cisco</p>
             </div>
-
             <div class="card">
                 <i class="fa-solid fa-certificate"></i>
                 <h3>Young Professional</h3>
                 <p>TCS iON</p>
             </div>
-
         </div>
 
     </section>
 
-    <!-- GITHUB -->
+    <!-- GITHUB + CONTENT -->
     <section id="github" class="hidden">
 
-        <p class="eyebrow">// 06 — activity</p>
-        <h2>GitHub Activity</h2>
+        <p class="eyebrow">Building in Public</p>
+        <h2>GitHub &amp; YouTube</h2>
 
-        <div class="github-box">
-            <h3>Consistent building, in public</h3>
-            <p>
-                Regular DSA practice, frontend work, and a profile README
-                with an animated typing tagline and categorized tech-stack
-                badges — updated alongside whatever I'm currently building.
-            </p>
-            <a href="https://github.com/Jyotishkumar-dev" target="_blank" class="btn">
-                <i class="fa-brands fa-github"></i> Visit GitHub
-            </a>
+        <div class="split-grid">
+
+            <div class="github-box">
+                <h3><i class="fa-brands fa-github"></i> GitHub Activity</h3>
+                <p>
+                    Regular DSA practice and frontend work, plus a profile
+                    README with an animated typing tagline and categorized
+                    tech-stack badges — updated alongside whatever I'm
+                    currently building.
+                </p>
+                <a href="https://github.com/Jyotishkumar-dev" target="_blank" class="btn">
+                    <i class="fa-brands fa-github"></i> Visit GitHub
+                </a>
+            </div>
+
+            <div class="github-box">
+                <h3><i class="fa-brands fa-youtube"></i> Build With Jyotish</h3>
+                <p>
+                    A YouTube channel on Java, DSA, full-stack development,
+                    and AI — including a "60 Day Tech Challenge" series.
+                    Tagline: <em>Building · Learning · Sharing.</em>
+                </p>
+                <!-- TODO: replace # with real YouTube channel URL -->
+                <a href="#" target="_blank" class="btn secondary-btn">
+                    <i class="fa-brands fa-youtube"></i> Watch on YouTube
+                </a>
+            </div>
+
         </div>
 
     </section>
@@ -361,34 +445,51 @@
     <!-- CONTACT -->
     <section id="contact" class="hidden">
 
-        <p class="eyebrow">// 07 — contact</p>
+        <p class="eyebrow">Contact</p>
         <h2>Get in Touch</h2>
 
         <div class="contact-box">
-
             <a href="mailto:jyotishyt58@gmail.com" class="contact-link">
                 <i class="fa-solid fa-envelope"></i>
                 <span>jyotishyt58@gmail.com</span>
             </a>
-
             <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/" target="_blank" class="contact-link">
                 <i class="fa-brands fa-linkedin"></i>
                 <span>Connect on LinkedIn</span>
             </a>
-
             <a href="https://github.com/Jyotishkumar-dev" target="_blank" class="contact-link">
                 <i class="fa-brands fa-github"></i>
                 <span>Jyotishkumar-dev</span>
             </a>
+        </div>
 
+        <div class="elsewhere-row">
+            <span>Also on:</span>
+            <!-- TODO: replace # with real LeetCode profile URL -->
+            <a href="#" target="_blank" aria-label="LeetCode">LeetCode</a>
+            <!-- TODO: replace # with real HackerRank profile URL -->
+            <a href="#" target="_blank" aria-label="HackerRank">HackerRank</a>
         </div>
 
     </section>
+
+    </main>
 
     <!-- FOOTER -->
     <footer>
         <p class="footer-text">© 2026 Jyotish Kumar. All Rights Reserved.</p>
     </footer>
+
+    <!-- THEME TOGGLE -->
+    <script>
+        const themeToggle = document.getElementById("themeToggle");
+        themeToggle.addEventListener("click", () => {
+            const current = document.documentElement.getAttribute("data-theme");
+            const next = current === "light" ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", next);
+            localStorage.setItem("theme", next);
+        });
+    </script>
 
     <!-- MOBILE NAV TOGGLE -->
     <script>
@@ -410,33 +511,16 @@
         });
     </script>
 
-    <!-- TYPING EFFECT -->
-    <script>
-        const text = "Full-Stack Developer & Java DSA Enthusiast";
-        const typingElement = document.getElementById("typing-text");
-        let index = 0;
-        typingElement.innerHTML = "";
-
-        function typeEffect(){
-            if(index < text.length){
-                typingElement.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeEffect, 70);
-            }
-        }
-        typeEffect();
-    </script>
-
     <!-- SCROLL REVEAL -->
     <script>
         const hiddenElements = document.querySelectorAll(".hidden");
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-                if(entry.isIntersecting){
+                if (entry.isIntersecting) {
                     entry.target.classList.add("show");
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.12 });
 
         hiddenElements.forEach((el) => observer.observe(el));
     </script>
