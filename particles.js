@@ -9,7 +9,7 @@ particlesJS("particles-js", {
     },
 
     color: {
-      value: "#a855f7"
+      value: ["#4FD1C5", "#F5A623"]
     },
 
     shape: {
@@ -17,7 +17,7 @@ particlesJS("particles-js", {
     },
 
     opacity: {
-      value: 0.5,
+      value: 0.4,
       random: false
     },
 
@@ -29,14 +29,14 @@ particlesJS("particles-js", {
     line_linked: {
       enable: true,
       distance: 150,
-      color: "#a855f7",
-      opacity: 0.4,
+      color: "#4FD1C5",
+      opacity: 0.25,
       width: 1
     },
 
     move: {
       enable: true,
-      speed: 2,
+      speed: 1.6,
       direction: "none",
       random: false,
       straight: false,
@@ -66,7 +66,7 @@ particlesJS("particles-js", {
       grab: {
         distance: 140,
         line_linked: {
-          opacity: 1
+          opacity: 0.6
         }
       },
 
@@ -78,5 +78,3 @@ particlesJS("particles-js", {
 
   retina_detect: true
 });
-
-detectRetina: true

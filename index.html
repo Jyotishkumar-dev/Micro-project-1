@@ -1,9 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Jyotish Kumar | Portfolio</title>
+    <title>Jyotish Kumar | Full-Stack Developer & AI/ML Enthusiast</title>
+    <meta name="description" content="Portfolio of Jyotish Kumar — full-stack developer building SmartAttend and an AI Career Intelligence Platform.">
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
@@ -11,12 +14,10 @@
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
     <!-- FONT AWESOME -->
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
 
@@ -28,175 +29,252 @@
     <!-- NAVBAR -->
     <nav>
 
-        <h2 class="logo"> Jyotish.Dev</h2>
+        <a href="#top" class="logo">JK<span>.</span></a>
 
-        <ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
 
+        <ul id="navLinks">
             <li><a href="#about">About</a></li>
-
-            <li><a href="#skills">Skills</a></li>
-
-            <li><a href="#projects">Projects</a></li>
-
+            <li><a href="#skills">Stack</a></li>
+            <li><a href="#projects">Builds</a></li>
+            <li><a href="#experience">Log</a></li>
             <li><a href="#contact">Contact</a></li>
-
         </ul>
 
     </nav>
 
-    <!-- HERO SECTION ----->
-    <header>
+    <!-- HERO SECTION -->
+    <header id="top">
 
-        <p class="intro-text">
-           Hello, I'm
-        </p>
+        <div class="hero-grid">
 
-        <img src="my_pic2.jpeg"
-             alt="JYOTISH KUMAR"
-             class="profile-image">
+            <!-- TERMINAL PANEL -->
+            <div class="terminal-window">
+                <div class="terminal-bar">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="terminal-title">~/jyotish-kumar — zsh</span>
+                </div>
+                <div class="terminal-body">
+                    <p class="term-line"><span class="prompt">$</span> whoami</p>
+                    <h1>Jyotish Kumar</h1>
+                    <p class="term-line role-line"><span class="prompt">&gt;</span> <span id="typing-text"></span><span class="cursor">&#9608;</span></p>
+                    <p class="hero-description">
+                        B.Tech CS student shipping full-stack, AI-assisted products —
+                        from a college attendance SaaS with role-based access
+                        to an in-progress career-intelligence platform.
+                        Clean architecture, typed code, no shortcuts.
+                    </p>
 
-        <h1>Jyotish kumar</h1>
+                    <div class="hero-buttons">
+                        <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/" target="_blank" class="btn">
+                            <i class="fa-brands fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/Jyotishkumar-dev" target="_blank" class="btn secondary-btn">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </a>
+                        <a href="resume.pdf" download class="btn secondary-btn">
+                            <i class="fa-solid fa-arrow-down"></i> Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-        <h2 id="typing-text"></h2>
-
-        <p class="hero-description">
-
-            <p class="hero-description">
-
-           Passionate Full Stack Developer focused on
-           building modern, responsive and user-friendly
-           web applications using clean design and efficient code.
-
-     
-        </p>
-
-        <div class="hero-buttons">
-
-            <!-- LINKEDIN BUTTON -->
-            <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/"
-               target="_blank"
-               class="btn">
-
-               LinkedIn
-
-            </a>
-
-            <!-- GITHUB BUTTON -->
-            <a href="https://github.com/Jyotishkumar-dev"
-               target="_blank"
-               class="btn secondary-btn">
-
-               GitHub
-
-            </a>
-
-            <!-- RESUME BUTTON -->
-            <a href="resume.pdf"
-               download
-               class="btn">
-
-               Download Resume
-
-            </a>
+            <!-- PROFILE -->
+            <div class="profile-panel">
+                <div class="profile-frame">
+                    <img src="my_pic2.jpeg" alt="Jyotish Kumar" class="profile-image">
+                </div>
+                <div class="status-chip">
+                    <span class="pulse"></span> Available for internships
+                </div>
+            </div>
 
         </div>
 
     </header>
 
     <!-- ABOUT SECTION -->
-<section id="about" class="hidden">
+    <section id="about" class="hidden">
 
-    <h2>About Me</h2>
+        <p class="eyebrow">// 01 — about</p>
+        <h2>Who I am</h2>
 
-    <div class="about-box">
+        <div class="about-box">
 
-        <p class="about-text">
+            <p class="about-text">
+                I'm <span>Jyotish Kumar</span>, a developer who likes turning
+                real, messy problems — attendance tracking, job-market noise —
+                into products with clean data models and interfaces people
+                actually enjoy using.
+            </p>
 
-            I’m <span>Jyotish Kumar</span>,
-            a passionate developer focused on
-            creating impactful digital products
-            and solving real-world problems
-            through technology.
+            <p class="college-text">
+                Pursuing <span>B.Tech in Computer Science &amp; Technology</span> at
+                <span>SAGE University Indore</span>, powered by
+                <span>ALTA School of Technology</span>.
+            </p>
 
-        </p>
+            <p class="learning-text">
+                Currently deep in Full-Stack Development, Java &amp; DSA, AI/ML,
+                and modern frontend tooling — learning in public and shipping
+                alongside it.
+            </p>
 
-        <p class="college-text">
-
-            Pursuing B.Tech CST from
-            <span>SAGE University Indore</span>
-            powered by
-            <span>ALTA School of Technology</span>
-
-        </p>
-
-        <p class="learning-text">
-
-            Currently learning Full Stack Development,
-            Java DSA, AI/ML, and modern frontend technologies.
-
-        </p>
-
-    </div>
-
-</section>
-
-<section id="stats" class="hidden">
-
-    <div class="stats-container">
-
-        <div class="stat-box">
-
-            <h2>2+</h2>
-
-            <p>Projects</p>
+            <div class="tag-row">
+                <span class="tag">AI/ML Enthusiast</span>
+                <span class="tag">Full-Stack Developer</span>
+                <span class="tag">Java DSA</span>
+                <span class="tag">Problem Solver</span>
+            </div>
 
         </div>
 
-        <div class="stat-box">
+    </section>
 
-            <h2>5+</h2>
-
-            <p>Certificates</p>
-
+    <!-- STATS -->
+    <section id="stats" class="hidden">
+        <div class="stats-container">
+            <div class="stat-box">
+                <h2>2</h2>
+                <p>SaaS platforms in build</p>
+            </div>
+            <div class="stat-box">
+                <h2>5+</h2>
+                <p>Certifications</p>
+            </div>
+            <div class="stat-box">
+                <h2>10+</h2>
+                <p>DSA problems solved</p>
+            </div>
+            <div class="stat-box">
+                <h2>5</h2>
+                <p>User roles designed (RBAC)</p>
+            </div>
         </div>
-
-        <div class="stat-box">
-
-            <h2>10+</h2>
-
-            <p>DSA Problems</p>
-
-        </div>
-
-    </div>
-
-</section>
+    </section>
 
     <!-- SKILLS -->
     <section id="skills" class="hidden">
 
-        <h2>Technical Skills</h2>
+        <p class="eyebrow">// 02 — stack</p>
+        <h2>Technical Stack</h2>
 
-        <div class="skills-container">
+        <div class="skills-group">
+            <p class="skills-label">Languages</p>
+            <div class="skills-container">
+                <div class="skill-card">Java</div>
+                <div class="skill-card">TypeScript</div>
+                <div class="skill-card">JavaScript</div>
+                <div class="skill-card">C++</div>
+                <div class="skill-card">SQL</div>
+            </div>
+        </div>
 
-            <div class="skill-card">HTML5</div>
+        <div class="skills-group">
+            <p class="skills-label">Frontend</p>
+            <div class="skills-container">
+                <div class="skill-card">React</div>
+                <div class="skill-card">Vite</div>
+                <div class="skill-card">Tailwind CSS</div>
+                <div class="skill-card">Framer Motion</div>
+                <div class="skill-card">HTML5 &amp; CSS3</div>
+            </div>
+        </div>
 
-            <div class="skill-card">CSS3</div>
+        <div class="skills-group">
+            <p class="skills-label">Backend &amp; Data</p>
+            <div class="skills-container">
+                <div class="skill-card">Node.js</div>
+                <div class="skill-card">Express</div>
+                <div class="skill-card">PostgreSQL</div>
+                <div class="skill-card">Drizzle ORM</div>
+                <div class="skill-card">MySQL</div>
+                <div class="skill-card">JWT &amp; RBAC</div>
+            </div>
+        </div>
 
-            <div class="skill-card">JavaScript</div>
+        <div class="skills-group">
+            <p class="skills-label">Foundations &amp; Tools</p>
+            <div class="skills-container">
+                <div class="skill-card">Data Structures &amp; Algorithms</div>
+                <div class="skill-card">OOP</div>
+                <div class="skill-card">Git &amp; GitHub</div>
+            </div>
+        </div>
 
-            <div class="skill-card">Java</div>
+    </section>
 
-            <div class="skill-card">C++</div>
+    <!-- PROJECTS -->
+    <section id="projects" class="hidden">
 
-            <div class="skill-card">DSA</div>
+        <p class="eyebrow">// 03 — builds</p>
+        <h2>Projects</h2>
 
-            <div class="skill-card">Git & GitHub</div>
+        <div class="projects-container">
 
-            <div class="skill-card">OOPs</div>
+            <!-- PROJECT 1 -->
+            <div class="project-card">
+                <span class="status-badge building">In active build</span>
+                <h3>SmartAttend</h3>
+                <p class="project-sub">AI-powered college attendance management SaaS</p>
+                <p>
+                    A full-stack attendance platform with five distinct roles —
+                    student, faculty, HOD, admin, super admin — backed by
+                    JWT auth, bcrypt, and audit-logged records. Frontend runs
+                    on React 19 and Tailwind v4 with a dark glassmorphism
+                    design system.
+                </p>
+                <div class="tag-row small">
+                    <span class="tag">Node.js</span>
+                    <span class="tag">Express</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Drizzle ORM</span>
+                    <span class="tag">React 19</span>
+                    <span class="tag">Tailwind v4</span>
+                </div>
+            </div>
 
-            <div class="skill-card">MySQL</div>
+            <!-- PROJECT 2 -->
+            <div class="project-card">
+                <span class="status-badge planning">Phase 1 — foundation</span>
+                <h3>AI Career Intelligence Platform</h3>
+                <p class="project-sub">Autonomous market-intelligence agents for career decisions</p>
+                <p>
+                    A career-intelligence SaaS being built on a monorepo:
+                    NestJS and Prisma on the backend, React 19, Vite and
+                    shadcn/ui on the frontend, with Argon2id-hashed JWT auth
+                    and a CI/CD pipeline from day one.
+                </p>
+                <div class="tag-row small">
+                    <span class="tag">NestJS</span>
+                    <span class="tag">Prisma</span>
+                    <span class="tag">React 19</span>
+                    <span class="tag">shadcn/ui</span>
+                    <span class="tag">Monorepo</span>
+                </div>
+            </div>
 
+            <!-- PROJECT 3 -->
+            <div class="project-card">
+                <span class="status-badge shipped">Shipped</span>
+                <h3>This Portfolio</h3>
+                <p class="project-sub">Personal site, built from scratch</p>
+                <p>
+                    Hand-written HTML, CSS and vanilla JS — no framework,
+                    no template. Particle background, scroll reveals and a
+                    terminal-inspired hero, tuned to be fast and fully
+                    responsive.
+                </p>
+                <div class="tag-row small">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">Vanilla JS</span>
+                </div>
+            </div>
 
         </div>
 
@@ -205,215 +283,166 @@
     <!-- EXPERIENCE -->
     <section id="experience" class="hidden">
 
+        <p class="eyebrow">// 04 — log</p>
         <h2>Experience</h2>
 
-        <div class="card">
+        <div class="log-list">
 
-            <h3>Techfest IIT Bombay</h3>
-
-            <p>College Ambassador</p>
-
-        </div>
-
-        <div class="card">
-
-            <h3>UDBHAV'26 Hackathon</h3>
-
-            <p>Graphics Core Team</p>
-
-        </div>
-
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects" class="hidden">
-
-        <h2>Projects</h2>
-
-        <div class="projects-container">
-
-            <!-- PROJECT 1 -->
-            <div class="project-card">
-
-                
-                
-
-                <h3>Portfolio Website</h3>
-
-                <p>
-
-                    Modern portfolio website built
-                    using HTML and CSS.
-
-                </p>
-
+            <div class="log-entry">
+                <span class="log-marker"></span>
+                <div class="log-content">
+                    <h3>Techfest, IIT Bombay</h3>
+                    <p>College Ambassador</p>
+                </div>
             </div>
 
-            <!-- PROJECT 2 -->
-            <div class="project-card">
-
-                
-                
-                <h3>Upcoming Project</h3>
-
-                <p>
-
-                    More projects coming soon.
-
-                </p>
-
+            <div class="log-entry">
+                <span class="log-marker"></span>
+                <div class="log-content">
+                    <h3>UDBHAV'26 Hackathon</h3>
+                    <p>Graphics Core Team</p>
+                </div>
             </div>
 
         </div>
 
     </section>
 
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="hidden">
+
+        <p class="eyebrow">// 05 — certified</p>
+        <h2>Certifications</h2>
+
+        <div class="cert-grid">
+
+            <div class="card">
+                <i class="fa-solid fa-brain"></i>
+                <h3>AI/ML Workshop</h3>
+                <p>IIT Patna</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-code"></i>
+                <h3>C++ Essentials 1</h3>
+                <p>Cisco</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-certificate"></i>
+                <h3>Young Professional</h3>
+                <p>TCS iON</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GITHUB -->
     <section id="github" class="hidden">
 
-    <h2>GitHub Activity</h2>
+        <p class="eyebrow">// 06 — activity</p>
+        <h2>GitHub Activity</h2>
 
-    <div class="github-box">
+        <div class="github-box">
+            <h3>Consistent building, in public</h3>
+            <p>
+                Regular DSA practice, frontend work, and a profile README
+                with an animated typing tagline and categorized tech-stack
+                badges — updated alongside whatever I'm currently building.
+            </p>
+            <a href="https://github.com/Jyotishkumar-dev" target="_blank" class="btn">
+                <i class="fa-brands fa-github"></i> Visit GitHub
+            </a>
+        </div>
 
-        <h3>Consistent Learning & Building</h3>
-
-        <p>
-
-            Regularly practicing DSA,
-            frontend development,
-            and working on real-world projects.
-
-        </p>
-
-        <a href="https://github.com/Jyotishkumar-dev"
-           target="_blank"
-           class="btn">
-
-           Visit GitHub
-
-        </a>
-
-    </div>
-
-</section>
-
-<!-- CERTIFICATIONS -->
-<section id="certifications" class="hidden">
-
-    <h2>Certifications</h2>
-
-    <div class="card">
-
-        <h3>AI/ML Workshop - IIT Patna</h3>
-
-    </div>
-
-    <div class="card">
-
-        <h3>C++ Essentials 1 - Cisco</h3>
-
-    </div>
-
-    <div class="card">
-
-        <h3>TCS iON Young Professional</h3>
-
-    </div>
-
-</section>
+    </section>
 
     <!-- CONTACT -->
     <section id="contact" class="hidden">
 
-        <h2>Contact Me</h2>
+        <p class="eyebrow">// 07 — contact</p>
+        <h2>Get in Touch</h2>
 
-        <p>
+        <div class="contact-box">
 
-            Email:
-            <a href="mailto:jyotishyt58@gmail.com">
-
-                jyotishyt58@gmail.com
-
+            <a href="mailto:jyotishyt58@gmail.com" class="contact-link">
+                <i class="fa-solid fa-envelope"></i>
+                <span>jyotishyt58@gmail.com</span>
             </a>
 
-        </p>
-
-        <p>
-
-            LinkedIn:
-            <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/"
-               target="_blank">
-
-               Visit Profile
-
+            <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/" target="_blank" class="contact-link">
+                <i class="fa-brands fa-linkedin"></i>
+                <span>Connect on LinkedIn</span>
             </a>
 
-        </p>
+            <a href="https://github.com/Jyotishkumar-dev" target="_blank" class="contact-link">
+                <i class="fa-brands fa-github"></i>
+                <span>Jyotishkumar-dev</span>
+            </a>
+
+        </div>
 
     </section>
 
     <!-- FOOTER -->
-
     <footer>
-
-        <p class="footer-text">
-          © 2026 Jyotish Kumar. 
-          All Rights Reserved.
-       </p>
-
+        <p class="footer-text">© 2026 Jyotish Kumar. All Rights Reserved.</p>
     </footer>
 
+    <!-- MOBILE NAV TOGGLE -->
+    <script>
+        const navToggle = document.getElementById("navToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        navToggle.addEventListener("click", () => {
+            const isOpen = navLinks.classList.toggle("open");
+            navToggle.classList.toggle("open");
+            navToggle.setAttribute("aria-expanded", isOpen);
+        });
+
+        navLinks.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("open");
+                navToggle.classList.remove("open");
+                navToggle.setAttribute("aria-expanded", false);
+            });
+        });
+    </script>
+
     <!-- TYPING EFFECT -->
-   <script>
+    <script>
+        const text = "Full-Stack Developer & Java DSA Enthusiast";
+        const typingElement = document.getElementById("typing-text");
+        let index = 0;
+        typingElement.innerHTML = "";
 
-const text = "Full Stack Developer & Java DSA Enthusiast";
-
-const typingElement = document.getElementById("typing-text");
-
-let index = 0;
-
-typingElement.innerHTML = "";
-
-function typeEffect(){
-
-    if(index < text.length){
-
-        typingElement.innerHTML += text.charAt(index);
-
-        index++;
-
-        setTimeout(typeEffect, 100);
-    }
-}
-
-typeEffect();
-
-</script>
-
-<script>
-
-const hiddenElements =
-document.querySelectorAll(".hidden");
-
-const observer =
-new IntersectionObserver((entries)=>{
-
-    entries.forEach((entry)=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
+        function typeEffect(){
+            if(index < text.length){
+                typingElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeEffect, 70);
+            }
         }
-    });
-});
+        typeEffect();
+    </script>
 
-hiddenElements.forEach((el)=>
-observer.observe(el));
+    <!-- SCROLL REVEAL -->
+    <script>
+        const hiddenElements = document.querySelectorAll(".hidden");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: 0.15 });
 
-</script>
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
 
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script src="particles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="particles.js"></script>
 
 </body>
-
 </html>
