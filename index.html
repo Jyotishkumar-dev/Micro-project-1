@@ -26,15 +26,6 @@
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- THEME (applied before paint to avoid flash) -->
-    <script>
-        (function(){
-            const saved = localStorage.getItem("theme");
-            const theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-            document.documentElement.setAttribute("data-theme", theme);
-        })();
-    </script>
-
 </head>
 
 <body>
@@ -50,11 +41,6 @@
         <a href="#top" class="logo">Jyotish<span>.</span></a>
 
         <div class="nav-right">
-
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
-                <i class="fa-solid fa-sun icon-sun"></i>
-                <i class="fa-solid fa-moon icon-moon"></i>
-            </button>
 
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span><span></span><span></span>
@@ -115,17 +101,19 @@
                     <img src="my_pic2.jpeg" alt="Portrait of Jyotish Kumar" class="profile-image">
                 </div>
 
-                <div class="float-card float-status">
-                    <span class="pulse"></span> Open to internships
-                </div>
-
-                <a href="https://attendance-management-system-projec-steel.vercel.app/login" target="_blank" class="float-card float-project">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    <div>
-                        <strong>SmartAttend AI</strong>
-                        <span>Live product</span>
+                <div class="hero-badges">
+                    <div class="glass-chip">
+                        <span class="pulse"></span> Open to internships
                     </div>
-                </a>
+
+                    <a href="https://attendance-management-system-projec-steel.vercel.app/login" target="_blank" class="glass-chip glass-chip--link">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <div>
+                            <strong>SmartAttend AI</strong>
+                            <span>Live product</span>
+                        </div>
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -479,17 +467,6 @@
     <footer>
         <p class="footer-text">© 2026 Jyotish Kumar. All Rights Reserved.</p>
     </footer>
-
-    <!-- THEME TOGGLE -->
-    <script>
-        const themeToggle = document.getElementById("themeToggle");
-        themeToggle.addEventListener("click", () => {
-            const current = document.documentElement.getAttribute("data-theme");
-            const next = current === "light" ? "dark" : "light";
-            document.documentElement.setAttribute("data-theme", next);
-            localStorage.setItem("theme", next);
-        });
-    </script>
 
     <!-- MOBILE NAV TOGGLE -->
     <script>

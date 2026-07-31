@@ -1,5 +1,5 @@
 /* ============================================
-   TOKENS
+   TOKENS — single dark glassmorphism theme
    ============================================ */
 :root{
     --font-display: 'Poppins', sans-serif;
@@ -7,30 +7,16 @@
     --nav-height: 76px;
     --amber: #F5A623;
     --teal: #3FBFAE;
-}
 
-[data-theme="dark"]{
     --bg: #0A0E17;
     --bg-mesh-1: rgba(245,166,35,0.16);
     --bg-mesh-2: rgba(63,191,174,0.14);
-    --surface: rgba(255,255,255,0.055);
-    --surface-strong: rgba(255,255,255,0.08);
-    --border: rgba(255,255,255,0.10);
+    --surface: rgba(255,255,255,0.07);
+    --surface-strong: rgba(255,255,255,0.10);
+    --glass-highlight: rgba(255,255,255,0.14);
+    --border: rgba(255,255,255,0.14);
     --text: #EEF0F5;
     --text-muted: #99A1B3;
-    --particles-opacity: 1;
-}
-
-[data-theme="light"]{
-    --bg: #F3F4F7;
-    --bg-mesh-1: rgba(245,166,35,0.12);
-    --bg-mesh-2: rgba(63,191,174,0.12);
-    --surface: rgba(255,255,255,0.65);
-    --surface-strong: rgba(255,255,255,0.85);
-    --border: rgba(15,18,25,0.08);
-    --text: #14161C;
-    --text-muted: #5B6270;
-    --particles-opacity: 0.35;
 }
 
 html{
@@ -80,8 +66,7 @@ body{
     top: 0;
     left: 0;
     z-index: -2;
-    opacity: var(--particles-opacity);
-    transition: opacity 0.4s ease;
+    opacity: 0.9;
     background: var(--bg);
 }
 
@@ -153,6 +138,7 @@ nav{
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
+    box-shadow: inset 0 -1px 0 var(--glass-highlight);
 
     z-index: 1000;
 }
@@ -192,26 +178,6 @@ nav ul li a{
 nav ul li a:hover{
     color: var(--amber);
 }
-
-/* Theme toggle */
-.theme-toggle{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    cursor: pointer;
-    font-size: 0.95rem;
-}
-
-.icon-sun{ display: none; }
-.icon-moon{ display: inline; }
-[data-theme="light"] .icon-sun{ display: inline; }
-[data-theme="light"] .icon-moon{ display: none; }
 
 /* Hamburger (hidden on desktop) */
 .nav-toggle{
@@ -375,8 +341,16 @@ header h1{
     background: var(--surface);
 }
 
-.float-card{
-    position: absolute;
+.hero-badges{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+    width: 100%;
+}
+
+.glass-chip{
     display: flex;
     align-items: center;
     gap: 10px;
@@ -385,36 +359,34 @@ header h1{
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 12px 16px;
+    padding: 12px 18px;
     font-size: 0.85rem;
+    font-weight: 600;
     text-decoration: none;
     color: var(--text);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.18), inset 0 1px 0 var(--glass-highlight);
 }
 
-.float-status{
-    top: -6px;
-    right: -10px;
-    font-weight: 600;
+.glass-chip--link{
+    font-weight: 400;
 }
 
-.float-project{
-    bottom: 4px;
-    left: -30px;
-    flex-direction: row;
-}
-
-.float-project i{
+.glass-chip--link i{
     color: var(--amber);
 }
 
-.float-project div{
+.glass-chip--link div{
     display: flex;
     flex-direction: column;
     line-height: 1.3;
+    text-align: left;
 }
 
-.float-project span{
+.glass-chip--link strong{
+    font-weight: 600;
+}
+
+.glass-chip--link span{
     color: var(--text-muted);
     font-size: 0.75rem;
 }
@@ -505,6 +477,7 @@ section h2{
     border-radius: 22px;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 20px 50px rgba(0,0,0,0.2);
 }
 
 .about-text{
@@ -543,6 +516,7 @@ section h2{
     padding: 22px;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: transform 0.3s ease;
 }
 
@@ -607,6 +581,7 @@ section h2{
     transition: transform 0.25s ease, border-color 0.25s ease;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
 }
 
 .skill-card:hover{
@@ -624,13 +599,14 @@ section h2{
     border-radius: 20px;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .card:hover,
 .project-card:hover{
     transform: translateY(-8px);
-    box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 20px 45px rgba(0,0,0,0.15);
 }
 
 /* ============================================
@@ -787,6 +763,7 @@ section h2{
     padding: 38px;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 20px 50px rgba(0,0,0,0.18);
 }
 
 .github-box h3{
@@ -831,6 +808,7 @@ section h2{
     font-size: 0.95rem;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
     transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
@@ -907,12 +885,6 @@ footer{
         height: 180px;
     }
 
-    .float-project{
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: -20px;
-    }
-
     .about-grid,
     .split-grid{
         grid-template-columns: 1fr;
@@ -982,16 +954,6 @@ footer{
 
     header h1{
         font-size: 2.4rem;
-    }
-
-    .float-status{
-        top: -18px;
-        right: 50%;
-        transform: translateX(50%);
-    }
-
-    .float-project{
-        bottom: -50px;
     }
 
     section{
