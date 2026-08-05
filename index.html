@@ -21,7 +21,7 @@
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -32,23 +32,19 @@
 
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <!-- CUSTOM CURSOR -->
-    <div id="cursor-dot" aria-hidden="true"></div>
-    <div id="cursor-ring" aria-hidden="true"></div>
-
-    <!-- AURORA BACKGROUND -->
-    <div class="aurora" aria-hidden="true">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
+    <!-- PARTICLES BACKGROUND -->
+    <div id="particles-js" aria-hidden="true"></div>
 
     <!-- NAVBAR -->
     <nav>
 
-        <a href="#top" class="logo"><span class="dot"></span>Jyotish</a>
+        <a href="#top" class="logo">Jyotish<span>.</span></a>
 
         <div class="nav-right">
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
 
             <ul id="navLinks">
                 <li><a href="#about">About</a></li>
@@ -57,14 +53,6 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-
-            <a href="#contact" class="nav-cta">
-                <span class="pulse"></span><span class="cta-text">Open to internships</span>
-            </a>
-
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
 
         </div>
 
@@ -101,30 +89,30 @@
                     <a href="https://github.com/Jyotishkumar-dev" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/jyotish-kumar-0601bb387/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                     <a href="mailto:jyotishyt58@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <!-- TODO: replace # with real LeetCode profile URL -->
                     <a href="https://leetcode.com/u/jyotishyt58/" target="_blank" aria-label="LeetCode"><i class="fa-solid fa-code"></i></a>
+                    <!-- TODO: replace # with real YouTube channel URL -->
                     <a href="https://youtube.com/@buildwithjyotish07?si=EKThuvD1CX-rGSVzx" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
 
             <div class="hero-visual">
-                <div class="tilt-card">
-                    <div class="profile-frame">
-                        <img src="my_pic2.jpeg" alt="Portrait of Jyotish Kumar" class="profile-image">
+                <div class="profile-frame">
+                    <img src="my_pic2.jpeg" alt="Portrait of Jyotish Kumar" class="profile-image">
+                </div>
+
+                <div class="hero-badges">
+                    <div class="glass-chip">
+                        <span class="pulse"></span> Open to internships
                     </div>
 
-                    <div class="hero-badges">
-                        <div class="glass-chip">
-                            <span class="pulse"></span> Open to internships
+                    <a href="https://attendance-management-system-projec-steel.vercel.app/login" target="_blank" class="glass-chip glass-chip--link">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <div>
+                            <strong>SmartAttend AI</strong>
+                            <span>Live product</span>
                         </div>
-
-                        <a href="https://attendance-management-system-projec-steel.vercel.app/login" target="_blank" class="glass-chip glass-chip--link">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            <div>
-                                <strong>SmartAttend AI</strong>
-                                <span>Live product</span>
-                            </div>
-                        </a>
-                    </div>
+                    </a>
                 </div>
             </div>
 
@@ -140,7 +128,7 @@
 
         <div class="about-grid">
 
-            <div class="about-box glass-panel">
+            <div class="about-box">
                 <p class="about-text">
                     I'm <span>Jyotish Kumar</span>, a Computer Science student
                     who treats every project as practice for the engineer I'm
@@ -272,7 +260,7 @@
                         with JWT access/refresh tokens and bcrypt-hashed
                         credentials across five distinct roles.
                     </p>
-                    <div class="tag-row">
+                    <div class="tag-row small">
                         <span class="tag">React</span>
                         <span class="tag">TypeScript</span>
                         <span class="tag">Tailwind CSS</span>
@@ -304,7 +292,7 @@
                     project submission, and a sponsor dashboard, built with
                     a team under hackathon time pressure.
                 </p>
-                <div class="tag-row">
+                <div class="tag-row small">
                     <span class="tag">Team Project</span>
                     <span class="tag">Full-Stack</span>
                     <span class="tag">Real-time</span>
@@ -322,7 +310,7 @@
                     the frontend, with Argon2id-hashed JWT auth and CI/CD
                     from day one.
                 </p>
-                <div class="tag-row">
+                <div class="tag-row small">
                     <span class="tag">NestJS</span>
                     <span class="tag">Prisma</span>
                     <span class="tag">React 19</span>
@@ -412,7 +400,7 @@
 
         <div class="split-grid">
 
-            <div class="github-box glass-panel">
+            <div class="github-box">
                 <h3><i class="fa-brands fa-github"></i> GitHub Activity</h3>
                 <p>
                     Regular DSA practice and frontend work, plus a profile
@@ -425,14 +413,15 @@
                 </a>
             </div>
 
-            <div class="github-box glass-panel">
+            <div class="github-box">
                 <h3><i class="fa-brands fa-youtube"></i> Build With Jyotish</h3>
                 <p>
                     A YouTube channel on Java, DSA, full-stack development,
                     and AI — including a "60 Day Tech Challenge" series.
                     Tagline: <em>Building · Learning · Sharing.</em>
                 </p>
-                <a href="https://youtube.com/@buildwithjyotish07?si=bl2z_mrkzHYqjYur" target="_blank" class="btn secondary-btn">
+                <!-- TODO: replace # with real YouTube channel URL -->
+                <a href="https://youtube.com/@buildwithjyotish07?si=bl2z_mrkzHYqjYur">
                     <i class="fa-brands fa-youtube"></i> Watch on YouTube
                 </a>
             </div>
@@ -464,7 +453,9 @@
 
         <div class="elsewhere-row">
             <span>Also on:</span>
+            <!-- TODO: replace # with real LeetCode profile URL -->
             <a href="https://leetcode.com/u/jyotishyt58/" target="_blank" aria-label="LeetCode">LeetCode</a>
+            <!-- TODO: replace # with real HackerRank profile URL -->
             <a href="https://www.hackerrank.com/jyotishyt58" target="_blank" aria-label="HackerRank">HackerRank</a>
         </div>
 
@@ -477,7 +468,42 @@
         <p class="footer-text">© 2026 Jyotish Kumar. All Rights Reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- MOBILE NAV TOGGLE -->
+    <script>
+        const navToggle = document.getElementById("navToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        navToggle.addEventListener("click", () => {
+            const isOpen = navLinks.classList.toggle("open");
+            navToggle.classList.toggle("open");
+            navToggle.setAttribute("aria-expanded", isOpen);
+        });
+
+        navLinks.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("open");
+                navToggle.classList.remove("open");
+                navToggle.setAttribute("aria-expanded", false);
+            });
+        });
+    </script>
+a
+    <!-- SCROLL REVEAL -->
+    <script>
+        const hiddenElements = document.querySelectorAll(".hidden");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, { threshold: 0.12 });
+
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="particles.js"></script>
 
 </body>
 </html>
