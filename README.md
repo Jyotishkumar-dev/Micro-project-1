@@ -1,37 +1,44 @@
-# Jyotish Kumar — Modern Developer Portfolio
+# Jyotish Kumar — Developer Portfolio (Version 2)
 
-A premium, highly interactive personal developer portfolio built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, and **Lucide Icons**.
+A premium, authentic personal developer portfolio for **Jyotish Kumar**, built with **Next.js 14 (App Router)**, **TypeScript**, and **Tailwind CSS**.
 
 ![Portfolio Preview](/public/my_pic2.jpeg)
 
 ---
 
-## 🌟 Highlights & Features
+## 🌟 Highlights & Version 2 Design Philosophy
 
-- ⚡ **Futuristic & Clean Design**: Neutral obsidian dark palette with subtle cyan & indigo accents, glassmorphism, and seamless light/dark mode switching.
-- 🎯 **Personal Branding**: Focused storytelling around Jyotish Kumar (Developer • Builder • Problem Solver).
-- 🧭 **Sticky Navigation with Scroll Depth**: Real-time active section highlighting, top scroll progress bar, and blur-on-scroll effects.
-- 💻 **Interactive Code Terminal Workspace**: Interactive tab switcher previewing `Jyotish.config.ts`, `KrishiFleet.ai`, and `SmartAttend.ts` code snippets.
-- 📦 **Featured Projects & In-Depth Case Studies**: Filterable project gallery (`All`, `AI & ML`, `Full Stack`, `Hackathons`) with a deep Case Study modal covering problem statements, architecture, tech stack, 6-phase development pipelines, technical challenges, and takeaways.
-- 🛠️ **Categorized Skills Matrix**: Programming, Frontend, Backend, Databases, Developer Tools, and AI Workflows with proficiency indicators.
-- 🏆 **Hackathons & Achievements**: Showcase for SQUidHACK 2026, IIT Patna AI/ML workshop, Cisco C++, and TCS iON credentials.
-- 📈 **GitHub & Open Source Insights**: Repository stats, commit activity overview, and primary language ecosystem breakdown.
-- 🗺️ **"Always Building. Always Learning." Roadmap**: Interactive milestone timeline displaying mastered, active, and upcoming focus topics.
-- 📬 **Interactive "Get in Touch" Form**: Complete client-side validation, error handling, confetti celebration, and a working `/api/contact` endpoint.
-- ⌨️ **Command Palette (`⌘K` / `Ctrl+K`)**: Keyboard-driven quick jump menu to navigate sections, toggle theme, copy email, or preview resume.
-- 📄 **Resume Preview Modal**: Interactive PDF viewer and download trigger for `resume.pdf`.
-- 🔍 **SEO & Metadata**: JSON-LD Structured Data (`Person` schema), dynamic Open Graph tags, sitemap (`/sitemap.xml`), and robots (`/robots.txt`).
+- 📸 **Authentic Visual Anchor**: Integrates Jyotish's real professional photograph (`public/my_pic2.jpeg`) into an editorial hero composition with depth, soft ambient backlighting, and clean typography.
+- 🎯 **Honest Student Developer Positioning**: Clear, credible storytelling as a student developer, product builder, and hackathon participant (B.Tech CS - Data Science & ML at SAGE University Indore / ALTA School of Technology).
+- 🧭 **Streamlined User Journey**:
+  - `Home` &rarr; `About` &rarr; `Projects` &rarr; `Skills` &rarr; `Journey` &rarr; `Contact`
+- 💼 **Selected Work with Alternating Rhythm**:
+  - **01 / KrishiFleet AI** (SQUidHACK 2026 farm equipment rental platform)
+  - **02 / SmartAttend AI** (Multi-role college attendance system with [Live Demo](https://attendance-management-system-projec-steel.vercel.app/login))
+  - **03 / HackathonOS** (Real-time hackathon orchestration platform)
+- 📖 **Authentic Case Studies**:
+  - The Problem &bull; The Idea &bull; What I Built &bull; Key Features &bull; Tech Stack &bull; Real Challenges &bull; Key Learnings.
+- 🛠️ **3-Tier Honest Skills Matrix**:
+  1. *Technologies I Work With* (Active languages and frameworks)
+  2. *Tools I Use* (VS Code, GitHub, Postman, Figma, Vercel, Render)
+  3. *Currently Learning & Exploring* (Advanced Java & DSA, System Design, LLM Tool Calling)
+- 🗺️ **"The Journey So Far" Growth Timeline**:
+  - Vertical storytelling timeline tracking progress from core programming in C++/Java to full-stack systems, hackathons, and building in public.
+- 🏆 **Verified Achievements & Activities**:
+  - SQUidHACK 2026, IIT Patna AI/ML Workshop, Cisco C++ Essentials 1, TCS iON Young Professional, and UDBHAV'26 Hackathon Core Committee.
+- 📬 **Interactive "Get In Touch" Form**:
+  - Complete client-side validation, loading states, direct email copy button, and `/api/contact` API route.
+- 🌓 **Consistent Light & Dark Theme**:
+  - Smooth theme transitions with polished contrast ratios.
 
 ---
 
-## 🏗️ Architecture & Structured Data
-
-All portfolio content is separated cleanly from UI components in `src/data/`, allowing effortless updates without modifying layouts:
+## 📂 Project Architecture
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx             # Root layout with fonts, metadata, JSON-LD
+│   ├── layout.tsx             # Root layout with metadata, JSON-LD, fonts
 │   ├── page.tsx               # Main single-page application orchestrator
 │   ├── globals.css            # Tailwind theme, CSS variables & scrollbars
 │   ├── sitemap.ts             # Dynamic SEO sitemap
@@ -39,18 +46,16 @@ src/
 │   └── api/
 │       └── contact/route.ts   # Contact form submission endpoint
 ├── components/
-│   ├── layout/                # Navbar, MobileMenu, Footer, ScrollProgress, CommandPalette
-│   ├── sections/              # Hero, About, Skills, Projects, Experience, Achievements, Github, Roadmap, Testimonials, Contact
-│   ├── ui/                    # GlowCard, ProjectCard, ProjectModal, ContactForm, ResumeModal, CodeTerminal, ThemeToggle
+│   ├── layout/                # Navbar, MobileMenu, Footer, ScrollProgress
+│   ├── sections/              # HeroSection, AboutSection, ProjectsSection, SkillsSection, JourneySection, AchievementsSection, ContactSection
+│   ├── ui/                    # GlowCard, ProjectModal, ContactForm, ResumeModal, SectionHeading, ThemeToggle, Badge
 │   └── providers/             # ThemeProvider (next-themes)
 ├── data/
-│   ├── personal.ts            # Bio, rotating roles, socials, stats
-│   ├── projects.ts            # Projects dataset + complete case studies
-│   ├── skills.ts              # Categorized tech stacks & tools
-│   ├── experience.ts          # Leadership & work timeline
-│   ├── achievements.ts        # Hackathons & certifications
-│   ├── learning.ts            # Growth milestones & topics
-│   └── testimonials.ts        # Peer recommendations
+│   ├── personal.ts            # Bio, contact, socials, photo references
+│   ├── projects.ts            # Projects dataset + honest case studies
+│   ├── skills.ts              # 3-tier skills matrix
+│   ├── journey.ts             # Growth timeline milestones
+│   └── achievements.ts        # Hackathons & certifications
 ├── hooks/                     # useActiveSection, useScrollPosition
 ├── lib/                       # Utility helpers (cn)
 └── types/                     # Full TypeScript interfaces
@@ -85,15 +90,15 @@ npm start
 
 ## 📝 Updating Your Content
 
-- **Personal Details & Social Links**: Edit `src/data/personal.ts`
-- **Add or Edit Projects**: Edit `src/data/projects.ts`
-- **Update Skills**: Edit `src/data/skills.ts`
-- **Add Experiences / Leadership**: Edit `src/data/experience.ts`
-- **Add Achievements / Hackathons**: Edit `src/data/achievements.ts`
-- **Update Learning Roadmap**: Edit `src/data/learning.ts`
+All data is separated from UI components in `src/data/`:
+- **Personal Info & Socials**: `src/data/personal.ts`
+- **Projects & Case Studies**: `src/data/projects.ts`
+- **Skills Matrix**: `src/data/skills.ts`
+- **Journey Milestones**: `src/data/journey.ts`
+- **Achievements & Certifications**: `src/data/achievements.ts`
 
 ---
 
 ## 📄 License
 
-Designed and built by **Jyotish Kumar**. Free to use and customize.
+Designed and developed by **Jyotish Kumar**.
