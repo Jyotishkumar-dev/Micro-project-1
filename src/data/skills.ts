@@ -1,79 +1,45 @@
-import { SkillCategory } from "@/types";
+import { SkillTier } from "@/types";
 
-export const skillCategories: SkillCategory[] = [
+export const skillTiers: SkillTier[] = [
   {
-    title: "Programming",
-    iconName: "Code2",
-    description: "Core languages used for building performant software and algorithm problem solving.",
+    title: "Technologies I Work With",
+    subtitle: "Languages, libraries, and frameworks I actively use to build full-stack web applications.",
     skills: [
-      { name: "Java", level: "Proficient", featured: true, description: "OOP, Collections, Multi-threading, DSA" },
-      { name: "JavaScript (ES6+)", level: "Advanced", featured: true, description: "Async/Await, DOM, Event Loop, Closures" },
-      { name: "TypeScript", level: "Proficient", featured: true, description: "Type Safety, Generics, Interfaces, Strict Mode" },
-      { name: "Python", level: "Intermediate", featured: false, description: "Data Analysis, Scripting, AI Libraries" },
-      { name: "C++", level: "Intermediate", featured: false, description: "Data Structures, Competitive Programming" },
-      { name: "SQL", level: "Proficient", featured: true, description: "Relational Queries, Joins, Indexing, Schema Design" }
+      { name: "Java", context: "OOP, Core Syntax, Algorithms", highlight: true },
+      { name: "JavaScript (ES6+)", context: "Async/Await, Modern APIs, DOM", highlight: true },
+      { name: "TypeScript", context: "Type Safety, Interfaces, Component Props", highlight: true },
+      { name: "React", context: "Hooks, State Management, Component Architecture", highlight: true },
+      { name: "Next.js (App Router)", context: "Server & Client Components, Route Handlers", highlight: true },
+      { name: "Tailwind CSS", context: "Responsive Layouts, Custom Themes, Modern UI", highlight: true },
+      { name: "HTML5 & CSS3", context: "Semantic Markup, Flexbox, CSS Grid", highlight: false },
+      { name: "Node.js", context: "Event-driven Runtime, REST APIs", highlight: true },
+      { name: "Express.js", context: "Routing, Middlewares, API Endpoints", highlight: true },
+      { name: "PostgreSQL & SQL", context: "Relational Modeling, Basic Queries, Joins", highlight: false },
+      { name: "MongoDB", context: "Document Modeling, Basic Aggregations", highlight: false },
+      { name: "Git & GitHub", context: "Version Control, Branching, Pull Requests", highlight: true }
     ]
   },
   {
-    title: "Frontend Development",
-    iconName: "Layout",
-    description: "Crafting responsive, accessible, high-performance user interfaces.",
+    title: "Tools I Use",
+    subtitle: "Everyday developer environment, design tools, and deployment platforms.",
     skills: [
-      { name: "React", level: "Advanced", featured: true, description: "Hooks, Context API, Custom Hooks, State Management" },
-      { name: "Next.js (App Router)", level: "Proficient", featured: true, description: "SSR, SSG, Server Actions, Route Handlers" },
-      { name: "Tailwind CSS", level: "Advanced", featured: true, description: "Utility-first CSS, Responsive UI, Custom Animations" },
-      { name: "HTML5 & CSS3", level: "Expert", featured: true, description: "Semantic markup, Flexbox, Grid, CSS Variables" },
-      { name: "Framer Motion", level: "Proficient", featured: true, description: "Spring Physics, Gesture Animations, Layout Animations" },
-      { name: "Vite", level: "Advanced", featured: false, description: "Lightning-fast HMR and build bundling" }
+      { name: "VS Code", context: "Primary IDE, Extensions, Snippets", highlight: true },
+      { name: "GitHub", context: "Code Repositories, Issue Tracking, Actions", highlight: true },
+      { name: "Postman", context: "API Endpoint Testing & Verification", highlight: false },
+      { name: "Figma", context: "UI Wireframing, Layout Concepting", highlight: false },
+      { name: "Vercel", context: "Frontend & Next.js Deployments", highlight: true },
+      { name: "Render", context: "Backend Web Service Hosting", highlight: false }
     ]
   },
   {
-    title: "Backend & Systems",
-    iconName: "Server",
-    description: "Architecting reliable server-side microservices, APIs, and authentication pipelines.",
+    title: "Currently Learning & Exploring",
+    subtitle: "Topics and technologies I am actively studying and experimenting with in my free time.",
     skills: [
-      { name: "Node.js", level: "Proficient", featured: true, description: "Event-driven runtime, NPM ecosystem, Streams" },
-      { name: "Express.js", level: "Proficient", featured: true, description: "RESTful architecture, Middlewares, Routing" },
-      { name: "RESTful APIs", level: "Advanced", featured: true, description: "API Contract Design, Versioning, Status Codes" },
-      { name: "JWT & Multi-Role Auth", level: "Proficient", featured: true, description: "Access/Refresh tokens, RBAC, Bcrypt/Argon2" },
-      { name: "PostgreSQL", level: "Proficient", featured: true, description: "Relational modeling, Constraints, Foreign Keys" },
-      { name: "Prisma & Drizzle ORM", level: "Proficient", featured: false, description: "Type-safe database migrations & queries" }
-    ]
-  },
-  {
-    title: "Database & Storage",
-    iconName: "Database",
-    description: "Designing data structures and database systems for data integrity and speed.",
-    skills: [
-      { name: "MongoDB", level: "Proficient", featured: true, description: "NoSQL document stores, Aggregation pipeline" },
-      { name: "PostgreSQL", level: "Proficient", featured: true, description: "ACID compliance, Transactions, Optimized Queries" },
-      { name: "SQL Fundamentals", level: "Advanced", featured: true, description: "Normalization (1NF-BCNF), Indexing, Subqueries" },
-      { name: "Database Design", level: "Proficient", featured: true, description: "ER Diagrams, Relationships, Constraints" }
-    ]
-  },
-  {
-    title: "Developer Tools & DevOps",
-    iconName: "Terminal",
-    description: "Industry-standard tooling for collaborative engineering and rapid deployment.",
-    skills: [
-      { name: "Git & GitHub", level: "Advanced", featured: true, description: "Version control, branching, PR reviews, CI/CD" },
-      { name: "VS Code", level: "Advanced", featured: true, description: "Extensions, debugging, snippet optimization" },
-      { name: "Postman", level: "Advanced", featured: true, description: "API testing, automated suites, documentation" },
-      { name: "Figma", level: "Intermediate", featured: false, description: "UI wireframing, component design systems" },
-      { name: "Vercel", level: "Proficient", featured: true, description: "Edge deployments, preview branches, analytics" },
-      { name: "Render", level: "Proficient", featured: false, description: "Backend web services, cron workers, databases" }
-    ]
-  },
-  {
-    title: "AI & Modern Workflows",
-    iconName: "Bot",
-    description: "Leveraging frontier foundation models and AI agent techniques in applications.",
-    skills: [
-      { name: "LLM APIs Integration", level: "Proficient", featured: true, description: "OpenAI, Google Gemini, OpenRouter integrations" },
-      { name: "Prompt Engineering", level: "Advanced", featured: true, description: "System prompting, few-shot, structured JSON outputs" },
-      { name: "AI-Assisted Development", level: "Expert", featured: true, description: "Agentic coding, automated refactoring, test generation" },
-      { name: "Agentic Workflows", level: "Intermediate", featured: true, description: "Tool calling, autonomous multi-step reasoning" },
-      { name: "OpenRouter", level: "Proficient", featured: false, description: "Model routing, fallback strategies, latency optimization" }
+      { name: "Data Structures & Algorithms", context: "Trees, Graphs, Recursion, Optimization in Java", highlight: true },
+      { name: "Backend Architecture", context: "Modular Monoliths, API Security, Performance", highlight: true },
+      { name: "AI Tool Integration", context: "Integrating LLM APIs (Gemini/OpenAI) into Web Apps", highlight: true },
+      { name: "Database Design & Indexing", context: "Schema Normalization, Query Optimization", highlight: false },
+      { name: "System Design Basics", context: "Caching, Load Balancing Fundamentals", highlight: false }
     ]
   }
 ];

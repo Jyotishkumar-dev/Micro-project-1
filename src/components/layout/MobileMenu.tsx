@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { X, Sparkles, Send, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { X, Send, FileText, Github, Linkedin, Mail, Code, Youtube } from "lucide-react";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { personalData } from "@/data/personal";
 
@@ -43,7 +43,7 @@ export function MobileMenu({
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-slate-950/80 backdrop-blur-lg animate-in fade-in"
+        className="fixed inset-0 bg-slate-950/80 backdrop-blur-md animate-in fade-in"
       />
 
       {/* Menu Drawer */}
@@ -51,8 +51,8 @@ export function MobileMenu({
         <div>
           {/* Header */}
           <div className="flex items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-bold text-sm">
                 JK
               </div>
               <span className="font-bold text-slate-900 dark:text-white">
@@ -84,8 +84,8 @@ export function MobileMenu({
                   onClick={onClose}
                   className={`flex items-center justify-between px-4 py-3 rounded-xl font-medium text-base transition-colors ${
                     isActive
-                      ? "bg-brand-500/10 text-brand-600 dark:text-brand-400 font-semibold"
-                      : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+                      ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold"
+                      : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"
                   }`}
                 >
                   <span>{item.name}</span>
@@ -115,20 +115,20 @@ export function MobileMenu({
             <a
               href="#contact"
               onClick={onClose}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold transition-colors shadow-md shadow-brand-500/20"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold transition-colors"
             >
               <Send className="w-4 h-4" />
               <span>Let's Connect</span>
             </a>
           </div>
 
-          {/* Social Links */}
+          {/* Social Icons Row */}
           <div className="flex justify-center items-center gap-4 text-slate-500 dark:text-slate-400 pt-2">
             <a
               href={personalData.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-brand-500 transition-colors"
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
               aria-label="GitHub Profile"
             >
               <Github className="w-5 h-5" />
@@ -137,17 +137,35 @@ export function MobileMenu({
               href={personalData.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-brand-500 transition-colors"
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="w-5 h-5" />
             </a>
             <a
               href={personalData.socials.email}
-              className="hover:text-brand-500 transition-colors"
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
               aria-label="Email Jyotish"
             >
               <Mail className="w-5 h-5" />
+            </a>
+            <a
+              href={personalData.socials.leetcode}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+              aria-label="LeetCode Profile"
+            >
+              <Code className="w-5 h-5" />
+            </a>
+            <a
+              href={personalData.socials.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-slate-900 dark:hover:text-white transition-colors"
+              aria-label="YouTube Channel"
+            >
+              <Youtube className="w-5 h-5" />
             </a>
           </div>
         </div>

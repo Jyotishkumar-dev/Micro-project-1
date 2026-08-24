@@ -3,406 +3,199 @@ import { Project } from "@/types";
 export const projectsData: Project[] = [
   {
     id: "krishifleet-ai",
+    number: "01",
     title: "KrishiFleet AI",
-    category: "ai",
-    tagline: "Intelligent Farm Equipment Marketplace & CHC Operations Platform",
+    category: "Agritech / Hackathon Build",
+    tagline: "Intelligent Farm Machinery Discovery & CHC Operations Platform",
     shortDescription:
-      "An intelligent platform connecting smallholder farmers with Custom Hiring Centres (CHCs) to optimize machinery utilization, dynamic booking, smart recommendations, and predictive maintenance.",
+      "A platform built during SQUidHACK 2026 to help smallholder farmers discover and rent agricultural equipment while providing Custom Hiring Centres (CHCs) with equipment operations management.",
     problem:
-      "Smallholder farmers struggle with prohibitive farm machinery costs, lack of equipment availability transparency, and seasonal peak demand shortages, while Custom Hiring Centres suffer from idle fleet capacity and reactive maintenance.",
+      "Most smallholder farmers cannot afford expensive tractors or specialized harvesting equipment. Meanwhile, regional Custom Hiring Centres face difficulty managing rental schedules and equipment availability efficiently.",
     solution:
-      "Architected a dual-sided marketplace with an intelligent recommendation engine, real-time fleet availability calendars, dynamic pricing concepts based on seasonal demand, and maintenance analytics for fleet owners.",
-    tags: ["Next.js", "React", "TypeScript", "Node.js", "AI Integration", "PostgreSQL", "Tailwind CSS"],
+      "Designed a dual-sided web platform where farmers can search for verified machinery nearby based on crop type and budget, while CHC hub operators can track active bookings and equipment status.",
+    myContribution:
+      "Co-designed the full-stack architecture, built the Next.js and Tailwind frontend interfaces, structured the database schemas, and integrated equipment discovery workflows.",
+    tags: ["Next.js", "React", "TypeScript", "Node.js", "Tailwind CSS", "REST API", "Database Design"],
     featured: true,
     status: "Hackathon Build",
     githubUrl: "https://github.com/Jyotishkumar-dev",
     liveUrl: "https://github.com/Jyotishkumar-dev",
     caseStudy: {
-      overview:
-        "KrishiFleet AI is a comprehensive agritech operations and marketplace ecosystem designed to democratize high-end agricultural equipment access for farmers while empowering Custom Hiring Centres (CHCs) with enterprise-grade fleet telemetry and demand optimization.",
       problem:
-        "Over 85% of small and marginal farmers cannot afford tractors, harvesters, or specialized precision equipment. Meanwhile, regional CHCs struggle with manual paper logs, unpredictable seasonal peaks, underutilized assets during off-seasons, and sudden machine breakdowns.",
-      solution:
-        "Developed a unified web platform that enables farmers to discover, compare, and book verified equipment nearby with AI-assisted crop-cycle recommendations, while providing CHC fleet operators with an operations dashboard for tracking bookings, dispatch schedules, predictive service alerts, and dynamic revenue analytics.",
+        "Agricultural machinery costs are prohibitive for individual smallholder farmers. When seasonal harvesting starts, farmers struggle to locate available equipment, while Custom Hiring Centres (CHCs) lack a centralized digital tool to manage bookings and dispatch machinery.",
+      idea:
+        "Build a practical web application connecting farmers with nearby machinery rental hubs, featuring intuitive search by equipment category, availability calendars, and a simplified management interface for CHC operators.",
+      whatIBuilt:
+        "Developed the responsive web application using Next.js 14 and Tailwind CSS. Implemented farmer discovery screens, equipment detail cards, and an operator management view for reviewing incoming equipment rental requests.",
       keyFeatures: [
         {
-          title: "Farmer Discovery & Smart Recommendations",
-          description: "Location-aware equipment discovery filtered by farm size, soil type, crop stage, and budget constraints."
+          title: "Equipment Discovery & Filtering",
+          description: "Search implements by category (Tractors, Harvesters, Tillers), location radius, and daily rental rates."
         },
         {
-          title: "CHC Operator Command Center",
-          description: "Centralized fleet management dashboard showing real-time machine availability, utilization metrics, and driver assignments."
+          title: "CHC Operator Portal",
+          description: "Dashboard for fleet owners to view machinery availability, booking requests, and equipment status."
         },
         {
-          title: "Dynamic Demand & Pricing Insights",
-          description: "AI-assisted demand estimation that suggests optimal pricing and dispatch schedules during peak harvest cycles."
+          title: "Booking Request Flow",
+          description: "Step-by-step reservation form allowing farmers to select time slots and specify farm location details."
         },
         {
-          title: "Maintenance & Telemetry Alerts",
-          description: "Predictive maintenance scheduling tracking operating hours to prevent costly mid-season machinery failures."
-        },
-        {
-          title: "Multi-Role Booking Engine",
-          description: "End-to-end booking lifecycle with instant status notifications, time-slot reservations, and payment receipts."
+          title: "Responsive Mobile-First UI",
+          description: "Clean layout designed to work smoothly on mobile browsers for field usability."
         }
       ],
       techStack: [
-        {
-          category: "Frontend",
-          skills: ["Next.js 14 (App Router)", "React 18", "Tailwind CSS", "Framer Motion", "Lucide Icons"]
-        },
-        {
-          category: "Backend & Services",
-          skills: ["Node.js", "Express.js", "RESTful APIs", "JWT Authentication"]
-        },
-        {
-          category: "Database & AI",
-          skills: ["PostgreSQL", "Prisma ORM", "LLM APIs (OpenRouter / Gemini)", "Prompt Engineering"]
-        }
-      ],
-      developmentProcess: [
-        {
-          step: 1,
-          phase: "Research & Domain Discovery",
-          description: "Interviewed agricultural workflows, CHC operational models, and identified key bottlenecks in seasonal farm equipment rentals."
-        },
-        {
-          step: 2,
-          phase: "System Architecture & Schema Design",
-          description: "Structured multi-role database schemas for Farmers, CHC Operators, Equipment, Bookings, and Service Logs."
-        },
-        {
-          step: 3,
-          phase: "UI/UX & Prototyping",
-          description: "Designed intuitive, high-contrast, accessible interfaces suitable for diverse user technical comfort levels."
-        },
-        {
-          step: 4,
-          phase: "Full-Stack Development",
-          description: "Built the Next.js frontend integrated with server API routes and responsive dashboard analytics widgets."
-        },
-        {
-          step: 5,
-          phase: "AI Recommendation Integration",
-          description: "Implemented contextual AI prompts that evaluate season, crop type, and soil requirements to propose ideal implements."
-        },
-        {
-          step: 6,
-          phase: "Deployment & Optimization",
-          description: "Deployed to Vercel with optimized edge caching, lazy-loaded components, and comprehensive responsive testing."
-        }
+        "Next.js 14",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "RESTful API"
       ],
       challenges: [
         {
-          challenge: "Modeling complex time-slot booking conflicts across disparate machinery fleets.",
-          resolution: "Implemented deterministic SQL transaction locks and real-time availability calendar queries to prevent overlapping reservations."
+          challenge: "Designing an intuitive UI suitable for users with varying levels of technical familiarity.",
+          resolution: "Focused on high contrast, clear visual icons, large tap targets, and streamlined form inputs."
         },
         {
-          challenge: "Ensuring low latency on AI-assisted equipment recommendations.",
-          resolution: "Cached recurring regional crop-recommendation templates while streaming dynamic tailored parameters asynchronously."
+          challenge: "Structuring the equipment availability logic within a fast-paced 36-hour hackathon timeframe.",
+          resolution: "Prioritized clean modular data models and created clear API contracts to coordinate frontend and backend development."
         }
       ],
       learnings: [
-        "Architecting multi-tenant user permissions with distinct dashboard views.",
-        "Balancing real-time state updates with clean server component data fetching.",
-        "Translating complex domain constraints into intuitive, human-centered UI workflows."
+        "How to quickly translate a real-world domain problem into an actionable MVP.",
+        "Rapid prototyping and component architecture under hackathon time limits.",
+        "Collaborative Git workflows and sprint communication within a team."
       ]
     }
   },
   {
     id: "smartattend-ai",
-    title: "SmartAttend AI (Attendance Management System)",
-    category: "fullstack",
-    tagline: "Multi-Role Academic Attendance & Analytics SaaS Platform",
+    number: "02",
+    title: "SmartAttend (Attendance Management System)",
+    category: "Full Stack SaaS",
+    tagline: "Modern Role-Based College Attendance & Record System",
     shortDescription:
-      "A modern, role-based attendance management ecosystem built for colleges and universities to replace manual paper sheets with digital workflows, analytics, and security.",
+      "A complete web-based academic attendance platform built to replace traditional paper registers with a streamlined digital logging workflow and visual attendance records.",
     problem:
-      "Educational institutions lose hundreds of hours to manual paper registers, prone to proxy attendance, human recording errors, and lack of actionable real-time student attendance trends for faculty and HODs.",
+      "Universities and colleges spend valuable lecture time manually calling roll sheets, which often leads to recording errors, lost paperwork, and lack of clear attendance visibility for students and faculty.",
     solution:
-      "Engineered an enterprise-grade multi-role SaaS (Student, Faculty, HOD, Admin) with secure JWT access/refresh token authentication, visual attendance calendar heatmaps, and automated eligibility warnings.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "PostgreSQL", "Prisma"],
+      "Engineered a digital attendance platform featuring role-based portals for Students, Faculty, and Administrators, intuitive class session marking, and visual attendance summaries.",
+    myContribution:
+      "Built the end-to-end web application: authentication system, database schema modeling, backend REST APIs, and the responsive React frontend dashboard.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "JWT Auth", "PostgreSQL"],
     featured: true,
     status: "Live",
     githubUrl: "https://github.com/Jyotishkumar-dev",
     liveUrl: "https://attendance-management-system-projec-steel.vercel.app/login",
     caseStudy: {
-      overview:
-        "SmartAttend AI is a production-grade academic management system designed to streamline attendance logging, track aggregate performance, and eliminate administrative friction across universities.",
       problem:
-        "Manual attendance systems suffer from high administrative overhead, proxy attendance, delayed reporting to parents/HODs, and zero real-time visibility into students at risk of attendance shortages.",
-      solution:
-        "Engineered a scalable multi-tier web application with role-based access control (RBAC), intuitive single-click session logging for instructors, visual student attendance timelines, and automated shortage threshold alerts.",
+        "Paper-based attendance sheets in colleges are inefficient, slow to record in large classrooms, and prone to proxy attendance. Students have little visibility into their cumulative percentages until semester end.",
+      idea:
+        "Create a dedicated, secure web platform where faculty can mark attendance with minimal clicks during class, and students can view their real-time attendance percentage and calendar records.",
+      whatIBuilt:
+        "Constructed a multi-role web platform using React and TypeScript on the frontend with a Node.js/Express backend. Implemented JWT token-based authentication, student roll lists, and visual percentage indicators.",
       keyFeatures: [
         {
-          title: "Five Distinct RBAC Roles",
-          description: "Specialized permissions and tailored portals for Super Admin, College Admin, HOD, Faculty, and Students."
+          title: "Role-Based Portals",
+          description: "Distinct dashboards for Faculty (session marking, student lists) and Students (attendance percentages, subject breakdowns)."
         },
         {
-          title: "Interactive Visual Calendar & Heatmaps",
-          description: "Visual date-picker and monthly calendar view indicating present, absent, excused, and holiday states."
+          title: "Quick Classroom Session Logging",
+          description: "Streamlined batch attendance marking interface allowing instructors to quickly toggle present/absent states."
         },
         {
-          title: "Real-Time Shortage Risk Alerts",
-          description: "Automatic visual flags for students dropping below mandatory 75% attendance criteria."
+          title: "Visual Attendance Percentage",
+          description: "Clear indicator bars and subject-wise metrics showing students whether they meet the required attendance thresholds."
         },
         {
-          title: "Batch Class Attendance Marking",
-          description: "Rapid one-click batch marking with keyboard shortcuts and multi-select for fast classroom logging."
-        },
-        {
-          title: "Comprehensive Export & Reports",
-          description: "Exportable CSV and PDF summary reports for semester reviews and accreditation audits."
+          title: "Secure Authentication",
+          description: "Protected route middlewares and JWT token handling for verified role access."
         }
       ],
       techStack: [
-        {
-          category: "Frontend",
-          skills: ["React", "TypeScript", "Tailwind CSS", "Vite", "Lucide Icons"]
-        },
-        {
-          category: "Backend",
-          skills: ["Node.js", "Express.js", "REST APIs", "JWT (Access & Refresh Tokens)", "Bcrypt"]
-        },
-        {
-          category: "Database & Deployment",
-          skills: ["PostgreSQL", "Prisma ORM", "Vercel", "Render"]
-        }
-      ],
-      developmentProcess: [
-        {
-          step: 1,
-          phase: "Stakeholder Requirement Analysis",
-          description: "Mapped out attendance workflows across faculty, department chairs, and student requirements."
-        },
-        {
-          step: 2,
-          phase: "Role-Based Access Control Architecture",
-          description: "Designed secure JWT authentication system with httpOnly cookies and fine-grained route middlewares."
-        },
-        {
-          step: 3,
-          phase: "Database Normalization & Constraints",
-          description: "Constructed relational models for courses, batches, enrollments, sessions, and daily attendance logs."
-        },
-        {
-          step: 4,
-          phase: "Frontend Dashboard Construction",
-          description: "Built responsive, accessible dashboards with custom data tables, filtering, and summary statistics."
-        },
-        {
-          step: 5,
-          phase: "Integration & Edge Testing",
-          description: "Stress-tested concurrent classroom logging and edge cases like leave approvals and retroactive edits."
-        },
-        {
-          step: 6,
-          phase: "Production Deployment",
-          description: "Deployed frontend on Vercel and backend services with continuous integration."
-        }
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "Express.js",
+        "JWT Authentication",
+        "PostgreSQL / Prisma"
       ],
       challenges: [
         {
-          challenge: "Managing complex session state across hundreds of students without UI performance degradation.",
-          resolution: "Optimized React state using localized batch dispatching and virtualized list rendering."
+          challenge: "Ensuring attendance marking remains fast and responsive during live class sessions.",
+          resolution: "Optimized React state updates with batch submission so teachers can log an entire classroom in one click."
         },
         {
-          challenge: "Preventing unauthorized attendance tampering across distributed client endpoints.",
-          resolution: "Implemented server-side validation verifying instructor authorization against course schedule timestamps."
+          challenge: "Designing proper role-based route protection across student and teacher views.",
+          resolution: "Implemented server-side token verification with custom role check middlewares on all API routes."
         }
       ],
       learnings: [
-        "Deep understanding of secure session management and token lifecycle.",
-        "Relational database query optimization for historical time-series logs.",
-        "Designing enterprise UX where speed of daily data entry is the primary metric."
+        "Designing relational database schemas for academic batches, courses, and attendance logs.",
+        "Handling user authentication, token storage, and protected navigation in React.",
+        "Deploying and connecting decoupled frontend and backend services to production on Vercel."
       ]
     }
   },
   {
     id: "hackathon-os",
+    number: "03",
     title: "HackathonOS",
-    category: "hackathon",
-    tagline: "End-to-End Hackathon Orchestration & Live Operations System",
+    category: "Event Operations Platform",
+    tagline: "End-to-End Hackathon Coordination & Operations Tool",
     shortDescription:
-      "An all-in-one operating platform built during SQUIDHACK 2026 to manage participant registration, QR check-ins, mentor queues, live judge scoring, and dynamic leaderboards.",
+      "A platform developed by team 'The Last Commit' at SQUidHACK 2026 to simplify participant check-ins, mentor queues, and judging rubrics for hackathons.",
     problem:
-      "Organizing large-scale hackathons requires juggling disconnected Google Forms, spreadsheets, Discord channels, and paper judging sheets, leading to chaotic schedules and judging delays.",
+      "Organizing student hackathons often involves juggling messy spreadsheets, scattered Google forms, and chaotic judging sessions.",
     solution:
-      "Created a unified command center featuring instant QR check-in scanning, team matchmaking, mentor queue management, judge rubrics with live scoring aggregation, and digital certificate issuing.",
-    tags: ["React", "Node.js", "Express", "Tailwind CSS", "Real-Time WebSockets", "QR Scanner API"],
+      "Built a unified event tool featuring participant verification, team registration tracking, mentor help requests, and a centralized judging evaluation interface.",
+    myContribution:
+      "Implemented responsive frontend views, coordinate event dashboard state, and connected rubric calculation components with the backend API.",
+    tags: ["React", "Node.js", "Express", "Tailwind CSS", "REST APIs", "Team Project"],
     featured: true,
     status: "Hackathon Build",
     githubUrl: "https://github.com/Jyotishkumar-dev",
     liveUrl: "https://github.com/Jyotishkumar-dev",
     caseStudy: {
-      overview:
-        "HackathonOS was built under high-tempo hackathon pressure by Team 'The Last Commit' at SQUIDHACK 2026 to replace fragmented event coordination tools with a synchronized real-time web platform.",
       problem:
-        "Hackathon organizers lose critical momentum managing hundreds of attendees manually at the door, tracking mentor capacity, calculating judge scores across disparate rubrics, and publishing final rankings.",
-      solution:
-        "Built an integrated web OS that provides organizer controls, participant dashboard with schedule countdowns, digital badge QR scanner, mentor request ticketing, and a live aggregate judge scoring board.",
+        "Running hackathons requires tracking hundreds of attendees, team matching, mentor availability, and score calculations under tight time pressure.",
+      idea:
+        "Create a streamlined web interface where organizers can view checked-in teams, mentors can manage incoming assistance tickets, and judges can enter scored rubrics.",
+      whatIBuilt:
+        "Built the client-side dashboard in React, created judge evaluation scorecards with weighted criteria, and implemented organizer management tables.",
       keyFeatures: [
         {
-          title: "Instant QR Entry Scanner",
-          description: "Rapid participant check-in scanning via web camera with instant verification against database."
+          title: "Organizer Command Center",
+          description: "Live overview of registered teams, check-in status, and event schedule milestones."
         },
         {
-          title: "Mentor Queue & Helpdesk",
-          description: "Ticket-based mentor request system allowing teams to get assistance based on tech stack tag matching."
+          title: "Judge Evaluation Rubric",
+          description: "Interactive scoring sliders covering innovation, technical execution, design, and presentation."
         },
         {
-          title: "Multi-Criteria Judge Portal",
-          description: "Dedicated judge evaluation screen with weighted sliders for innovation, technical execution, UI/UX, and pitch."
-        },
-        {
-          title: "Live Leaderboard & Showcase",
-          description: "Real-time results calculation with tie-breaker logic and public project showcase gallery."
+          title: "Mentor Help Desk",
+          description: "Ticket submission interface where hacking teams can request mentor guidance for specific tech stacks."
         }
       ],
       techStack: [
-        {
-          category: "Frontend",
-          skills: ["React 18", "Tailwind CSS", "Lucide Icons", "HTML5 QR Scanner"]
-        },
-        {
-          category: "Backend & Real-Time",
-          skills: ["Node.js", "Express", "REST APIs", "WebSockets"]
-        },
-        {
-          category: "Database & Tools",
-          skills: ["MongoDB", "Mongoose", "Git & GitHub", "Vercel"]
-        }
-      ],
-      developmentProcess: [
-        {
-          step: 1,
-          phase: "Problem Framing & Sprint Planning",
-          description: "Deconstructed hackathon operational pain points within the first 2 hours of the hackathon."
-        },
-        {
-          step: 2,
-          phase: "Schema & Endpoint Contract Drafting",
-          description: "Drafted team, user, ticket, and score data contracts to allow parallel frontend and backend development."
-        },
-        {
-          step: 3,
-          phase: "Core Engine Implementation",
-          description: "Built QR authentication, scoring arithmetic formulas, and role-gated navigation."
-        },
-        {
-          step: 4,
-          phase: "UI Polish & Dark Theme Design",
-          description: "Implemented high-energy developer aesthetic with status badges and animated counters."
-        },
-        {
-          step: 5,
-          phase: "Team Demo & Pitch Integration",
-          description: "Conducted end-to-end simulated hackathon run-through for judges and demo evaluation."
-        }
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "Express",
+        "Git & GitHub"
       ],
       challenges: [
         {
-          challenge: "Completing full-stack multi-role workflows within a strict 36-hour hackathon timeframe.",
-          resolution: "Prioritized strict MVP feature slicing and clean modular API contracts between team members."
-        },
-        {
-          challenge: "Preventing score tampering and ensuring fair aggregate calculation.",
-          resolution: "Built normalized weighted average calculation on the server with audit trails."
+          challenge: "Coordinating multi-developer feature branches within a 36-hour hackathon crunch.",
+          resolution: "Maintained clear component boundaries and agreed on shared data contracts before writing code."
         }
       ],
       learnings: [
-        "Rapid team collaboration and Git branching hygiene under extreme time limits.",
-        "Designing resilient UX states for high-frequency live event situations.",
-        "Communicating product value effectively during technical hackathon demos."
-      ]
-    }
-  },
-  {
-    id: "ai-career-intelligence",
-    title: "AI Career Intelligence Platform",
-    category: "ai",
-    tagline: "Autonomous Market-Intelligence & Skill Alignment Agents",
-    shortDescription:
-      "An intelligent career analysis platform using LLM agents to parse real-time job market requirements, benchmark candidate skill gaps, and generate customized roadmaps.",
-    problem:
-      "Early-career software developers waste hundreds of hours navigating scattered job postings without understanding what specific modern skill gaps are blocking them from top engineering roles.",
-    solution:
-      "Created an agentic career engine that analyzes job specifications, benchmarks developer portfolios and GitHub activity, and generates actionable 30/60/90-day learning trajectories.",
-    tags: ["React 19", "NestJS", "TypeScript", "Prisma", "OpenAI API", "Tailwind CSS", "shadcn/ui"],
-    featured: true,
-    status: "In Development",
-    githubUrl: "https://github.com/Jyotishkumar-dev",
-    liveUrl: "https://github.com/Jyotishkumar-dev",
-    caseStudy: {
-      overview:
-        "AI Career Intelligence Platform is a next-generation developer tooling platform designed to give software engineers data-backed clarity on market demand, technical skill alignment, and targeted learning paths.",
-      problem:
-        "Tech job descriptions are filled with buzzwords and shifting requirements. Aspiring engineers struggle to prioritize what technologies actually matter for specific career tracks.",
-      solution:
-        "Developed an autonomous pipeline that scrapes, normalizes, and analyzes market skill graphs, comparing them against the user's project portfolio to produce tailored development roadmaps.",
-      keyFeatures: [
-        {
-          title: "Skill Gap Benchmarking Engine",
-          description: "Automated analysis comparing user tech stack against industry requirements for FDE, Full-Stack, and AI roles."
-        },
-        {
-          title: "Dynamic Learning Trajectory Generator",
-          description: "Personalized milestone generator breaking down complex technologies into weekly project-based challenges."
-        },
-        {
-          title: "Resume & Portfolio Feedback Agent",
-          description: "LLM-powered structural critique focusing on impact metrics, architecture explanations, and clarity."
-        },
-        {
-          title: "Market Demand Radar",
-          description: "Visual charts tracking rising and declining framework adoption across startup and enterprise roles."
-        }
-      ],
-      techStack: [
-        {
-          category: "Frontend",
-          skills: ["React 19", "TypeScript", "Tailwind CSS", "shadcn/ui", "Recharts"]
-        },
-        {
-          category: "Backend & Systems",
-          skills: ["NestJS", "TypeScript", "Prisma ORM", "Argon2id Auth", "Docker"]
-        },
-        {
-          category: "AI & Data",
-          skills: ["OpenAI / OpenRouter APIs", "Structured Outputs", "Prompt Optimization"]
-        }
-      ],
-      developmentProcess: [
-        {
-          step: 1,
-          phase: "Architecture Definition & Monorepo Setup",
-          description: "Structured clean NestJS backend alongside modern React 19 client with strict shared TypeScript types."
-        },
-        {
-          step: 2,
-          phase: "Prompt Pipeline Engineering",
-          description: "Engineered robust JSON-schema-constrained LLM prompts for reliable data extraction without hallucinations."
-        },
-        {
-          step: 3,
-          phase: "Authentication & User Vault",
-          description: "Implemented Argon2id password hashing and session tokens for secure user progress persistence."
-        },
-        {
-          step: 4,
-          phase: "Roadmap Generation Engine",
-          description: "Created deterministic milestone sequencing based on prerequisite tech dependencies."
-        }
-      ],
-      challenges: [
-        {
-          challenge: "Guaranteeing structured and deterministic responses from LLM reasoning calls.",
-          resolution: "Enforced strict Zod schema validation on JSON mode outputs with automatic retry fallbacks."
-        }
-      ],
-      learnings: [
-        "Advanced prompt engineering techniques for structured data generation.",
-        "NestJS dependency injection and enterprise backend patterns.",
-        "Building user interfaces that make AI insights immediately actionable."
+        "Effective git branching hygiene and collaborative problem-solving under deadline pressure.",
+        "Structuring scalable component interfaces for fast iteration."
       ]
     }
   }

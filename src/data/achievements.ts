@@ -3,16 +3,15 @@ import { AchievementItem } from "@/types";
 export const achievementsData: AchievementItem[] = [
   {
     id: "squidhack-2026",
-    title: "SQUidHACK 2026 — Team Hackathon",
-    event: "SQUidHACK National Hackathon",
+    title: "SQUidHACK 2026 Hackathon",
+    event: "National Level Hackathon",
     year: "2026",
-    category: "hackathon",
     badge: "Hackathon Builder",
-    description: "Built HackathonOS and KrishiFleet AI concept under rapid 36-hour sprint with team 'The Last Commit'.",
+    description: "Built KrishiFleet AI and HackathonOS with team 'The Last Commit' under a rapid 36-hour build and pitch sprint.",
     details: [
-      "Designed full-stack architecture and real-time QR check-in & judging dashboard.",
-      "Presented live working demo to judges and technical evaluators.",
-      "Praised for UI finish, practical workflow clarity, and robust data schema."
+      "Co-developed the full-stack web application and live demo interfaces.",
+      "Delivered live project presentation to technical evaluators.",
+      "Recognized for practical problem solving, UI finish, and rapid execution."
     ],
     link: "https://github.com/Jyotishkumar-dev"
   },
@@ -21,13 +20,12 @@ export const achievementsData: AchievementItem[] = [
     title: "AI / ML Technical Workshop",
     event: "IIT Patna",
     year: "2025",
-    category: "workshop",
     badge: "Specialized Training",
-    description: "Completed intensive technical workshop on Applied Machine Learning, Neural Network architectures, and practical model deployment.",
+    description: "Completed intensive technical workshop covering Applied Machine Learning, Neural Network architectures, and Python data pipelines.",
     details: [
-      "Hands-on experience with Python ML libraries (Scikit-Learn, Pandas, NumPy).",
-      "Explored model evaluation metrics, supervised learning workflows, and data pipelines.",
-      "Certified by IIT Patna technical faculty."
+      "Practical exercises in Python with Scikit-Learn, Pandas, and NumPy.",
+      "Explored supervised and unsupervised learning algorithms.",
+      "Certified by IIT Patna technical instructors."
     ]
   },
   {
@@ -35,12 +33,11 @@ export const achievementsData: AchievementItem[] = [
     title: "C++ Essentials 1 Certification",
     event: "Cisco Networking Academy",
     year: "2024",
-    category: "certification",
     badge: "Industry Certified",
-    description: "Certified proficiency in modern C++, memory management, pointers, and object-oriented paradigms.",
+    description: "Certified understanding of foundational C++, data types, flow control, pointers, and object-oriented programming.",
     details: [
-      "Mastered fundamentals of syntax, type casting, pointers, dynamic memory allocation.",
-      "Developed foundational understanding applied to Data Structures & Algorithms."
+      "Solidified fundamental principles of memory management and pointers.",
+      "Applied C++ knowledge toward core data structures problem solving."
     ]
   },
   {
@@ -48,25 +45,23 @@ export const achievementsData: AchievementItem[] = [
     title: "Young Professional Certification",
     event: "TCS iON",
     year: "2024",
-    category: "certification",
     badge: "Professional Readiness",
-    description: "Certified in workplace communication, agile collaboration, problem-solving, and corporate etiquette.",
+    description: "Certified in workplace communication, problem-solving methodologies, collaboration, and professional presentation skills.",
     details: [
-      "Structured problem solving and critical thinking frameworks.",
-      "Effective technical communication and team collaboration practices."
+      "Structured critical thinking and team collaboration practices.",
+      "Effective presentation and technical documentation habits."
     ]
   },
   {
     id: "udbhav-leadership",
-    title: "UDBHAV'26 Flagship Hackathon Leadership",
-    event: "SAGE University",
+    title: "UDBHAV'26 Hackathon Core Committee",
+    event: "SAGE University Flagship Hackathon",
     year: "2026",
-    category: "leadership",
-    badge: "Core Committee",
-    description: "Key member of the graphics & coordination committee managing visual communication for 400+ attendees.",
+    badge: "Organizing Team",
+    description: "Member of the Graphics and Coordination Core Team for the university's flagship hackathon with 400+ attendees.",
     details: [
-      "Coordinated stage logistics and live problem statements delivery.",
-      "Produced all digital brand banners, ID badges, and presentation materials."
+      "Designed digital assets, stage presentations, and participant materials.",
+      "Assisted on-ground technical coordination and live event logistics."
     ]
   }
 ];

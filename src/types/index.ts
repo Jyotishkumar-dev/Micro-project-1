@@ -1,34 +1,27 @@
 export interface Project {
   id: string;
+  number: string;
   title: string;
-  category: 'all' | 'ai' | 'fullstack' | 'hackathon' | 'tools';
+  category: string;
   tagline: string;
   shortDescription: string;
   problem: string;
   solution: string;
-  image?: string;
+  myContribution: string;
   tags: string[];
   featured: boolean;
-  status: 'Live' | 'Hackathon Build' | 'In Development' | 'Completed';
+  status: 'Live' | 'Hackathon Build' | 'In Progress';
   githubUrl?: string;
   liveUrl?: string;
   caseStudy: {
-    overview: string;
     problem: string;
-    solution: string;
+    idea: string;
+    whatIBuilt: string;
     keyFeatures: {
       title: string;
       description: string;
     }[];
-    techStack: {
-      category: string;
-      skills: string[];
-    }[];
-    developmentProcess: {
-      step: number;
-      phase: string;
-      description: string;
-    }[];
+    techStack: string[];
     challenges: {
       challenge: string;
       resolution: string;
@@ -37,28 +30,24 @@ export interface Project {
   };
 }
 
-export interface SkillCategory {
+export interface SkillTier {
   title: string;
-  iconName: string;
-  description: string;
+  subtitle: string;
   skills: {
     name: string;
-    level?: string;
-    icon?: string;
-    featured?: boolean;
-    description?: string;
+    context?: string;
+    highlight?: boolean;
   }[];
 }
 
-export interface ExperienceItem {
+export interface JourneyMilestone {
   id: string;
-  role: string;
-  organization: string;
-  location?: string;
-  period: string;
-  type: 'leadership' | 'community' | 'project' | 'education';
-  highlights: string[];
-  skills: string[];
+  year: string;
+  phase: string;
+  title: string;
+  description: string;
+  takeaways: string[];
+  category: 'foundation' | 'building' | 'leadership' | 'hackathon' | 'exploration';
 }
 
 export interface AchievementItem {
@@ -66,28 +55,8 @@ export interface AchievementItem {
   title: string;
   event: string;
   year: string;
-  category: 'hackathon' | 'certification' | 'workshop' | 'leadership';
   badge: string;
   description: string;
   details: string[];
   link?: string;
-}
-
-export interface LearningMilestone {
-  title: string;
-  status: 'mastered' | 'in-progress' | 'planned';
-  category: string;
-  description: string;
-  topics: string[];
-}
-
-export interface TestimonialItem {
-  id: string;
-  name: string;
-  role: string;
-  organization: string;
-  avatar?: string;
-  text: string;
-  badge?: string;
-  rating: number;
 }
