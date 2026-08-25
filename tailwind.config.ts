@@ -12,6 +12,15 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        navy: {
+          950: "#070B16",
+          900: "#0A1020", // Primary dark background
+          850: "#0E1528",
+          800: "#101429", // Card background
+          750: "#141A33",
+          700: "#1A2242",
+          600: "#222D54",
+        },
         brand: {
           50: "#eef2ff",
           100: "#e0e7ff",
@@ -25,6 +34,7 @@ const config: Config = {
           900: "#312e81",
         },
         cyan: {
+          300: "#67e8f9",
           400: "#22d3ee",
           500: "#06b6d4",
           600: "#0891b2",
@@ -34,16 +44,16 @@ const config: Config = {
           500: "#10b981",
         },
         dark: {
-          base: "#090d16",
-          card: "#0f1629",
-          hover: "#172038",
+          base: "#0A1020",
+          card: "#101429",
+          hover: "#141A33",
           border: "rgba(255, 255, 255, 0.08)",
           subtle: "rgba(255, 255, 255, 0.03)",
         },
         light: {
-          base: "#f8fafc",
-          card: "#ffffff",
-          hover: "#f1f5f9",
+          base: "#F8FAFC",
+          card: "#FFFFFF",
+          hover: "#F1F5F9",
           border: "rgba(0, 0, 0, 0.08)",
           subtle: "rgba(0, 0, 0, 0.02)",
         }
@@ -56,27 +66,16 @@ const config: Config = {
       animation: {
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "float": "float 6s ease-in-out infinite",
-        "glow": "glow 3s ease-in-out infinite alternate",
-        "gradient-x": "gradient-x 15s ease infinite",
+        "glow": "glow 4s ease-in-out infinite alternate",
       },
       keyframes: {
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
+          "50%": { transform: "translateY(-8px)" },
         },
         glow: {
-          "0%": { opacity: "0.4", filter: "blur(20px)" },
-          "100%": { opacity: "0.8", filter: "blur(30px)" },
-        },
-        "gradient-x": {
-          "0%, 100%": {
-            "background-size": "200% 200%",
-            "background-position": "left center",
-          },
-          "50%": {
-            "background-size": "200% 200%",
-            "background-position": "right center",
-          },
+          "0%": { opacity: "0.3", filter: "blur(20px)" },
+          "100%": { opacity: "0.6", filter: "blur(30px)" },
         },
       },
     },

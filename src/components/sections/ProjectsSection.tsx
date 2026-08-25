@@ -1,25 +1,70 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { projectsData } from "@/data/projects";
 import { Project } from "@/types";
 import { SectionHeading } from "../ui/SectionHeading";
 import { GlowCard } from "../ui/GlowCard";
 import { Badge } from "../ui/Badge";
 import { ProjectModal } from "../ui/ProjectModal";
+import { MagneticButton } from "../ui/MagneticButton";
+import { gsap } from "@/lib/gsap";
 import {
   ExternalLink,
   Github,
   ArrowRight,
   Sparkles,
   Layers,
-  CheckCircle2,
-  AlertCircle,
 } from "lucide-react";
 
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      projectRefs.current.forEach((card, index) => {
+        if (!card) return;
+
+        // Subtle ScrollTrigger reveal with gentle parallax
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 82%",
+            toggleActions: "play none none none",
+          },
+          y: 45,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power3.out",
+        });
+
+        // Subtle parallax movement on visual card during scroll
+        const visualCard = card.querySelector(".project-visual-box");
+        if (visualCard) {
+          gsap.to(visualCard, {
+            scrollTrigger: {
+              trigger: card,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1,
+            },
+            y: -15,
+            ease: "none",
+          });
+        }
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleOpenCaseStudy = (project: Project) => {
     setSelectedProject(project);
@@ -32,7 +77,7 @@ export function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-20 lg:py-28 relative">
+    <section ref={sectionRef} id="projects" className="py-20 lg:py-28 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badgeText="Selected Work"
@@ -48,7 +93,10 @@ export function ProjectsSection() {
             return (
               <div
                 key={project.id}
-                className="relative rounded-3xl bg-slate-50/70 dark:bg-slate-900/40 border border-slate-200/80 dark:border-slate-800/80 p-6 sm:p-10 lg:p-12 transition-all hover:border-slate-300 dark:hover:border-slate-700/80 shadow-sm"
+                ref={(node) => {
+                  projectRefs.current[index] = node;
+                }}
+                className="relative rounded-3xl bg-slate-50/70 dark:bg-navy-900/60 border border-slate-200/80 dark:border-white/[0.08] p-6 sm:p-10 lg:p-12 transition-all hover:border-slate-300 dark:hover:border-white/[0.14] shadow-sm backdrop-blur-md"
               >
                 <div
                   className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
@@ -61,47 +109,49 @@ export function ProjectsSection() {
                       isReversed ? "lg:order-2" : "lg:order-1"
                     }`}
                   >
-                    <GlowCard className="p-6 sm:p-8 bg-white dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-bold text-brand-600 dark:text-brand-400">
-                          PROJECT {project.number}
-                        </span>
-                        <Badge variant="brand">{project.status}</Badge>
-                      </div>
+                    <div className="project-visual-box will-change-transform">
+                      <GlowCard className="p-6 sm:p-8 bg-white dark:bg-navy-800/95 border border-slate-200 dark:border-white/[0.08] shadow-xl space-y-6">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-mono font-bold text-brand-600 dark:text-brand-400">
+                            PROJECT {project.number}
+                          </span>
+                          <Badge variant="brand">{project.status}</Badge>
+                        </div>
 
-                      <div>
-                        <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
-                          {project.category}
-                        </span>
-                        <h4 className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                          {project.title}
-                        </h4>
-                        <p className="text-sm font-medium text-brand-600 dark:text-brand-400 mt-1">
-                          {project.tagline}
-                        </p>
-                      </div>
-
-                      {/* Problem & Contribution Highlights */}
-                      <div className="space-y-3 pt-2 text-xs sm:text-sm">
-                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800">
-                          <p className="font-semibold text-rose-500 dark:text-rose-400 mb-1">
-                            Problem Addressed:
-                          </p>
-                          <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                            {project.problem}
+                        <div>
+                          <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
+                            {project.category}
+                          </span>
+                          <h4 className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+                            {project.title}
+                          </h4>
+                          <p className="text-sm font-medium text-brand-600 dark:text-brand-400 mt-1">
+                            {project.tagline}
                           </p>
                         </div>
 
-                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800">
-                          <p className="font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
-                            My Contribution:
-                          </p>
-                          <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                            {project.myContribution}
-                          </p>
+                        {/* Problem & Contribution Highlights */}
+                        <div className="space-y-3 pt-2 text-xs sm:text-sm">
+                          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-navy-900 border border-slate-200/60 dark:border-white/[0.06]">
+                            <p className="font-semibold text-rose-500 dark:text-rose-400 mb-1">
+                              Problem Addressed:
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                              {project.problem}
+                            </p>
+                          </div>
+
+                          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-navy-900 border border-slate-200/60 dark:border-white/[0.06]">
+                            <p className="font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
+                              My Contribution:
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                              {project.myContribution}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </GlowCard>
+                      </GlowCard>
+                    </div>
                   </div>
 
                   {/* Project Details & Action Column */}
@@ -131,7 +181,7 @@ export function ProjectsSection() {
                         {project.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="px-3 py-1 text-xs font-mono rounded-lg bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700/80 shadow-sm"
+                            className="px-3 py-1 text-xs font-mono rounded-lg bg-white dark:bg-navy-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/[0.08] shadow-sm"
                           >
                             {tag}
                           </span>
@@ -141,13 +191,15 @@ export function ProjectsSection() {
 
                     {/* Action CTAs */}
                     <div className="pt-4 flex items-center gap-3 flex-wrap">
-                      <button
-                        onClick={() => handleOpenCaseStudy(project)}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-semibold text-xs transition-all shadow-sm group/btn cursor-pointer"
-                      >
-                        <span>Read Case Study</span>
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
-                      </button>
+                      <MagneticButton>
+                        <button
+                          onClick={() => handleOpenCaseStudy(project)}
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-950 font-semibold text-xs transition-all shadow-sm group/btn cursor-pointer"
+                        >
+                          <span>Read Case Study</span>
+                          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
+                        </button>
+                      </MagneticButton>
 
                       {project.liveUrl && project.status === "Live" && (
                         <a
@@ -166,7 +218,7 @@ export function ProjectsSection() {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-xs font-medium transition-colors"
+                          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-navy-800 hover:bg-slate-200 dark:hover:bg-navy-750 text-slate-900 dark:text-white text-xs font-medium transition-colors border border-slate-200 dark:border-white/[0.08]"
                         >
                           <Github className="w-3.5 h-3.5" />
                           <span>Source</span>

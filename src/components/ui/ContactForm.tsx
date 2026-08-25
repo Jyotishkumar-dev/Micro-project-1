@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import confetti from "canvas-confetti";
-import { Send, CheckCircle, AlertCircle, Loader2, Sparkles } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { MagneticButton } from "./MagneticButton";
 import { cn } from "@/lib/utils";
 
 interface FormData {
@@ -96,14 +96,6 @@ export function ContactForm() {
 
       if (response.ok && data.success) {
         setStatus("success");
-        // Trigger celebratory confetti
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ["#6366f1", "#06b6d4", "#10b981", "#f59e0b"],
-        });
-        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -117,12 +109,12 @@ export function ContactForm() {
       }
     } catch (err) {
       setStatus("error");
-      setErrorMessage("Network error occurred. Please try again or reach out directly at jyotishyt58@gmail.com.");
+      setErrorMessage("Network error occurred. Please reach out directly at jyotishyt58@gmail.com.");
     }
   };
 
   return (
-    <div className="relative rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800 p-6 sm:p-10 shadow-xl">
+    <div className="relative rounded-3xl bg-white/90 dark:bg-navy-800/90 backdrop-blur-xl border border-slate-200/80 dark:border-white/[0.08] p-6 sm:p-10 shadow-xl">
       {status === "success" ? (
         <div className="text-center py-12 space-y-4 animate-in fade-in zoom-in-95 duration-300">
           <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center mx-auto">
@@ -132,11 +124,11 @@ export function ContactForm() {
             Message Sent Successfully!
           </h3>
           <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
-            Thank you for reaching out, Jyotish will get back to you within 24 hours. You can also connect directly on LinkedIn or GitHub.
+            Thank you for reaching out! Jyotish will get back to you within 24 hours. You can also connect directly on LinkedIn or GitHub.
           </p>
           <button
             onClick={() => setStatus("idle")}
-            className="mt-6 px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-sm transition-colors"
+            className="mt-6 px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-950 font-semibold text-xs transition-colors"
           >
             Send Another Message
           </button>
@@ -148,7 +140,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="name"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
+                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2 font-mono"
               >
                 Your Name <span className="text-rose-500">*</span>
               </label>
@@ -160,10 +152,10 @@ export function ContactForm() {
                 onChange={handleChange}
                 placeholder="e.g. Alex Rivera"
                 className={cn(
-                  "w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500",
+                  "w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-navy-900/80 border text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500",
                   errors.name
                     ? "border-rose-500 focus:ring-rose-500"
-                    : "border-slate-200 dark:border-slate-800"
+                    : "border-slate-200 dark:border-white/[0.08]"
                 )}
               />
               {errors.name && (
@@ -178,7 +170,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
+                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2 font-mono"
               >
                 Your Email <span className="text-rose-500">*</span>
               </label>
@@ -190,10 +182,10 @@ export function ContactForm() {
                 onChange={handleChange}
                 placeholder="alex@example.com"
                 className={cn(
-                  "w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500",
+                  "w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-navy-900/80 border text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500",
                   errors.email
                     ? "border-rose-500 focus:ring-rose-500"
-                    : "border-slate-200 dark:border-slate-800"
+                    : "border-slate-200 dark:border-white/[0.08]"
                 )}
               />
               {errors.email && (
@@ -210,7 +202,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="subject"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
+                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2 font-mono"
               >
                 Subject <span className="text-rose-500">*</span>
               </label>
@@ -220,12 +212,12 @@ export function ContactForm() {
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                placeholder="e.g. Project Collaboration / Opportunity"
+                placeholder="e.g. Full-Stack / Internship Role"
                 className={cn(
-                  "w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500",
+                  "w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-navy-900/80 border text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500",
                   errors.subject
                     ? "border-rose-500 focus:ring-rose-500"
-                    : "border-slate-200 dark:border-slate-800"
+                    : "border-slate-200 dark:border-white/[0.08]"
                 )}
               />
               {errors.subject && (
@@ -236,11 +228,11 @@ export function ContactForm() {
               )}
             </div>
 
-            {/* Project / Inquiry Type */}
+            {/* Inquiry Type */}
             <div>
               <label
                 htmlFor="projectType"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
+                className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2 font-mono"
               >
                 Inquiry Type
               </label>
@@ -249,10 +241,10 @@ export function ContactForm() {
                 name="projectType"
                 value={formData.projectType}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-navy-900/80 border border-slate-200 dark:border-white/[0.08] text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500"
               >
                 {projectTypes.map((type) => (
-                  <option key={type} value={type} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
+                  <option key={type} value={type} className="bg-white dark:bg-navy-900 text-slate-900 dark:text-white">
                     {type}
                   </option>
                 ))}
@@ -264,22 +256,22 @@ export function ContactForm() {
           <div>
             <label
               htmlFor="message"
-              className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2"
+              className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2 font-mono"
             >
               Message <span className="text-rose-500">*</span>
             </label>
             <textarea
               id="message"
               name="message"
-              rows={5}
+              rows={4}
               value={formData.message}
               onChange={handleChange}
               placeholder="Tell me about your project, idea, or role..."
               className={cn(
-                "w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500 resize-y",
+                "w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-navy-900/80 border text-slate-900 dark:text-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-500 resize-y",
                 errors.message
                   ? "border-rose-500 focus:ring-rose-500"
-                  : "border-slate-200 dark:border-slate-800"
+                  : "border-slate-200 dark:border-white/[0.08]"
               )}
             />
             {errors.message && (
@@ -299,23 +291,25 @@ export function ContactForm() {
           )}
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 active:bg-brand-700 disabled:opacity-50 text-white font-semibold text-sm transition-all shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2 group cursor-pointer"
-          >
-            {status === "loading" ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Sending Message...</span>
-              </>
-            ) : (
-              <>
-                <span>Send Message</span>
-                <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5" />
-              </>
-            )}
-          </button>
+          <MagneticButton strength={10}>
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="px-8 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 dark:text-slate-950 text-white font-semibold text-xs transition-all shadow-md flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50"
+            >
+              {status === "loading" ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Sending...</span>
+                </>
+              ) : (
+                <>
+                  <span>Send Message</span>
+                  <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5" />
+                </>
+              )}
+            </button>
+          </MagneticButton>
         </form>
       )}
     </div>
