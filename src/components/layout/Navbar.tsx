@@ -33,17 +33,16 @@ export function Navbar({ onOpenResume }: NavbarProps) {
     return new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: "vertical",
-      gestureDirection: "vertical",
-      smooth: true,
-      smoothTouch: false,
+      smoothWheel: true,
+      orientation: "vertical",
+      gestureOrientation: "vertical",
     });
   });
 
   const scrollToSection = (href: string) => {
     setMobileMenuOpen(false);
     if (lenis) {
-      const element = document.querySelector(href);
+      const element = document.querySelector(href) as HTMLElement | null;
       if (element) {
         lenis.scrollTo(element, { offset: -80 });
       }

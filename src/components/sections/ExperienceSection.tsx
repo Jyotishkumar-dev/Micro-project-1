@@ -7,7 +7,7 @@ import { GlowCard } from "../ui/GlowCard";
 import { gsap } from "@/lib/gsap";
 import { CheckCircle2, Award, Users, Target, BookOpen } from "lucide-react";
 
-const typeIcons = {
+const typeIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   leadership: Users,
   hackathon: Award,
   ambassador: Target,
@@ -15,7 +15,7 @@ const typeIcons = {
   workshop: CheckCircle2,
 };
 
-const typeColors = {
+const typeColors: Record<string, "brand" | "cyan" | "emerald"> = {
   leadership: "brand",
   hackathon: "emerald",
   ambassador: "cyan",

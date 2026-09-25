@@ -14,6 +14,7 @@ export const leadershipData: LeadershipActivity[] = [
       "Managed technical infrastructure and deployment pipelines.",
       "Mentored participants on full-stack development and debugging.",
     ],
+    type: "hackathon",
   },
   {
     id: "hackathon-co-lead",
@@ -28,6 +29,7 @@ export const leadershipData: LeadershipActivity[] = [
       "Coordinated judge interactions and evaluation criteria.",
       "Delivered opening and closing ceremony presentations.",
     ],
+    type: "hackathon",
   },
   {
     id: "techfest-ambassador",
@@ -42,6 +44,7 @@ export const leadershipData: LeadershipActivity[] = [
       "Coordinated student participation in workshops and competitions.",
       "Liaison between campus student body and Techfest organizing team.",
     ],
+    type: "ambassador",
   },
   {
     id: "social-media-club",
@@ -56,6 +59,7 @@ export const leadershipData: LeadershipActivity[] = [
       "Organized coding workshops and peer learning sessions.",
       "Managed event logistics for tech talks and hackathons.",
     ],
+    type: "club",
   },
   {
     id: "udbhav-graphics",
@@ -70,5 +74,6 @@ export const leadershipData: LeadershipActivity[] = [
       "Created branding collateral for print and digital media.",
       "Assisted with on-ground technical coordination and live event logistics.",
     ],
+    type: "leadership",
   },
 ];

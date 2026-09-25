@@ -94,6 +94,7 @@ export interface LeadershipActivity {
   organization: string;
   description: string;
   highlights: string[];
+  type: 'leadership' | 'hackathon' | 'ambassador' | 'club' | 'workshop';
 }
 
 export interface Certification {

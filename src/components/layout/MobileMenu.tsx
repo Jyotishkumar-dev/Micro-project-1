@@ -25,6 +25,7 @@ export function MobileMenu({
   navItems,
   activeSection,
   onOpenResume,
+  onNavigate,
 }: MobileMenuProps) {
   useEffect(() => {
     if (isOpen) {

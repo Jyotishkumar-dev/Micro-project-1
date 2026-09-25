@@ -15,6 +15,8 @@ import {
   Brain,
 } from "lucide-react";
 
+type SkillCategoryKey = (typeof skillCategories)[number]["key"];
+
 const categoryIcons = {
   language: Code,
   frontend: Layout,
@@ -34,13 +36,33 @@ const categoryColors = {
 };
 
 const getIconBgClass = (category: string) => {
+  const base = "w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ";
   switch (categoryColors[category as keyof typeof categoryColors]) {
     case "brand":
-      return "bg-brand-500/10 text-brand-600 dark:text-brand-400";
+      return base + "bg-brand-500/10 text-brand-600 dark:text-brand-400";
     case "cyan":
-      return "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400";
+      return base + "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400";
     default:
-      return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400";
+      return base + "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400";
+  }
+};
+
+const getIconElement = (category: string) => {
+  switch (category) {
+    case "language":
+      return <Code className="w-5 h-5" />;
+    case "frontend":
+      return <Layout className="w-5 h-5" />;
+    case "backend":
+      return <Server className="w-5 h-5" />;
+    case "database":
+      return <Database className="w-5 h-5" />;
+    case "tool":
+      return <Wrench className="w-5 h-5" />;
+    case "core":
+      return <Brain className="w-5 h-5" />;
+    default:
+      return <Code className="w-5 h-5" />;
   }
 };
 
@@ -54,7 +76,7 @@ const getBadgeVariant = (category: string) => {
 export function SkillsSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [activeCategory, setActiveCategory] = useState(skillCategories[0].key);
+  const [activeCategory, setActiveCategory] = useState<SkillCategoryKey>(skillCategories[0].key);
 
   const filteredSkills = useMemo(
     () => skillsData.filter((skill) => skill.category === activeCategory),
@@ -114,8 +136,7 @@ export function SkillsSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredSkills.map((skill, idx) => {
-            const iconBaseClass = "w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0";
-            const iconColorClass: string = getIconBgClass(skill.category);
+            const iconClassName = getIconBgClass(skill.category);
             return (
               <div
                 key={skill.id}
@@ -130,8 +151,8 @@ export function SkillsSection() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3 flex-1 min-w-0">
-                      <div className={iconBaseClass + " " + iconColorClass}>
-                        <categoryIcons[skill.category] className="w-5 h-5" />
+                      <div className={iconClassName}>
+                        {getIconElement(skill.category)}
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
