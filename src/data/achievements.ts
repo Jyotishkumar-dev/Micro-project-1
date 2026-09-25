@@ -11,9 +11,9 @@ export const achievementsData: AchievementItem[] = [
     details: [
       "Co-developed the full-stack web application and live demo interfaces.",
       "Delivered live project presentation to technical evaluators.",
-      "Recognized for practical problem solving, UI finish, and rapid execution."
+      "Recognized for practical problem solving, UI finish, and rapid execution.",
     ],
-    link: "https://github.com/Jyotishkumar-dev"
+    link: "https://github.com/Jyotishkumar-dev",
   },
   {
     id: "iit-patna-aiml",
@@ -25,8 +25,8 @@ export const achievementsData: AchievementItem[] = [
     details: [
       "Practical exercises in Python with Scikit-Learn, Pandas, and NumPy.",
       "Explored supervised and unsupervised learning algorithms.",
-      "Certified by IIT Patna technical instructors."
-    ]
+      "Certified by IIT Patna technical instructors.",
+    ],
   },
   {
     id: "cisco-cpp",
@@ -37,8 +37,8 @@ export const achievementsData: AchievementItem[] = [
     description: "Certified understanding of foundational C++, data types, flow control, pointers, and object-oriented programming.",
     details: [
       "Solidified fundamental principles of memory management and pointers.",
-      "Applied C++ knowledge toward core data structures problem solving."
-    ]
+      "Applied C++ knowledge toward core data structures problem solving.",
+    ],
   },
   {
     id: "tcs-ion-pro",
@@ -49,8 +49,8 @@ export const achievementsData: AchievementItem[] = [
     description: "Certified in workplace communication, problem-solving methodologies, collaboration, and professional presentation skills.",
     details: [
       "Structured critical thinking and team collaboration practices.",
-      "Effective presentation and technical documentation habits."
-    ]
+      "Effective presentation and technical documentation habits.",
+    ],
   },
   {
     id: "udbhav-leadership",
@@ -61,7 +61,7 @@ export const achievementsData: AchievementItem[] = [
     description: "Member of the Graphics and Coordination Core Team for the university's flagship hackathon with 400+ attendees.",
     details: [
       "Designed digital assets, stage presentations, and participant materials.",
-      "Assisted on-ground technical coordination and live event logistics."
-    ]
-  }
+      "Assisted on-ground technical coordination and live event logistics.",
+    ],
+  },
 ];
