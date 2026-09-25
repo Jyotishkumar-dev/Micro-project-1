@@ -41,6 +41,20 @@ export function createPublicSupabaseClient(): PublicSupabaseClient | null {
         autoRefreshToken: false,
         detectSessionInUrl: false,
       },
+      db: {
+        /**
+         * Fail fast, and do not retry.
+         *
+         * Every read through this client has a bundled fallback, and the
+         * results are revalidated every 5 minutes anyway. Measured against an
+         * unreachable host, the client's default retry policy (3 attempts with
+         * backoff) pushed the response to ~13 seconds — all of it spent waiting
+         * to serve content the fallback already had. A 5s ceiling keeps a
+         * Supabase outage a brief delay instead of an apparent hang.
+         */
+        retry: false,
+        timeout: 5000,
+      },
       global: {
         /**
          * Next.js patches `fetch` to honour its data cache. Portfolio content

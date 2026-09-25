@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
-import { isSupabaseServerConfigured } from "@/lib/supabase/env";
+import { isSupabaseServerConfigured } from "@/lib/supabase/env.server";
 import {
   contactMessageSchema,
   firstErrorMessage,

@@ -1,5 +1,6 @@
 import "server-only";
 
+import { cache } from "react";
 import { redirect } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
 import type { ProfileRow } from "./database.types";
@@ -33,8 +34,11 @@ const ANONYMOUS: AdminSession = {
  * security boundary. RLS is. A user who forges their way past this function
  * still cannot write a single row, because `public.is_admin()` re-checks the
  * same claim inside the database using the verified JWT.
+ *
+ * Wrapped in React `cache` so a layout and a page that both need the session
+ * share one auth round trip per request instead of making two.
  */
-export async function getAdminSession(): Promise<AdminSession> {
+export const getAdminSession = cache(async (): Promise<AdminSession> => {
   if (!isSupabaseConfigured()) return ANONYMOUS;
 
   const supabase = createSupabaseServerClient();
@@ -62,7 +66,7 @@ export async function getAdminSession(): Promise<AdminSession> {
     isAdmin: Boolean(profile?.is_admin),
     unavailable: false,
   };
-}
+});
 
 /**
  * Gate for every /admin page. Redirects to the login screen (or bounces an

@@ -24,10 +24,20 @@ const LOGIN_PATH = "/admin/login";
  * the database. Never treat a 200 from middleware as an authorization decision.
  */
 export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const isLoginRoute = pathname === LOGIN_PATH;
+
   if (!isSupabaseConfigured()) {
-    // No backend to talk to. Let the request through so /admin/login can
-    // explain what is missing instead of bouncing forever.
-    return NextResponse.next();
+    // No backend to talk to. `/admin/login` still renders — it is what explains
+    // the missing env vars. Everything else gets a real 307 to it, rather than
+    // letting a Server Component `redirect()` arrive as a 200 with a
+    // client-side meta refresh once streaming has already started.
+    if (isLoginRoute) return NextResponse.next();
+
+    const url = request.nextUrl.clone();
+    url.pathname = LOGIN_PATH;
+    url.search = "?reason=not-configured";
+    return NextResponse.redirect(url);
   }
 
   let response = NextResponse.next({ request });
@@ -53,9 +63,6 @@ export async function middleware(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  const { pathname } = request.nextUrl;
-  const isLoginRoute = pathname === LOGIN_PATH;
 
   if (!user && !isLoginRoute) {
     const url = request.nextUrl.clone();

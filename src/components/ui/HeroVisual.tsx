@@ -90,12 +90,15 @@ const ParticleSystem = () => {
     };
   }, [count]);
 
-  const handleMouseMove = (event: MouseEvent) => {
-    mouseRef.current.x = (event.clientX / viewport.width) * 2 - 1;
-    mouseRef.current.y = -(event.clientY / viewport.height) * 2 + 1;
-  };
-
   useEffect(() => {
+    // Defined inside the effect so the listener is bound to exactly the
+    // viewport it was created for, and so the cleanup closes over the same
+    // function instance it registered.
+    const handleMouseMove = (event: MouseEvent) => {
+      mouseRef.current.x = (event.clientX / viewport.width) * 2 - 1;
+      mouseRef.current.y = -(event.clientY / viewport.height) * 2 + 1;
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [viewport.width, viewport.height]);

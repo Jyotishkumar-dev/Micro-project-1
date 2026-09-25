@@ -33,6 +33,16 @@ const requiredText = (label: string, min: number, max: number) =>
     .min(min, { message: `${label} is required.` })
     .max(max, { message: `${label} must be ${max} characters or fewer.` });
 
+/** Same as {@link optionalText} but for NOT NULL text columns: always a string. */
+const freeText = (max: number) =>
+  z
+    .string()
+    .trim()
+    .max(max)
+    .optional()
+    .or(z.literal(""))
+    .transform((value) => value ?? "");
+
 const optionalUrl = z
   .string()
   .trim()
@@ -186,7 +196,7 @@ export const experienceSchema = z.object({
     .or(z.literal(""))
     .transform((value) => (value ? value : null)),
   isCurrent: booleanish.default(false),
-  description: z.string().trim().max(4000).optional().or(z.literal("")),
+  description: freeText(4000),
   highlights: stringList,
   published: booleanish.default(true),
   displayOrder: z.coerce.number().int().min(0).max(9999).default(0),
@@ -211,7 +221,7 @@ export const certificationSchema = z.object({
     .transform((value) => (value ? value : null)),
   credentialUrl: optionalUrl,
   badge: optionalText(80),
-  description: z.string().trim().max(2000).optional().or(z.literal("")),
+  description: freeText(2000),
   details: stringList,
   published: booleanish.default(true),
   displayOrder: z.coerce.number().int().min(0).max(9999).default(0),

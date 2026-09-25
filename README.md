@@ -1,93 +1,170 @@
-# Jyotish Kumar — Developer Portfolio (Version 3)
+# Jyotish Kumar — Developer Portfolio
 
-A modern, highly polished personal developer portfolio for **Jyotish Kumar**, built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, **GSAP & ScrollTrigger**, and custom **interactive HTML5 canvas animations**.
+A full-stack personal developer portfolio built with **Next.js 14 (App Router)**,
+**TypeScript**, **Tailwind CSS**, **GSAP + ScrollTrigger**, **React Three Fiber**,
+and **Supabase** (PostgreSQL, Auth, Row Level Security, Storage).
+
+The public site is server-rendered from Supabase with a bundled static fallback,
+so it keeps working when the backend is unreachable. Portfolio content is managed
+through a private admin CMS at `/admin`.
 
 ![Portfolio Preview](/public/my_pic2.jpeg)
 
 ---
 
-## 🌟 Version 3 Upgrades & Key Features
+## Quick start
 
-- 🌌 **Deep Dark Navy / Midnight Blue Palette (`#0A1020` / `#101429`)**: Inspired by the dark navy HackathonOS presentation aesthetic, featuring rich midnight surfaces, slate depth layers, and electric indigo/cyan accents.
-- ✨ **Interactive Animated Background (`InteractiveBackground.tsx`)**: Lightweight 60fps HTML5 canvas rendering floating digital constellation nodes with soft connecting lines and dynamic mouse proximity response. Automatically throttles on mobile and hidden tabs.
-- 💡 **Fluid Cursor-Following Radial Glow (`CursorLight.tsx`)**: Smooth interpolated (lerp) radial light tracking the mouse without blocking clicks, seamlessly adapting in intensity when hovering interactive cards and CTAs.
-- 🎬 **Mandatory GSAP & ScrollTrigger Integration (`gsap.ts`)**:
-  - **Hero Section**: Staggered cinematic entrance timeline (badge &rarr; headline reveal &rarr; narrative &rarr; magnetic CTAs &rarr; real photo frame reveal).
-  - **Section Headings**: ScrollTrigger-based reveal animations.
-  - **Projects Section**: Scroll-driven entrance with subtle image depth parallax.
-  - **Journey Section**: Scroll-driven vertical timeline progress line expanding in real time as the user scrolls.
-  - **Magnetic Button Effects (`MagneticButton.tsx`)**: Subtle magnetic attraction micro-interactions for primary CTAs (`View My Work`, `Let's Connect`).
-- 📸 **Real Professional Photo**: Preserves and frames Jyotish's real photograph (`public/my_pic2.jpeg`) with ambient backlighting and degree context (*B.Tech CS - Data Science & ML*).
-- 🧭 **Streamlined User Journey**:
-  - `Home` &rarr; `About` &rarr; `Projects` &rarr; `Skills` &rarr; `Journey` &rarr; `Contact`
-- 💼 **Authentic Featured Projects**:
-  - **01 / KrishiFleet AI** (SQUidHACK 2026 farm equipment rental platform)
-  - **02 / SmartAttend AI** (Multi-role college attendance system with [Live Demo](https://attendance-management-system-projec-steel.vercel.app/login))
-  - **03 / HackathonOS** (Real-time hackathon orchestration platform)
-- 🛠️ **3-Tier Honest Skills Matrix**:
-  1. *Technologies I Work With* (Active languages and frameworks)
-  2. *Tools I Use* (VS Code, GitHub, Postman, Figma, Vercel, Render)
-  3. *Currently Learning & Exploring* (Advanced Java & DSA, System Design, LLM Tool Calling)
-- 📬 **Interactive Contact System**:
-  - Form with client-side validation, loading states, and direct email copy button (`jyotishyt58@gmail.com`), backed by `/api/contact`.
+```bash
+npm install
+cp .env.example .env.local     # fill in the three Supabase values
+npm run dev
+```
+
+Without `.env.local` the site still runs — it serves the content bundled in
+`src/data/`. The admin CMS and the contact form need the real values.
+
+### Applying the database
+
+Run the four files in `supabase/migrations/` in order via the Supabase SQL
+editor. Full walkthrough, including how to create the owner account and how to
+verify the RLS policies, is in **[`supabase/README.md`](./supabase/README.md)**.
+
+| Order | File | Contents |
+| --- | --- | --- |
+| 1 | `0001_schema.sql` | Tables, indexes, triggers, `is_admin()`, the public-signup block |
+| 2 | `0002_rls.sql` | Grants, RLS on every table, all policies, `reorder_items()` |
+| 3 | `0003_storage.sql` | `project-images` bucket + storage policies |
+| 4 | `0004_seed.sql` | Admin allowlist + documented portfolio content |
 
 ---
 
-## 📂 Project Architecture
+## Architecture
+
+```
+Browser
+  ├── public site ──────────► Supabase (anon key, published-only reads)
+  └── /admin ───────────────► Supabase (anon key + admin session, RLS-checked)
+                                     ▲
+  /api/contact ──► Route Handler ────┘ (service role, server only)
+```
+
+There is no separate backend. Supabase provides PostgreSQL, Auth, Storage and
+RLS; Next.js Route Handlers cover the one operation that needs server-only
+privilege (scored contact-form intake).
+
+### Public site
+
+`src/app/page.tsx` is a Server Component. It calls `getPortfolioData()`, which
+reads through a cookie-less anon client, and hands plain props to
+`PortfolioShell`. Each section keeps its original view model (`Project`,
+`Skill`, `LeadershipActivity`, `Certification`, `Achievement`); the translation
+from DB rows lives in one place, `src/lib/data/mappers.ts`.
+
+If Supabase is unconfigured, unreachable, or erroring, the loader falls back to
+the arrays in `src/data/` and records a warning. An empty table is *not* treated
+as a failure — sections render an empty state, so unpublishing something in the
+CMS actually hides it.
+
+### Admin CMS
+
+Route group `src/app/admin/(dashboard)/` is guarded by `requireAdmin()`, which
+revalidates the session and checks `profiles.is_admin`. `src/middleware.ts`
+refreshes auth cookies and redirects anonymous visitors.
+
+Every read and write the CMS performs goes through the **anon key plus the
+admin's own session**. There is no service-role path in the browser, so the UI
+has exactly the privileges an attacker would — which is the point. RLS is the
+authorization boundary; the route guard is only UX.
+
+```
+/admin/login           email + password, no registration
+/admin                 counters + recent messages
+/admin/projects        CRUD, reorder, featured, image upload
+/admin/skills          CRUD, reorder, recategorise
+/admin/experience      CRUD, reorder
+/admin/certifications  CRUD, reorder
+/admin/messages        read/unread/delete, spam filter
+/admin/settings        profile, visibility, backend status
+```
+
+---
+
+## Security model
+
+| Concern | Control |
+| --- | --- |
+| Public reads | `published = true` policy; draft rows are invisible to `anon` |
+| Portfolio writes | `with check (public.is_admin())` on every table |
+| Contact messages | `anon` may INSERT only; there is **no** `anon` SELECT policy |
+| Admin flag | `profiles_protect_admin` trigger blocks self-promotion |
+| Registration | `before insert` trigger on `auth.users` rejects non-allowlisted emails |
+| Service role key | `server-only` import; no `NEXT_PUBLIC_` prefix; one call site |
+| Route guards | Middleware + server layout; both treated as convenience, not control |
+
+The three layers are independent on purpose. Removing the admin UI would not
+remove the RLS policies; bypassing the UI would not grant a write.
+
+---
+
+## Project structure
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx             # Root layout with metadata, JSON-LD, fonts
-│   ├── page.tsx               # Main single-page application orchestrator
-│   ├── globals.css            # Dark navy theme variables, CSS utilities & scrollbars
-│   ├── sitemap.ts             # Dynamic SEO sitemap
-│   ├── robots.ts              # Dynamic SEO robots
-│   └── api/
-│       └── contact/route.ts   # Contact form submission endpoint
+│   ├── page.tsx                  # Server Component: fetches portfolio data
+│   ├── loading.tsx / error.tsx   # Route-level loading and error boundaries
+│   ├── api/contact/route.ts      # Validated, rate-limited, spam-scored intake
+│   └── admin/
+│       ├── layout.tsx            # Bare wrapper (login lives here, so no guard)
+│       ├── login/page.tsx
+│       └── (dashboard)/          # Guarded group: force-dynamic + requireAdmin
 ├── components/
-│   ├── layout/                # Navbar, MobileMenu, Footer, ScrollProgress
-│   ├── sections/              # HeroSection, AboutSection, ProjectsSection, SkillsSection, JourneySection, AchievementsSection, ContactSection
-│   ├── ui/                    # InteractiveBackground, CursorLight, MagneticButton, GlowCard, ProjectModal, ContactForm, ResumeModal, SectionHeading, ThemeToggle, Badge
-│   └── providers/             # ThemeProvider (next-themes)
-├── data/
-│   ├── personal.ts            # Bio, contact, socials, photo references
-│   ├── projects.ts            # Projects dataset + honest case studies
-│   ├── skills.ts              # 3-tier skills matrix
-│   ├── journey.ts             # Growth timeline milestones
-│   └── achievements.ts        # Hackathons & certifications
-├── hooks/                     # useActiveSection, useScrollPosition
-├── lib/                       # gsap.ts (GSAP & ScrollTrigger), utils.ts
-└── types/                     # Full TypeScript interfaces
+│   ├── layout/PortfolioShell.tsx # Client shell; owns the resume modal state
+│   ├── sections/                 # Public sections, now data-driven via props
+│   ├── admin/                    # AdminShell, CRUD managers, forms, UI kit
+│   └── ui/                       # Existing public UI primitives
+├── lib/
+│   ├── supabase/                 # env, typed clients, session helpers
+│   ├── data/                     # portfolio.ts (public) · admin.ts (CRUD)
+│   ├── storage/                  # project image upload/delete
+│   └── validation/schemas.ts     # Zod schemas shared by API and forms
+├── middleware.ts                 # Admin auth refresh + redirect
+└── data/                         # Bundled fallback content
+
+supabase/migrations/              # Schema, RLS, storage, seed
 ```
 
 ---
 
-## 🚀 Getting Started
-
-### 1. Install Dependencies
+## Scripts
 
 ```bash
-npm install
+npm run dev      # dev server
+npm run build    # production build
+npm start        # serve the production build
+npm run lint     # eslint (next/core-web-vitals)
 ```
 
-### 2. Run the Development Server
+## Environment variables
 
-```bash
-npm run dev
-```
+See [`.env.example`](./.env.example).
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+| Variable | Scope | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | public | Project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | public | anon key; RLS-limited |
+| `SUPABASE_SERVICE_ROLE_KEY` | **server only** | Contact intake; bypasses RLS |
 
-### 3. Build for Production
-
-```bash
-npm run build
-npm start
-```
+`.env` and `.env.local` are git-ignored. Never commit real values.
 
 ---
 
-## 📄 License
+## Known issues
 
-Designed and developed by **Jyotish Kumar**.
+- **`next@14.2.35` has open advisories** (1 critical, several high) per
+  `npm audit`. The only patched line is `next@16`, which requires React 19 and
+  would break `@react-three/fiber@8` / `@react-three/drei@9`. Left alone
+  deliberately; see the Phase 3 report.
+- The resume PDF referenced at `/resume.pdf` is not in `public/`.
+- Public copy (hero headline, about story, social links) still lives in
+  `src/data/personal.ts`; only list content is database-driven.

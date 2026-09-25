@@ -2,11 +2,11 @@ import "server-only";
 
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./database.types";
+import { SUPABASE_URL } from "./env";
 import {
   SUPABASE_SERVICE_ROLE_KEY,
-  SUPABASE_URL,
   isSupabaseServerConfigured,
-} from "./env";
+} from "./env.server";
 
 export type SupabaseAdminClient = ReturnType<typeof createClient<Database>>;
 

@@ -132,7 +132,7 @@ export function Navbar({ onOpenResume }: NavbarProps) {
               className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold shadow-sm transition-all hover:scale-105"
             >
               <Send className="w-3.5 h-3.5" />
-              <span>Let's Connect</span>
+              <span>Let&apos;s Connect</span>
             </a>
 
             {/* Mobile Hamburger Menu Toggle */}
