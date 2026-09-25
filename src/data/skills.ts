@@ -1,45 +1,47 @@
-import { SkillTier } from "@/types";
+import { Skill } from "@/types";
 
-export const skillTiers: SkillTier[] = [
-  {
-    title: "Technologies I Work With",
-    subtitle: "Languages, libraries, and frameworks I actively use to build full-stack web applications.",
-    skills: [
-      { name: "Java", context: "OOP, Core Syntax, Algorithms", highlight: true },
-      { name: "JavaScript (ES6+)", context: "Async/Await, Modern APIs, DOM", highlight: true },
-      { name: "TypeScript", context: "Type Safety, Interfaces, Component Props", highlight: true },
-      { name: "React", context: "Hooks, State Management, Component Architecture", highlight: true },
-      { name: "Next.js (App Router)", context: "Server & Client Components, Route Handlers", highlight: true },
-      { name: "Tailwind CSS", context: "Responsive Layouts, Custom Themes, Modern UI", highlight: true },
-      { name: "HTML5 & CSS3", context: "Semantic Markup, Flexbox, CSS Grid", highlight: false },
-      { name: "Node.js", context: "Event-driven Runtime, REST APIs", highlight: true },
-      { name: "Express.js", context: "Routing, Middlewares, API Endpoints", highlight: true },
-      { name: "PostgreSQL & SQL", context: "Relational Modeling, Basic Queries, Joins", highlight: false },
-      { name: "MongoDB", context: "Document Modeling, Basic Aggregations", highlight: false },
-      { name: "Git & GitHub", context: "Version Control, Branching, Pull Requests", highlight: true }
-    ]
-  },
-  {
-    title: "Tools I Use",
-    subtitle: "Everyday developer environment, design tools, and deployment platforms.",
-    skills: [
-      { name: "VS Code", context: "Primary IDE, Extensions, Snippets", highlight: true },
-      { name: "GitHub", context: "Code Repositories, Issue Tracking, Actions", highlight: true },
-      { name: "Postman", context: "API Endpoint Testing & Verification", highlight: false },
-      { name: "Figma", context: "UI Wireframing, Layout Concepting", highlight: false },
-      { name: "Vercel", context: "Frontend & Next.js Deployments", highlight: true },
-      { name: "Render", context: "Backend Web Service Hosting", highlight: false }
-    ]
-  },
-  {
-    title: "Currently Learning & Exploring",
-    subtitle: "Topics and technologies I am actively studying and experimenting with in my free time.",
-    skills: [
-      { name: "Data Structures & Algorithms", context: "Trees, Graphs, Recursion, Optimization in Java", highlight: true },
-      { name: "Backend Architecture", context: "Modular Monoliths, API Security, Performance", highlight: true },
-      { name: "AI Tool Integration", context: "Integrating LLM APIs (Gemini/OpenAI) into Web Apps", highlight: true },
-      { name: "Database Design & Indexing", context: "Schema Normalization, Query Optimization", highlight: false },
-      { name: "System Design Basics", context: "Caching, Load Balancing Fundamentals", highlight: false }
-    ]
-  }
+export const skillsData: Skill[] = [
+  { id: "java", name: "Java", category: "language", proficiency: "proficient", context: "OOP, Core Syntax, DSA", highlight: true },
+  { id: "javascript", name: "JavaScript", category: "language", proficiency: "proficient", context: "ES6+, Async/Await, DOM", highlight: true },
+  { id: "typescript", name: "TypeScript", category: "language", proficiency: "proficient", context: "Type Safety, Interfaces, Generics", highlight: true },
+  { id: "python", name: "Python", category: "language", proficiency: "proficient", context: "Data Science, Scripting", highlight: false },
+  { id: "c", name: "C", category: "language", proficiency: "learning", context: "Systems Programming", highlight: false },
+  { id: "cpp", name: "C++", category: "language", proficiency: "proficient", context: "OOP, STL, Competitive Programming", highlight: true },
+
+  { id: "react", name: "React.js", category: "frontend", proficiency: "proficient", context: "Hooks, State Management, Component Architecture", highlight: true },
+  { id: "nextjs", name: "Next.js", category: "frontend", proficiency: "proficient", context: "App Router, Server Components, API Routes", highlight: true },
+  { id: "html", name: "HTML5", category: "frontend", proficiency: "advanced", context: "Semantic Markup, Accessibility", highlight: false },
+  { id: "css", name: "CSS3", category: "frontend", proficiency: "advanced", context: "Flexbox, Grid, Animations", highlight: false },
+  { id: "tailwind", name: "Tailwind CSS", category: "frontend", proficiency: "advanced", context: "Responsive Layouts, Custom Themes", highlight: true },
+
+  { id: "nodejs", name: "Node.js", category: "backend", proficiency: "proficient", context: "Event-driven Runtime, REST APIs", highlight: true },
+  { id: "express", name: "Express.js", category: "backend", proficiency: "proficient", context: "Routing, Middleware, API Design", highlight: true },
+  { id: "rest", name: "REST APIs", category: "backend", proficiency: "proficient", context: "API Design, Authentication", highlight: false },
+  { id: "jwt", name: "JWT Auth", category: "backend", proficiency: "proficient", context: "Authentication, Refresh Tokens, RBAC", highlight: true },
+
+  { id: "postgresql", name: "PostgreSQL", category: "database", proficiency: "proficient", context: "Relational Modeling, Queries, Joins", highlight: true },
+  { id: "mongodb", name: "MongoDB", category: "database", proficiency: "learning", context: "Document Modeling, Aggregations", highlight: false },
+  { id: "sql", name: "SQL", category: "database", proficiency: "proficient", context: "Query Optimization, Indexing", highlight: false },
+  { id: "drizzle", name: "Drizzle ORM", category: "database", proficiency: "learning", context: "Type-safe Database Access", highlight: false },
+
+  { id: "git", name: "Git & GitHub", category: "tool", proficiency: "advanced", context: "Version Control, Branching, PRs", highlight: true },
+  { id: "vscode", name: "VS Code", category: "tool", proficiency: "advanced", context: "Primary IDE, Extensions", highlight: true },
+  { id: "postman", name: "Postman", category: "tool", proficiency: "proficient", context: "API Testing & Verification", highlight: false },
+  { id: "figma", name: "Figma", category: "tool", proficiency: "learning", context: "UI Wireframing, Prototyping", highlight: false },
+  { id: "vercel", name: "Vercel", category: "tool", proficiency: "proficient", context: "Frontend Deployments", highlight: true },
+
+  { id: "oop", name: "OOP", category: "core", proficiency: "advanced", context: "Encapsulation, Inheritance, Polymorphism", highlight: true },
+  { id: "dsa", name: "Data Structures & Algorithms", category: "core", proficiency: "proficient", context: "Trees, Graphs, Recursion, Optimization", highlight: true },
+  { id: "dbms", name: "DBMS", category: "core", proficiency: "proficient", context: "Normalization, Transactions, ACID", highlight: false },
+  { id: "auth", name: "Authentication & RBAC", category: "core", proficiency: "proficient", context: "JWT, Role-Based Access Control", highlight: true },
+  { id: "system-design", name: "System Design Basics", category: "core", proficiency: "learning", context: "Caching, Load Balancing Fundamentals", highlight: false },
 ];
+
+export const skillCategories = [
+  { key: "language", label: "Languages", icon: "code" },
+  { key: "frontend", label: "Frontend", icon: "layout" },
+  { key: "backend", label: "Backend", icon: "server" },
+  { key: "database", label: "Databases", icon: "database" },
+  { key: "tool", label: "Tools", icon: "wrench" },
+  { key: "core", label: "Core Concepts", icon: "brain" },
+] as const;

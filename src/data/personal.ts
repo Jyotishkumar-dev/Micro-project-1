@@ -1,23 +1,26 @@
 export const personalData = {
   name: "Jyotish Kumar",
-  label: "Hi, I'm Jyotish Kumar",
-  role: "Developer • Builder • Problem Solver",
-  headline: "I build digital products and learn by bringing ideas to life.",
+  label: "Jyotish Kumar",
+  role: "Computer Science & Technology Student",
+  headline: "Builder • Developer • Problem Solver",
   shortBio:
-    "I'm a student developer focused on modern web development, building full-stack products, competing in hackathons, and experimenting with AI-powered workflows.",
+    "I build full-stack web applications and explore modern web technologies. Currently pursuing B.Tech in Computer Science & Technology, focusing on Java, Data Structures & Algorithms, and full-stack development with React, Next.js, and Node.js.",
   aboutStory: [
-    "I am currently pursuing my B.Tech in Computer Science & Technology (specializing in Data Science & Machine Learning) at SAGE University Indore, powered by ALTA School of Technology.",
-    "My journey in tech began with a simple curiosity for how software is structured. Rather than just following passive tutorials, I found that I learn best by getting my hands dirty: identifying real-world problems, writing code, debugging late into the night, and shipping working applications.",
-    "Whether it's building a custom farm equipment coordination system for a hackathon or engineering a role-based attendance management platform, I treat every project as deliberate practice to become a thoughtful, product-minded engineer."
+    "I am currently pursuing my B.Tech in Computer Science & Technology at SAGE University Indore (Alta School of Technology), with a CGPA of 7.8.",
+    "My journey in tech began with a curiosity for how software works. I learn best by building: identifying real problems, writing code, debugging, and shipping working applications.",
+    "From building a role-based attendance management system to creating a farm equipment coordination platform for a hackathon, I treat every project as deliberate practice to become a thoughtful, product-minded engineer.",
   ],
   education: {
-    degree: "B.Tech in Computer Science & Technology",
+    degree: "Bachelor of Technology in Computer Science and Technology",
     specialization: "Data Science & Machine Learning",
     institution: "SAGE University Indore",
-    poweredBy: "ALTA School of Technology"
+    poweredBy: "Alta School of Technology",
+    period: "Aug 2025 – Present",
+    cgpa: "7.8",
+    location: "Indore, Madhya Pradesh",
   },
   availability: "Open to internships & collaborative projects",
-  location: "Indore, India",
+  location: "Bokaro, Jharkhand",
   timezone: "IST (GMT+5:30)",
   email: "jyotishyt58@gmail.com",
   profileImage: "/my_pic2.jpeg",
@@ -27,7 +30,7 @@ export const personalData = {
     linkedin: "https://www.linkedin.com/in/jyotish-kumar-0601bb387/",
     email: "mailto:jyotishyt58@gmail.com",
     leetcode: "https://leetcode.com/u/jyotishyt58/",
-    youtube: "https://youtube.com/@buildwithjyotish07?si=bl2z_mrkzHYqjYur",
-    hackerrank: "https://www.hackerrank.com/jyotishyt58"
-  }
+    youtube: "https://youtube.com/@buildwithjyotish07",
+    hackerrank: "https://www.hackerrank.com/jyotishyt58",
+  },
 };
