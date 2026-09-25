@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemeToggle } from "../ui/ThemeToggle";
 import { MobileMenu } from "../layout/MobileMenu";
 import { Menu, FileText, Send, X } from "lucide-react";
 import { cn } from "@/lib/utils";

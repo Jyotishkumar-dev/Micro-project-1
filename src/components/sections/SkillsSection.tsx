@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import { skillsData, skillCategories } from "@/data/skills";
 import { SectionHeading } from "../ui/SectionHeading";
 import { GlowCard } from "../ui/GlowCard";
@@ -13,7 +13,6 @@ import {
   Database,
   Wrench,
   Brain,
-  CheckCircle2,
 } from "lucide-react";
 
 const categoryIcons = {
@@ -34,10 +33,33 @@ const categoryColors = {
   core: "emerald",
 };
 
+const getIconBgClass = (category: string) => {
+  switch (categoryColors[category as keyof typeof categoryColors]) {
+    case "brand":
+      return "bg-brand-500/10 text-brand-600 dark:text-brand-400";
+    case "cyan":
+      return "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400";
+    default:
+      return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400";
+  }
+};
+
+const getBadgeVariant = (category: string) => {
+  const color = categoryColors[category as keyof typeof categoryColors];
+  if (color === "brand") return "brand";
+  if (color === "cyan") return "cyan";
+  return "emerald";
+};
+
 export function SkillsSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeCategory, setActiveCategory] = useState(skillCategories[0].key);
+
+  const filteredSkills = useMemo(
+    () => skillsData.filter((skill) => skill.category === activeCategory),
+    [activeCategory]
+  );
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -63,8 +85,6 @@ export function SkillsSection() {
     return () => ctx.revert();
   }, []);
 
-  const filteredSkills = skillsData.filter((skill) => skill.category === activeCategory);
-
   return (
     <section ref={sectionRef} id="skills" className="py-20 lg:py-28 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,7 +94,6 @@ export function SkillsSection() {
           subtitle="An honest overview of languages, frameworks, tools, and concepts I work with daily."
         />
 
-        {/* Category Tabs */}
         <div className="flex flex-wrap gap-2 mb-10 justify-center" role="tablist" aria-label="Skill categories">
           {skillCategories.map((cat) => (
             <button
@@ -93,53 +112,50 @@ export function SkillsSection() {
           ))}
         </div>
 
-        {/* Skills Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSkills.map((skill, idx) => (
-            <div
-              key={skill.id}
-              ref={(node) => {
-                cardRefs.current[idx] = node;
-              }}
-              className="will-change-transform"
-            >
-              <GlowCard
-                className="p-5 space-y-3 bg-white dark:bg-navy-800/90 border border-slate-200 dark:border-white/[0.08]"
-                glowColor={categoryColors[skill.category] as "brand" | "cyan" | "emerald"}
+          {filteredSkills.map((skill, idx) => {
+            const iconBaseClass = "w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0";
+            const iconColorClass: string = getIconBgClass(skill.category);
+            return (
+              <div
+                key={skill.id}
+                ref={(node) => {
+                  cardRefs.current[idx] = node;
+                }}
+                className="will-change-transform"
               >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3 flex-1 min-w-0">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                      categoryColors[skill.category] === "brand"
-                        ? "bg-brand-500/10 text-brand-600 dark:text-brand-400"
-                        : categoryColors[skill.category] === "cyan"
-                        ? "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400"
-                        : "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                    }`}>
-                      <categoryIcons[skill.category] className="w-5 h-5" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h4 className="font-semibold text-sm text-slate-900 dark:text-white truncate">
-                          {skill.name}
-                        </h4>
-                        {skill.highlight && (
-                          <Badge variant={categoryColors[skill.category] as "brand" | "cyan" | "emerald"} size="sm">
-                            Core
-                          </Badge>
+                <GlowCard
+                  className="p-5 space-y-3 bg-white dark:bg-navy-800/90 border border-slate-200 dark:border-white/[0.08]"
+                  glowColor={getBadgeVariant(skill.category)}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <div className={iconBaseClass + " " + iconColorClass}>
+                        <categoryIcons[skill.category] className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h4 className="font-semibold text-sm text-slate-900 dark:text-white truncate">
+                            {skill.name}
+                          </h4>
+                          {skill.highlight && (
+                            <Badge variant={getBadgeVariant(skill.category)} size="sm">
+                              Core
+                            </Badge>
+                          )}
+                        </div>
+                        {skill.context && (
+                          <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                            {skill.context}
+                          </p>
                         )}
                       </div>
-                      {skill.context && (
-                        <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-                          {skill.context}
-                        </p>
-                      )}
                     </div>
                   </div>
-                </div>
-              </GlowCard>
-            </div>
-          ))}
+                </GlowCard>
+              </div>
+            );
+          })}
         </div>
 
         {filteredSkills.length === 0 && (
