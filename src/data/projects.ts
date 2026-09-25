@@ -18,9 +18,9 @@ export const projectsData: Project[] = [
     tags: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "JWT Auth", "PostgreSQL", "Drizzle ORM"],
     featured: true,
     status: "Live",
-    githubUrl: "https://github.com/Jyotishkumar-dev",
-    liveUrl: "https://attendance-management-system-projec-steel.vercel.app/login",
-    image: "/projects/smartattend.png",
+    githubUrl: undefined,
+    liveUrl: undefined,
+    image: undefined,
     caseStudy: {
       problem:
         "Paper-based attendance sheets in colleges are inefficient, slow to record in large classrooms, and prone to proxy attendance. Students have little visibility into their cumulative percentages until semester end.",
@@ -90,9 +90,9 @@ export const projectsData: Project[] = [
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "React Hook Form", "Zod", "Recharts", "REST API"],
     featured: true,
     status: "Hackathon Build",
-    githubUrl: "https://github.com/Jyotishkumar-dev",
-    liveUrl: "https://github.com/Jyotishkumar-dev",
-    image: "/projects/krishifleet.png",
+    githubUrl: undefined,
+    liveUrl: undefined,
+    image: undefined,
     caseStudy: {
       problem:
         "Agricultural machinery costs are prohibitive for individual smallholder farmers. When seasonal harvesting starts, farmers struggle to locate available equipment, while Custom Hiring Centres (CHCs) lack a centralized digital tool to manage bookings and dispatch machinery.",
@@ -144,65 +144,5 @@ export const projectsData: Project[] = [
         "Collaborative Git workflows and sprint communication within a team.",
       ],
     },
-  },
-  {
-    id: "hackathon-os",
-    number: "03",
-    title: "HackathonOS",
-    category: "Event Operations Platform",
-    tagline: "End-to-End Hackathon Coordination & Operations Tool",
-    shortDescription:
-      "A platform developed by team 'The Last Commit' at SQUidHACK 2026 to simplify participant check-ins, mentor queues, and judging rubrics for hackathons.",
-    problem:
-      "Organizing student hackathons often involves juggling messy spreadsheets, scattered Google forms, and chaotic judging sessions.",
-    solution:
-      "Built a unified event tool featuring participant verification, team registration tracking, mentor help requests, and a centralized judging evaluation interface.",
-    myContribution:
-      "Implemented responsive frontend views, coordinated event dashboard state, and connected rubric calculation components with the backend API.",
-    tags: ["React", "Node.js", "Express", "Tailwind CSS", "REST APIs", "Team Project"],
-    featured: true,
-    status: "Hackathon Build",
-    githubUrl: "https://github.com/Jyotishkumar-dev",
-    liveUrl: "https://github.com/Jyotishkumar-dev",
-    image: "/projects/hackathonos.png",
-    caseStudy: {
-      problem:
-        "Running hackathons requires tracking hundreds of attendees, team matching, mentor availability, and score calculations under tight time pressure.",
-      idea:
-        "Create a streamlined web interface where organizers can view checked-in teams, mentors can manage incoming assistance tickets, and judges can enter scored rubrics.",
-      whatIBuilt:
-        "Built the client-side dashboard in React, created judge evaluation scorecards with weighted criteria, and implemented organizer management tables.",
-      keyFeatures: [
-        {
-          title: "Organizer Command Center",
-          description: "Live overview of registered teams, check-in status, and event schedule milestones.",
-        },
-        {
-          title: "Judge Evaluation Rubric",
-          description: "Interactive scoring sliders covering innovation, technical execution, design, and presentation.",
-        },
-        {
-          title: "Mentor Help Desk",
-          description: "Ticket submission interface where hacking teams can request mentor guidance for specific tech stacks.",
-        },
-      ],
-      techStack: [
-        "React",
-        "Tailwind CSS",
-        "Node.js",
-        "Express",
-        "Git & GitHub",
-      ],
-      challenges: [
-        {
-          challenge: "Coordinating multi-developer feature branches within a 36-hour hackathon crunch.",
-          resolution: "Maintained clear component boundaries and agreed on shared data contracts before writing code.",
-        },
-      ],
-      learnings: [
-        "Effective git branching hygiene and collaborative problem-solving under deadline pressure.",
-        "Structuring scalable component interfaces for fast iteration.",
-      ],
-    },
-  },
+  }
 ];

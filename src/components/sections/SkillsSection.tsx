@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useEffect, useState, useMemo } from "react";
-import { skillsData, skillCategories } from "@/data/skills";
+import { skillsData as fallbackSkills, skillCategories } from "@/data/skills";
+import type { Skill } from "@/types";
 import { SectionHeading } from "../ui/SectionHeading";
 import { GlowCard } from "../ui/GlowCard";
 import { Badge } from "../ui/Badge";
@@ -73,14 +74,19 @@ const getBadgeVariant = (category: string) => {
   return "emerald";
 };
 
-export function SkillsSection() {
+interface SkillsSectionProps {
+  /** Supabase rows when available; falls back to the bundled copy. */
+  skills?: Skill[];
+}
+
+export function SkillsSection({ skills = fallbackSkills }: SkillsSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeCategory, setActiveCategory] = useState<SkillCategoryKey>(skillCategories[0].key);
 
   const filteredSkills = useMemo(
-    () => skillsData.filter((skill) => skill.category === activeCategory),
-    [activeCategory]
+    () => skills.filter((skill) => skill.category === activeCategory),
+    [skills, activeCategory]
   );
 
   useEffect(() => {

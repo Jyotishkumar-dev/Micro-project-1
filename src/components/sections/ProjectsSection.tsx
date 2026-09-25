@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { projectsData } from "@/data/projects";
+import { projectsData as fallbackProjects } from "@/data/projects";
 import { Project } from "@/types";
 import { SectionHeading } from "../ui/SectionHeading";
 import { GlowCard } from "../ui/GlowCard";
@@ -17,11 +17,22 @@ import {
   Layers,
 } from "lucide-react";
 
-export function ProjectsSection() {
+interface ProjectsSectionProps {
+  /** Supabase rows when available; falls back to the bundled copy. */
+  projects?: Project[];
+}
+
+export function ProjectsSection({ projects = fallbackProjects }: ProjectsSectionProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Revalidate whenever the row set changes, and drop stale refs so a removed
+  // project cannot keep animating a DOM node that no longer exists.
+  useEffect(() => {
+    projectRefs.current = projectRefs.current.slice(0, projects.length);
+  }, [projects.length]);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -87,7 +98,7 @@ export function ProjectsSection() {
 
         {/* Editorial Project List */}
         <div className="space-y-16 lg:space-y-24">
-          {projectsData.map((project, index) => {
+          {projects.map((project, index) => {
             const isReversed = index % 2 !== 0;
 
             return (
@@ -231,6 +242,19 @@ export function ProjectsSection() {
             );
           })}
         </div>
+
+        {/* Empty state — the owner unpublished every project. */}
+        {projects.length === 0 && (
+          <div className="text-center py-16 px-6 rounded-3xl border border-dashed border-slate-300 dark:border-white/10">
+            <Layers className="w-8 h-8 mx-auto text-slate-400 mb-4" />
+            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              No projects published yet
+            </p>
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+              Case studies will appear here once they are published.
+            </p>
+          </div>
+        )}
 
         {/* Project Case Study Modal */}
         <ProjectModal

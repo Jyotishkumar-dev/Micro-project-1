@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import { leadershipData } from "@/data/leadership";
+import { leadershipData as fallbackExperience } from "@/data/leadership";
+import type { LeadershipActivity } from "@/types";
 import { SectionHeading } from "../ui/SectionHeading";
 import { GlowCard } from "../ui/GlowCard";
 import { gsap } from "@/lib/gsap";
@@ -23,7 +24,14 @@ const typeColors: Record<string, "brand" | "cyan" | "emerald"> = {
   workshop: "emerald",
 };
 
-export function ExperienceSection() {
+interface ExperienceSectionProps {
+  /** Supabase rows when available; falls back to the bundled copy. */
+  experience?: LeadershipActivity[];
+}
+
+export function ExperienceSection({
+  experience = fallbackExperience,
+}: ExperienceSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -61,7 +69,7 @@ export function ExperienceSection() {
         />
 
         <div className="space-y-6">
-          {leadershipData.map((item, idx) => {
+          {experience.map((item, idx) => {
             const Icon = typeIcons[item.type];
             const glowColor = typeColors[item.type] as "brand" | "cyan" | "emerald";
 

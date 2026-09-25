@@ -1,73 +1,17 @@
-"use client";
+import { getPortfolioData } from "@/lib/data/portfolio";
+import { PortfolioShell } from "@/components/layout/PortfolioShell";
 
-import React, { useState } from "react";
-import { personalData } from "@/data/personal";
-import { ScrollProgress } from "@/components/layout/ScrollProgress";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ResumeModal } from "@/components/ui/ResumeModal";
-import { LenisProvider } from "@/components/providers/LenisProvider";
-import { HeroVisual } from "@/components/ui/HeroVisual";
+/**
+ * Public portfolio page.
+ *
+ * Now a Server Component so the portfolio content can be read from Supabase
+ * during the render. The reads go through the cookie-less anon client and are
+ * cached for 5 minutes, and every one of them degrades to the bundled copy on
+ * failure — see `lib/data/portfolio.ts`. All client-side interactivity lives in
+ * `PortfolioShell`, which receives plain serialisable props.
+ */
+export default async function HomePage() {
+  const data = await getPortfolioData();
 
-import { HeroSection } from "@/components/sections/HeroSection";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { SkillsSection } from "@/components/sections/SkillsSection";
-import { JourneySection } from "@/components/sections/JourneySection";
-import { ExperienceSection } from "@/components/sections/ExperienceSection";
-import { CertificationsSection } from "@/components/sections/CertificationsSection";
-import { CodingSection } from "@/components/sections/CodingSection";
-import { ContactSection } from "@/components/sections/ContactSection";
-
-export default function HomePage() {
-  const [resumeModalOpen, setResumeModalOpen] = useState(false);
-
-  return (
-    <LenisProvider>
-      <div className="relative min-h-screen bg-slate-50 dark:bg-navy-900 text-slate-900 dark:text-slate-100 selection:bg-brand-500/20 selection:text-brand-500 overflow-x-hidden">
-        {/* Top Scroll Depth Progress Line */}
-        <ScrollProgress />
-
-        {/* Sticky Navbar */}
-        <Navbar onOpenResume={() => setResumeModalOpen(true)} />
-
-        {/* Main Single Page Sections with GSAP ScrollTriggers */}
-        <main className="relative z-10">
-          {/* 1. Hero Section with Three.js Visual */}
-          <HeroSection onOpenResume={() => setResumeModalOpen(true)} />
-
-          {/* 2. About Section */}
-          <AboutSection />
-
-          {/* 3. Skills & Capabilities */}
-          <SkillsSection />
-
-          {/* 4. Selected Work & Case Studies */}
-          <ProjectsSection />
-
-          {/* 5. Experience & Leadership */}
-          <ExperienceSection />
-
-          {/* 6. Certifications */}
-          <CertificationsSection />
-
-          {/* 7. Coding / DSA */}
-          <CodingSection />
-
-          {/* 8. Contact Section & Working Form */}
-          <ContactSection />
-        </main>
-
-        {/* Footer */}
-        <Footer />
-
-        {/* Interactive Resume Preview & Download Modal */}
-        <ResumeModal
-          isOpen={resumeModalOpen}
-          onClose={() => setResumeModalOpen(false)}
-          resumePath={personalData.resumePath}
-        />
-      </div>
-    </LenisProvider>
-  );
+  return <PortfolioShell {...data} />;
 }
