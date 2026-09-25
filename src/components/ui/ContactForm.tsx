@@ -11,6 +11,8 @@ interface FormData {
   subject: string;
   projectType: string;
   message: string;
+  /** Honeypot — must stay empty. See the spam note in api/contact/route.ts. */
+  website: string;
 }
 
 interface FormErrors {
@@ -35,6 +37,7 @@ export function ContactForm() {
     subject: "",
     projectType: projectTypes[0],
     message: "",
+    website: "",
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -102,6 +105,7 @@ export function ContactForm() {
           subject: "",
           projectType: projectTypes[0],
           message: "",
+          website: "",
         });
       } else {
         setStatus("error");
@@ -135,6 +139,24 @@ export function ContactForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/*
+            Honeypot. Positioned off-screen and hidden from assistive tech, so a
+            person neither sees nor fills it. A bot that submits every input it
+            finds trips the server-side heuristic.
+          */}
+          <div aria-hidden="true" className="absolute left-[-9999px] top-0 h-0 w-0 overflow-hidden">
+            <label htmlFor="website">Website</label>
+            <input
+              type="text"
+              id="website"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              value={formData.website}
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {/* Name */}
             <div>

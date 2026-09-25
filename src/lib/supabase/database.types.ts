@@ -16,8 +16,13 @@ export type Json =
 
 type Timestamps = { created_at: string; updated_at: string };
 
-type NewRow<T> = Omit<T, keyof Timestamps | "id"> &
-  Partial<Pick<T, "id" | keyof Timestamps>>;
+/**
+ * Insert shape: identity and timestamps are optional, everything else is not.
+ * Written out longhand rather than with a `keyof Timestamps` constraint, which
+ * TypeScript cannot prove is a subset of `keyof T` for an unresolved generic.
+ */
+type NewRow<T> = Omit<T, "id" | "created_at" | "updated_at"> &
+  Partial<Pick<T, "id" | "created_at" | "updated_at">>;
 
 export interface ProfileRow {
   id: string;

@@ -114,26 +114,40 @@ export function ExperienceSection({
                       {item.description}
                     </p>
 
-                    <ul className="space-y-1.5 text-xs text-slate-500 dark:text-slate-400 pt-3 border-t border-slate-100 dark:border-white/[0.08]">
-                      {item.highlights.map((highlight, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {item.highlights.length > 0 && (
+                      <ul className="space-y-1.5 text-xs text-slate-500 dark:text-slate-400 pt-3 border-t border-slate-100 dark:border-white/[0.08]">
+                        {item.highlights.map((highlight, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
 
                   <div className="flex-shrink-0 text-right sm:text-left">
-                    <p className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
-                      {item.organization}
-                    </p>
+                    {item.organization && item.organization !== item.event && (
+                      <p className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
+                        {item.organization}
+                      </p>
+                    )}
                   </div>
                 </GlowCard>
               </div>
             );
           })}
         </div>
+
+        {/* Empty state — nothing published yet. */}
+        {experience.length === 0 && (
+          <div className="text-center py-16 px-6 rounded-3xl border border-dashed border-slate-300 dark:border-white/10">
+            <Users className="w-8 h-8 mx-auto text-slate-400 mb-4" />
+            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              No leadership activities published yet
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

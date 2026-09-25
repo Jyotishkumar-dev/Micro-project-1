@@ -1,13 +1,19 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import { codingData, dsaFocusAreas } from "@/data/coding";
+import { codingData as fallbackStats, dsaFocusAreas } from "@/data/coding";
+import type { Achievement } from "@/types";
 import { SectionHeading } from "../ui/SectionHeading";
 import { GlowCard } from "../ui/GlowCard";
 import { gsap } from "@/lib/gsap";
 import { Code2, Target, CheckCircle2, ExternalLink } from "lucide-react";
 
-export function CodingSection() {
+interface CodingSectionProps {
+  /** Achievements tagged `type = 'coding'` in Supabase; falls back to bundled. */
+  stats?: Achievement[];
+}
+
+export function CodingSection({ stats = fallbackStats }: CodingSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const areaRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -61,7 +67,7 @@ export function CodingSection() {
         <div className="space-y-8">
           {/* Platform Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {codingData.map((item, idx) => (
+            {stats.map((item, idx) => (
               <div
                 key={item.id}
                 ref={(node) => {
@@ -106,6 +112,16 @@ export function CodingSection() {
               </div>
             ))}
           </div>
+
+          {/* Empty state */}
+          {stats.length === 0 && (
+            <div className="text-center py-12 px-6 rounded-3xl border border-dashed border-slate-300 dark:border-white/10">
+              <Code2 className="w-8 h-8 mx-auto text-slate-400 mb-4" />
+              <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                No coding stats published yet
+              </p>
+            </div>
+          )}
 
           {/* DSA Focus Areas */}
           <div>

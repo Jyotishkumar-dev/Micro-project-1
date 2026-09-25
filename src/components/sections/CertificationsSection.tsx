@@ -1,14 +1,22 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import { certificationsData } from "@/data/certifications";
+import { certificationsData as fallbackCertifications } from "@/data/certifications";
+import type { Certification } from "@/types";
 import { SectionHeading } from "../ui/SectionHeading";
 import { GlowCard } from "../ui/GlowCard";
 import { Badge } from "../ui/Badge";
 import { gsap } from "@/lib/gsap";
 import { CheckCircle2, Award, ExternalLink } from "lucide-react";
 
-export function CertificationsSection() {
+interface CertificationsSectionProps {
+  /** Supabase rows when available; falls back to the bundled copy. */
+  certifications?: Certification[];
+}
+
+export function CertificationsSection({
+  certifications = fallbackCertifications,
+}: CertificationsSectionProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -46,7 +54,7 @@ export function CertificationsSection() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {certificationsData.map((item, idx) => (
+          {certifications.map((item, idx) => (
             <div
               key={item.id}
               ref={(node) => {
@@ -77,14 +85,16 @@ export function CertificationsSection() {
                     {item.description}
                   </p>
 
-                  <ul className="mt-4 space-y-1.5 text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-white/[0.08] pt-3">
-                    {item.details.map((d, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                        <span>{d}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {item.details.length > 0 && (
+                    <ul className="mt-4 space-y-1.5 text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-white/[0.08] pt-3">
+                      {item.details.map((d, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                          <span>{d}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
                 {item.link && (
@@ -104,6 +114,16 @@ export function CertificationsSection() {
             </div>
           ))}
         </div>
+
+        {/* Empty state */}
+        {certifications.length === 0 && (
+          <div className="text-center py-16 px-6 rounded-3xl border border-dashed border-slate-300 dark:border-white/10">
+            <Award className="w-8 h-8 mx-auto text-slate-400 mb-4" />
+            <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+              No certifications published yet
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
