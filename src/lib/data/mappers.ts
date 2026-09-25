@@ -60,7 +60,16 @@ const EMPTY_CASE_STUDY: Project["caseStudy"] = {
   learnings: [],
 };
 
-function isRecord(value: unknown): value is Record<string, unknown> {
+type JsonRecord = { [key: string]: Json | undefined };
+
+/**
+ * Narrows a `Json` value to an object.
+ *
+ * The predicate is typed against `Json` (not `unknown`) on purpose: TypeScript
+ * only narrows `filter` results when the guard's type is a member of the
+ * element type, and a plain `Record<string, unknown>` is not.
+ */
+function isJsonRecord(value: Json): value is JsonRecord {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
@@ -81,17 +90,17 @@ function asStringArray(value: unknown): string[] {
  * rather than cast.
  */
 function parseCaseStudy(value: Json): Project["caseStudy"] {
-  if (!isRecord(value)) return { ...EMPTY_CASE_STUDY };
+  if (!isJsonRecord(value)) return { ...EMPTY_CASE_STUDY };
 
   const keyFeatures = Array.isArray(value.keyFeatures)
-    ? value.keyFeatures.filter(isRecord).map((feature) => ({
+    ? value.keyFeatures.filter(isJsonRecord).map((feature) => ({
         title: asString(feature.title),
         description: asString(feature.description),
       }))
     : [];
 
   const challenges = Array.isArray(value.challenges)
-    ? value.challenges.filter(isRecord).map((challenge) => ({
+    ? value.challenges.filter(isJsonRecord).map((challenge) => ({
         challenge: asString(challenge.challenge),
         resolution: asString(challenge.resolution),
       }))

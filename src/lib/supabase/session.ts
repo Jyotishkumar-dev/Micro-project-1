@@ -2,13 +2,12 @@ import "server-only";
 
 import { redirect } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
-import type { SupabaseClient } from "@supabase/supabase-js";
-import type { Database, ProfileRow } from "./database.types";
-import { createSupabaseServerClient } from "./server";
+import type { ProfileRow } from "./database.types";
+import { createSupabaseServerClient, type SupabaseServerClient } from "./server";
 import { isSupabaseConfigured } from "./env";
 
 export type AdminSession = {
-  supabase: SupabaseClient<Database> | null;
+  supabase: SupabaseServerClient | null;
   user: User | null;
   profile: ProfileRow | null;
   /** True only when the caller is signed in AND their profiles row says admin. */

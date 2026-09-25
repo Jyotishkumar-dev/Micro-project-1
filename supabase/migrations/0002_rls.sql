@@ -193,3 +193,63 @@ create policy "contact_messages_admin_update"
 create policy "contact_messages_admin_delete"
   on public.contact_messages for delete
   using (public.is_admin());
+
+-- ---------------------------------------------------------------------------
+-- reorder_items — drag-and-drop reordering in one round trip
+--
+-- SECURITY INVOKER on purpose: the UPDATEs below run as the calling role, so
+-- the table RLS policies still apply. A non-admin gets zero rows affected (and
+-- a permission error), which is the same outcome as issuing the updates from
+-- the client one by one — just without N round trips.
+--
+-- The table name is whitelisted rather than interpolated, so this cannot be
+-- turned into a write primitive for an arbitrary table.
+-- ---------------------------------------------------------------------------
+create or replace function public.reorder_items(p_table text, p_ids uuid[])
+returns integer
+language plpgsql
+security invoker
+set search_path = public
+as $$
+declare
+  affected integer;
+begin
+  if coalesce(array_length(p_ids, 1), 0) = 0 then
+    return 0;
+  end if;
+
+  if p_table = 'projects' then
+    update public.projects p
+       set display_order = i.ord
+      from (select id, ord::int as ord from unnest(p_ids) with ordinality as t(id, ord)) i
+     where p.id = i.id;
+  elsif p_table = 'skills' then
+    update public.skills s
+       set display_order = i.ord
+      from (select id, ord::int as ord from unnest(p_ids) with ordinality as t(id, ord)) i
+     where s.id = i.id;
+  elsif p_table = 'experience' then
+    update public.experience e
+       set display_order = i.ord
+      from (select id, ord::int as ord from unnest(p_ids) with ordinality as t(id, ord)) i
+     where e.id = i.id;
+  elsif p_table = 'certifications' then
+    update public.certifications c
+       set display_order = i.ord
+      from (select id, ord::int as ord from unnest(p_ids) with ordinality as t(id, ord)) i
+     where c.id = i.id;
+  elsif p_table = 'achievements' then
+    update public.achievements a
+       set display_order = i.ord
+      from (select id, ord::int as ord from unnest(p_ids) with ordinality as t(id, ord)) i
+     where a.id = i.id;
+  else
+    raise exception 'Unknown table: %', p_table using errcode = '22023';
+  end if;
+
+  get diagnostics affected = row_count;
+  return affected;
+end;
+$$;
+
+grant execute on function public.reorder_items(text, uuid[]) to authenticated;

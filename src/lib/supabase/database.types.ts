@@ -14,17 +14,20 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-type Timestamps = { created_at: string; updated_at: string };
-
 /**
  * Insert shape: identity and timestamps are optional, everything else is not.
- * Written out longhand rather than with a `keyof Timestamps` constraint, which
- * TypeScript cannot prove is a subset of `keyof T` for an unresolved generic.
+ *
+ * Written with mapped types rather than `Omit`/`Pick` because those demand a
+ * `K extends keyof T` constraint that string literals cannot satisfy for an
+ * unresolved generic parameter.
  */
-type NewRow<T> = Omit<T, "id" | "created_at" | "updated_at"> &
-  Partial<Pick<T, "id" | "created_at" | "updated_at">>;
+type NewRow<T> = {
+  [K in keyof T as K extends "id" | "created_at" | "updated_at" ? never : K]: T[K];
+} & {
+  [K in Extract<keyof T, "id" | "created_at" | "updated_at">]?: T[K];
+};
 
-export interface ProfileRow {
+export type ProfileRow = {
   id: string;
   email: string;
   full_name: string | null;
@@ -40,7 +43,7 @@ export interface ProfileRow {
   updated_at: string;
 }
 
-export interface ProjectRow {
+export type ProjectRow = {
   id: string;
   title: string;
   slug: string;
@@ -63,7 +66,7 @@ export interface ProjectRow {
   updated_at: string;
 }
 
-export interface SkillRow {
+export type SkillRow = {
   id: string;
   category: string;
   name: string;
@@ -75,7 +78,7 @@ export interface SkillRow {
   updated_at: string;
 }
 
-export interface ExperienceRow {
+export type ExperienceRow = {
   id: string;
   title: string;
   slug: string;
@@ -93,7 +96,7 @@ export interface ExperienceRow {
   updated_at: string;
 }
 
-export interface CertificationRow {
+export type CertificationRow = {
   id: string;
   name: string;
   slug: string;
@@ -109,7 +112,7 @@ export interface CertificationRow {
   updated_at: string;
 }
 
-export interface AchievementRow {
+export type AchievementRow = {
   id: string;
   title: string;
   slug: string;
@@ -123,7 +126,7 @@ export interface AchievementRow {
   updated_at: string;
 }
 
-export interface ContactMessageRow {
+export type ContactMessageRow = {
   id: string;
   name: string;
   email: string;
@@ -136,8 +139,23 @@ export interface ContactMessageRow {
   created_at: string;
 }
 
+export type AdminAllowlistRow = {
+  email: string;
+  created_at: string;
+}
+
 export type Tables = {
-  admin_allowlist: { Row: never; Insert: never; Update: never; Relationships: [] };
+  /**
+   * Compile-time shape only. The app never queries this table — it has no
+   * grants and no policies, so no web role can read it regardless of what the
+   * types say here.
+   */
+  admin_allowlist: {
+    Row: AdminAllowlistRow;
+    Insert: { email: string; created_at?: string };
+    Update: { email?: string; created_at?: string };
+    Relationships: [];
+  };
   profiles: {
     Row: ProfileRow;
     Insert: NewRow<ProfileRow>;
@@ -187,10 +205,22 @@ export type Database = {
   public: {
     Tables: Tables;
     Views: Record<never, never>;
-    Functions: Record<never, never>;
+    Functions: {
+      reorder_items: {
+        Args: { p_table: string; p_ids: string[] };
+        Returns: number;
+      };
+    };
     Enums: Record<never, never>;
     CompositeTypes: Record<never, never>;
   };
 };
+
+export type ReorderableTable =
+  | "projects"
+  | "skills"
+  | "experience"
+  | "certifications"
+  | "achievements";
 
 export type TableRow<T extends keyof Tables> = Tables[T]["Row"];

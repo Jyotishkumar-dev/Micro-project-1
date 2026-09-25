@@ -1,12 +1,14 @@
 import "server-only";
 
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./database.types";
 import {
   SUPABASE_SERVICE_ROLE_KEY,
   SUPABASE_URL,
   isSupabaseServerConfigured,
 } from "./env";
+
+export type SupabaseAdminClient = ReturnType<typeof createClient<Database>>;
 
 /**
  * Service-role client. BYPASSES Row Level Security.
@@ -22,7 +24,7 @@ import {
  * server-side spam heuristics and then write the verdict (`spam`) that the
  * public RLS policy deliberately forbids a caller from setting itself.
  */
-export function createSupabaseAdminClient(): SupabaseClient<Database> | null {
+export function createSupabaseAdminClient(): SupabaseAdminClient | null {
   if (!isSupabaseServerConfigured()) return null;
 
   return createClient<Database>(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
