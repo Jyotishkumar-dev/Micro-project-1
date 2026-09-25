@@ -4,17 +4,16 @@ import React, { useRef, useEffect } from "react";
 import { personalData } from "@/data/personal";
 import { MagneticButton } from "../ui/MagneticButton";
 import { gsap } from "@/lib/gsap";
+import { HeroVisual } from "../ui/HeroVisual";
 import {
   ArrowRight,
   Send,
   Github,
   Linkedin,
   Mail,
-  Youtube,
   Code,
   FileText,
   MapPin,
-  Sparkles,
 } from "lucide-react";
 
 interface HeroSectionProps {
@@ -26,10 +25,10 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
   const badgeRef = useRef<HTMLDivElement | null>(null);
   const greetingRef = useRef<HTMLParagraphElement | null>(null);
   const headlineRef = useRef<HTMLHeadingElement | null>(null);
+  const roleRef = useRef<HTMLParagraphElement | null>(null);
   const textRef = useRef<HTMLParagraphElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
   const socialsRef = useRef<HTMLDivElement | null>(null);
-  const photoRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const el = heroRef.current;
@@ -40,48 +39,40 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // 1. Badges & greeting
       tl.from([badgeRef.current, greetingRef.current], {
         y: -20,
         opacity: 0,
         stagger: 0.1,
         duration: 0.7,
       })
-      // 2. Headline reveal
-      .from(headlineRef.current, {
-        y: 35,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power4.out",
-      }, "-=0.4")
-      // 3. Supporting text
-      .from(textRef.current, {
-        y: 25,
-        opacity: 0,
-        duration: 0.7,
-      }, "-=0.5")
-      // 4. CTA buttons with slight bounce
-      .from(ctaRef.current?.children || [], {
-        y: 20,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: "back.out(1.4)",
-      }, "-=0.4")
-      // 5. Social icons
-      .from(socialsRef.current, {
-        opacity: 0,
-        y: 15,
-        duration: 0.5,
-      }, "-=0.3")
-      // 6. Photo visual frame reveal
-      .from(photoRef.current, {
-        scale: 0.92,
-        opacity: 0,
-        y: 40,
-        duration: 1.1,
-        ease: "power3.out",
-      }, "-=0.8");
+        .from(headlineRef.current, {
+          y: 35,
+          opacity: 0,
+          duration: 0.9,
+          ease: "power4.out",
+        }, "-=0.4")
+        .from(roleRef.current, {
+          y: 25,
+          opacity: 0,
+          duration: 0.7,
+        }, "-=0.5")
+        .from(textRef.current, {
+          y: 25,
+          opacity: 0,
+          duration: 0.7,
+        }, "-=0.4")
+        .from(ctaRef.current?.children || [], {
+          y: 20,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.6,
+          ease: "back.out(1.4)",
+        }, "-=0.3")
+        .from(socialsRef.current, {
+          opacity: 0,
+          y: 15,
+          duration: 0.5,
+        }, "-=0.2");
     }, el);
 
     return () => ctx.revert();
@@ -91,13 +82,17 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
     <section
       ref={heroRef}
       id="home"
-      className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden z-10"
+      className="relative min-h-screen flex items-center justify-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden z-10"
     >
-      {/* Subtle Ambient Backlight in Midnight Navy */}
-      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[550px] bg-brand-500/10 dark:bg-brand-500/15 rounded-full blur-3xl" />
-      <div className="pointer-events-none absolute top-1/2 right-1/4 w-[380px] h-[380px] bg-cyan-500/10 dark:bg-cyan-500/10 rounded-full blur-3xl" />
+      {/* Three.js Interactive Background */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <HeroVisual />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      {/* Subtle Gradient Overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/50 dark:via-navy-900/50 to-slate-50 dark:to-navy-900 z-5" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           {/* Left Column: Typography & Narrative */}
           <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-left">
@@ -126,11 +121,14 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
                 ref={headlineRef}
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]"
               >
-                I build digital products &amp; learn by bringing ideas to{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-indigo-500 to-cyan-400 dark:from-brand-400 dark:via-indigo-300 dark:to-cyan-300">
-                  life.
-                </span>
+                {personalData.name}
               </h1>
+              <p
+                ref={roleRef}
+                className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed"
+              >
+                {personalData.role}
+              </p>
             </div>
 
             {/* Supporting Intro */}
@@ -145,18 +143,20 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
                   href="#projects"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-950 font-semibold text-sm transition-all shadow-md hover:shadow-lg group cursor-pointer"
                 >
-                  <span>View My Work</span>
+                  <span>View Projects</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </MagneticButton>
 
               <MagneticButton>
                 <a
-                  href="#contact"
+                  href={personalData.socials.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 dark:bg-navy-800 hover:bg-slate-200 dark:hover:bg-navy-750 text-slate-900 dark:text-white font-semibold text-sm transition-all border border-slate-200 dark:border-white/[0.08] cursor-pointer"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Let's Connect</span>
+                  <Github className="w-4 h-4" />
+                  <span>GitHub</span>
                 </a>
               </MagneticButton>
 
@@ -172,7 +172,7 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
             {/* Social Channels Row */}
             <div ref={socialsRef} className="pt-4 border-t border-slate-200/80 dark:border-white/[0.08] flex items-center gap-3">
               <span className="text-xs font-mono uppercase text-slate-500 dark:text-slate-400 font-semibold">
-                Find Me On:
+                Connect:
               </span>
               <div className="flex items-center gap-2">
                 <a
@@ -209,70 +209,18 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
                 >
                   <Code className="w-4 h-4" />
                 </a>
-                <a
-                  href={personalData.socials.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="YouTube"
-                  className="p-2.5 rounded-xl bg-white dark:bg-navy-800 border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-slate-300 hover:text-brand-500 hover:border-brand-500/50 shadow-sm transition-all hover:-translate-y-0.5"
-                >
-                  <Youtube className="w-4 h-4" />
-                </a>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Prominent Real Professional Photo Visual */}
-          <div ref={photoRef} className="lg:col-span-5 relative flex justify-center">
-            <div className="relative w-full max-w-md">
-              {/* Backing Depth Layer / Glow */}
-              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-brand-600/25 via-cyan-500/20 to-transparent blur-2xl opacity-75 dark:opacity-60" />
-
-              {/* Main Photo Frame */}
-              <div className="relative rounded-3xl overflow-hidden bg-navy-950 border border-slate-200/80 dark:border-white/[0.1] shadow-2xl">
-                <div className="aspect-[4/5] relative w-full overflow-hidden">
-                  <img
-                    src={personalData.profileImage}
-                    alt="Jyotish Kumar - Software Developer"
-                    className="w-full h-full object-cover object-center grayscale-0 contrast-[1.02] hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  {/* Subtle Gradient Shade at bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-transparent to-transparent" />
-                </div>
-
-                {/* Integrated Editorial Photo Caption */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 text-white flex items-center justify-between backdrop-blur-md bg-navy-950/60 border-t border-white/10">
-                  <div>
-                    <p className="font-bold text-sm tracking-tight text-white">
-                      Jyotish Kumar
-                    </p>
-                    <p className="text-xs text-slate-300 font-mono">
-                      B.Tech CS (Data Science &amp; ML)
-                    </p>
-                  </div>
-                  <div className="px-3 py-1 rounded-full bg-white/15 border border-white/20 text-[11px] font-mono text-emerald-300 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Building &amp; Learning</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Real Project Mini Highlight Pill */}
-              <div className="mt-3.5 p-3 rounded-2xl bg-white/80 dark:bg-navy-800/90 backdrop-blur-md border border-slate-200/80 dark:border-white/[0.08] shadow-sm flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs">
-                  <Sparkles className="w-4 h-4 text-brand-500 flex-shrink-0" />
-                  <span className="text-slate-700 dark:text-slate-300 font-medium">
-                    Latest Build: <strong>SmartAttend AI</strong>
-                  </span>
-                </div>
-                <a
-                  href="https://attendance-management-system-projec-steel.vercel.app/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline"
-                >
-                  Live Demo &rarr;
-                </a>
+          {/* Right Column: Visual indicator */}
+          <div className="lg:col-span-5 relative flex justify-center items-end lg:items-center hidden lg:block">
+            <div className="w-full max-w-md text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/80 dark:bg-navy-800/90 backdrop-blur-md border border-slate-200/80 dark:border-white/[0.08] shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-xs font-mono text-slate-700 dark:text-slate-300">
+                  Real-time 3D Scene
+                </span>
               </div>
             </div>
           </div>

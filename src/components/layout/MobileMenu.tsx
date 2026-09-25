@@ -16,6 +16,7 @@ interface MobileMenuProps {
   navItems: NavItem[];
   activeSection: string;
   onOpenResume: () => void;
+  onNavigate: (href: string) => void;
 }
 
 export function MobileMenu({
@@ -81,7 +82,11 @@ export function MobileMenu({
                 <a
                   key={item.name}
                   href={item.href}
-                  onClick={onClose}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onClose();
+                    onNavigate(item.href);
+                  }}
                   className={`flex items-center justify-between px-4 py-3 rounded-xl font-medium text-base transition-colors ${
                     isActive
                       ? "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-semibold"
@@ -114,7 +119,11 @@ export function MobileMenu({
 
             <a
               href="#contact"
-              onClick={onClose}
+              onClick={(e) => {
+                e.preventDefault();
+                onClose();
+                onNavigate("#contact");
+              }}
               className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold transition-colors"
             >
               <Send className="w-4 h-4" />

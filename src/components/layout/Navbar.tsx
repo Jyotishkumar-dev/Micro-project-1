@@ -3,21 +3,22 @@
 import React, { useState } from "react";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { ThemeToggle } from "../ui/ThemeToggle";
-import { MobileMenu } from "./MobileMenu";
-import { Menu, FileText, Send } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
+import { MobileMenu } from "../layout/MobileMenu";
+import { Menu, FileText, Send, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Lenis from "lenis";
 
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
-  { name: "Journey", href: "#journey" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
   { name: "Contact", href: "#contact" },
 ];
 
-const sectionIds = ["home", "about", "projects", "skills", "journey", "contact"];
+const sectionIds = ["home", "about", "skills", "projects", "experience", "contact"];
 
 interface NavbarProps {
   onOpenResume: () => void;
@@ -27,6 +28,27 @@ export function Navbar({ onOpenResume }: NavbarProps) {
   const { isScrolled } = useScrollPosition();
   const activeSection = useActiveSection(sectionIds, "home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [lenis] = useState(() => {
+    if (typeof window === "undefined") return null;
+    return new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: "vertical",
+      gestureDirection: "vertical",
+      smooth: true,
+      smoothTouch: false,
+    });
+  });
+
+  const scrollToSection = (href: string) => {
+    setMobileMenuOpen(false);
+    if (lenis) {
+      const element = document.querySelector(href);
+      if (element) {
+        lenis.scrollTo(element, { offset: -80 });
+      }
+    }
+  };
 
   return (
     <>
@@ -42,6 +64,10 @@ export function Navbar({ onOpenResume }: NavbarProps) {
           {/* Logo / Personal Brand */}
           <a
             href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("#home");
+            }}
             className="flex items-center gap-2.5 group focus:outline-none"
           >
             <div className="w-8 h-8 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-bold text-sm flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
@@ -52,7 +78,7 @@ export function Navbar({ onOpenResume }: NavbarProps) {
                 Jyotish Kumar
               </span>
               <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono -mt-1 hidden sm:inline-block">
-                STUDENT DEVELOPER
+                CS & TECHNOLOGY STUDENT
               </span>
             </div>
           </a>
@@ -66,6 +92,10 @@ export function Navbar({ onOpenResume }: NavbarProps) {
                 <a
                   key={item.name}
                   href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.href);
+                  }}
                   className={cn(
                     "px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all",
                     isActive
@@ -96,6 +126,10 @@ export function Navbar({ onOpenResume }: NavbarProps) {
             {/* CTA Button */}
             <a
               href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("#contact");
+              }}
               className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold shadow-sm transition-all hover:scale-105"
             >
               <Send className="w-3.5 h-3.5" />
@@ -121,6 +155,7 @@ export function Navbar({ onOpenResume }: NavbarProps) {
         navItems={navItems}
         activeSection={activeSection}
         onOpenResume={onOpenResume}
+        onNavigate={scrollToSection}
       />
     </>
   );

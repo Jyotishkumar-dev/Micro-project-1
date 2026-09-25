@@ -168,7 +168,7 @@ export function ContactSection() {
               </p>
               <div className="pt-2 flex items-center gap-4 text-xs text-slate-500 font-mono">
                 <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5" /> Indore, India
+                  <MapPin className="w-3.5 h-3.5" /> Bokaro, Jharkhand
                 </span>
                 <span className="flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5" /> IST (GMT+5:30)
