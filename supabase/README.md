@@ -67,51 +67,43 @@ drop trigger on_auth_user_before_insert on auth.users;
 
 ## 5. RLS verification
 
-Run these from the SQL editor. The `set local role` trick impersonates each
-caller inside the same session, so the policies are exercised for real.
+`tests/rls_verification.sql` contains a runnable suite (48 assertions) covering
+every case in the spec. Run it in the Supabase SQL editor. It is **destructive** —
+it inserts, updates and deletes rows — so run it against a scratch project, or
+accept that it will churn your content.
 
-```sql
--- 1. Anonymous: can read published portfolio content
-set local role anon;
-select count(*) from projects;      -- > 0
-select count(*) from contact_messages;  -- 0 rows, and no error: no SELECT policy
-reset role;
+It needs a genuinely empty state for the seed-count assertions, so the simplest
+workflow is: run the four migrations on a fresh project, then run the suite once.
 
--- 2. Anonymous: can submit a contact message
-set local role anon;
-insert into contact_messages (name, email, subject, message)
-values ('Test', 'test@example.com', 'Hello', 'This is a test message.');
-reset role;
-
--- 3. Anonymous: cannot write portfolio content
-set local role anon;
-insert into projects (title, slug, description)
-values ('Nope', 'nope', 'should be rejected');  -- ERROR: new row violates row-level security
-reset role;
-
--- 4. Anonymous: cannot read the allowlist
-set local role anon;
-select * from admin_allowlist;  -- ERROR: permission denied for table admin_allowlist
-reset role;
+```bash
+# Locally, against a plain PostgreSQL, apply the shim first so auth.* / storage.*
+# exist, then the migrations, then the suite:
+psql -f supabase/tests/local_supabase_shim.sql
+psql -f supabase/migrations/0001_schema.sql
+psql -f supabase/migrations/0002_rls.sql
+psql -f supabase/migrations/0003_storage.sql
+psql -f supabase/migrations/0004_seed.sql
+psql -f supabase/tests/rls_verification.sql
 ```
 
-Then sign in as the admin in the dashboard and confirm the same write succeeds;
-and create a second (allowlisted) non-admin user to confirm their writes are
-rejected while their reads of published content succeed.
+What the suite covers:
 
-The admin CLI check is quicker still — it just confirms the policies exist and
-are not permissive by accident:
+| Section | Assertions |
+| --- | --- |
+| Seed data | Correct row counts; no invented project URLs; HackathonOS absent |
+| Users | `profiles` row auto-created; allowlist drives `is_admin` |
+| Signup | Non-allowlisted signup **rejected**, allowlisted signup allowed |
+| Anonymous | Reads published content; cannot read messages or the allowlist; cannot write content; **can** submit a contact message; cannot set `spam` itself |
+| Non-admin | Reads published content; every write affects 0 rows; cannot self-promote to admin; cannot upload; cannot reorder |
+| Admin | Full CRUD on all five content tables; can read/mark/delete messages; can upload; `reorder_items` works and rejects a non-whitelisted table |
+| Publishing | Unpublished rows vanish for `anon`, remain visible to the admin |
+| Profile | Public row readable by `anon`; not writable |
 
-```sql
-select tablename, policyname, cmd, roles, qual, with_check
-from pg_policies
-where schemaname = 'public'
-order by tablename, policyname;
-```
+The suite asserts **effect, not just errors**. `INSERT` raises when RLS blocks
+it, but `UPDATE`/`DELETE` quietly affect 0 rows — so the assertions check the
+row count. A suite that only checked for errors would report false confidence.
 
-Every portfolio table should show a `*_select_published` policy with
-`published = true or is_admin()`, and `contact_messages` should have no policy
-whose `roles` include `anon` for `SELECT`.
+Last run against PostgreSQL 16: **48 passed, 0 failed.**
 
 ## 6. Storage
 

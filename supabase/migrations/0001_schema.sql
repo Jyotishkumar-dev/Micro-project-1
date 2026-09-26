@@ -21,33 +21,6 @@ begin
 end;
 $$;
 
--- Single source of truth for "is this request an admin?".
---
--- SECURITY DEFINER is required: the function reads `public.profiles`, whose RLS
--- would otherwise recurse back into this function. `search_path` is pinned so a
--- malicious temp schema cannot shadow `profiles` or `auth.uid()`.
---
--- A row is admin only if BOTH conditions hold:
---   1. the caller is signed in (auth.uid() is not null), and
---   2. the caller owns a profiles row explicitly flagged is_admin.
-create or replace function public.is_admin()
-returns boolean
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select exists (
-    select 1
-    from public.profiles p
-    where p.id = auth.uid()
-      and p.is_admin
-  );
-$$;
-
-revoke execute on function public.is_admin() from public;
-grant execute on function public.is_admin() to anon, authenticated;
-
 -- ---------------------------------------------------------------------------
 -- admin_allowlist — gate for "the only account(s) allowed to exist"
 --
@@ -82,6 +55,39 @@ create table if not exists public.profiles (
 );
 
 create index if not exists profiles_email_idx on public.profiles (lower(email));
+
+-- ---------------------------------------------------------------------------
+-- is_admin — single source of truth for "is this request an admin?"
+--
+-- Declared here, immediately after `profiles`, because a `language sql` body is
+-- parsed and relation-checked at CREATE time. Defining it earlier, before the
+-- table exists, is a hard error.
+--
+-- SECURITY DEFINER is required: the function reads `public.profiles`, whose RLS
+-- would otherwise recurse back into this function. `search_path` is pinned so a
+-- malicious temp schema cannot shadow `profiles` or `auth.uid()`.
+--
+-- A row is admin only if BOTH conditions hold:
+--   1. the caller is signed in (auth.uid() is not null), and
+--   2. the caller owns a profiles row explicitly flagged is_admin.
+-- ---------------------------------------------------------------------------
+create or replace function public.is_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1
+    from public.profiles p
+    where p.id = auth.uid()
+      and p.is_admin
+  );
+$$;
+
+revoke execute on function public.is_admin() from public;
+grant execute on function public.is_admin() to anon, authenticated;
 
 -- ---------------------------------------------------------------------------
 -- Portfolio content tables
@@ -208,26 +214,32 @@ create index if not exists contact_messages_read_idx on public.contact_messages 
 -- ---------------------------------------------------------------------------
 -- updated_at triggers
 -- ---------------------------------------------------------------------------
+drop trigger if exists profiles_set_updated_at on public.profiles;
 create trigger profiles_set_updated_at
   before update on public.profiles
   for each row execute function public.set_updated_at();
 
+drop trigger if exists projects_set_updated_at on public.projects;
 create trigger projects_set_updated_at
   before update on public.projects
   for each row execute function public.set_updated_at();
 
+drop trigger if exists skills_set_updated_at on public.skills;
 create trigger skills_set_updated_at
   before update on public.skills
   for each row execute function public.set_updated_at();
 
+drop trigger if exists experience_set_updated_at on public.experience;
 create trigger experience_set_updated_at
   before update on public.experience
   for each row execute function public.set_updated_at();
 
+drop trigger if exists certifications_set_updated_at on public.certifications;
 create trigger certifications_set_updated_at
   before update on public.certifications
   for each row execute function public.set_updated_at();
 
+drop trigger if exists achievements_set_updated_at on public.achievements;
 create trigger achievements_set_updated_at
   before update on public.achievements
   for each row execute function public.set_updated_at();

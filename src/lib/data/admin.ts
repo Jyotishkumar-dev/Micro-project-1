@@ -482,15 +482,40 @@ export async function getDashboardStats(): Promise<Result<DashboardStats>> {
 // Reordering (drag or arrow buttons)
 // ---------------------------------------------------------------------------
 
+/**
+ * Persists a new display order.
+ *
+ * `reorder_items` is SECURITY INVOKER, so it fails *closed but quietly*: RLS
+ * filters the rows out and the function returns 0 rather than raising. A caller
+ * that only checked for "no error" would then report success while nothing was
+ * saved. Comparing the affected count against the number of ids sent turns that
+ * silent failure into a visible error.
+ */
 export async function reorder(
   table: ReorderableTable,
   orderedIds: string[]
 ): Promise<Result<number>> {
+  if (orderedIds.length === 0) return { ok: true, data: 0 };
+
   const { data, error } = await getSupabaseBrowserClient().rpc("reorder_items", {
     p_table: table,
     p_ids: orderedIds,
   });
 
   if (error) return fail(error, "Could not save the new order.");
-  return { ok: true, data: data ?? 0 };
+
+  const affected = data ?? 0;
+
+  if (affected !== orderedIds.length) {
+    return {
+      ok: false,
+      error: `Only ${affected} of ${orderedIds.length} rows were reordered. ${
+        affected === 0
+          ? "The database rejected the write — this is usually Row Level Security refusing a non-admin session."
+          : "Some rows could not be updated."
+      }`,
+    };
+  }
+
+  return { ok: true, data: affected };
 }

@@ -38,6 +38,7 @@ alter table public.profiles enable row level security;
 
 -- Public sees only the owner's public row. Signed-in users additionally see
 -- their own row. Admins see everything.
+drop policy if exists "profiles_select_public_or_self_or_admin" on public.profiles;
 create policy "profiles_select_public_or_self_or_admin"
   on public.profiles
   for select
@@ -45,6 +46,7 @@ create policy "profiles_select_public_or_self_or_admin"
 
 -- Self-service profile edit. The is_admin flag is neutralised by the
 -- profiles_protect_admin trigger from 0001, so this cannot be used to escalate.
+drop policy if exists "profiles_update_self" on public.profiles;
 create policy "profiles_update_self"
   on public.profiles
   for update
@@ -62,19 +64,23 @@ alter table public.admin_allowlist enable row level security;
 -- ---------------------------------------------------------------------------
 alter table public.projects enable row level security;
 
+drop policy if exists "projects_select_published" on public.projects;
 create policy "projects_select_published"
   on public.projects for select
   using (published = true or public.is_admin());
 
+drop policy if exists "projects_admin_insert" on public.projects;
 create policy "projects_admin_insert"
   on public.projects for insert
   with check (public.is_admin());
 
+drop policy if exists "projects_admin_update" on public.projects;
 create policy "projects_admin_update"
   on public.projects for update
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists "projects_admin_delete" on public.projects;
 create policy "projects_admin_delete"
   on public.projects for delete
   using (public.is_admin());
@@ -84,19 +90,23 @@ create policy "projects_admin_delete"
 -- ---------------------------------------------------------------------------
 alter table public.skills enable row level security;
 
+drop policy if exists "skills_select_published" on public.skills;
 create policy "skills_select_published"
   on public.skills for select
   using (published = true or public.is_admin());
 
+drop policy if exists "skills_admin_insert" on public.skills;
 create policy "skills_admin_insert"
   on public.skills for insert
   with check (public.is_admin());
 
+drop policy if exists "skills_admin_update" on public.skills;
 create policy "skills_admin_update"
   on public.skills for update
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists "skills_admin_delete" on public.skills;
 create policy "skills_admin_delete"
   on public.skills for delete
   using (public.is_admin());
@@ -106,19 +116,23 @@ create policy "skills_admin_delete"
 -- ---------------------------------------------------------------------------
 alter table public.experience enable row level security;
 
+drop policy if exists "experience_select_published" on public.experience;
 create policy "experience_select_published"
   on public.experience for select
   using (published = true or public.is_admin());
 
+drop policy if exists "experience_admin_insert" on public.experience;
 create policy "experience_admin_insert"
   on public.experience for insert
   with check (public.is_admin());
 
+drop policy if exists "experience_admin_update" on public.experience;
 create policy "experience_admin_update"
   on public.experience for update
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists "experience_admin_delete" on public.experience;
 create policy "experience_admin_delete"
   on public.experience for delete
   using (public.is_admin());
@@ -128,19 +142,23 @@ create policy "experience_admin_delete"
 -- ---------------------------------------------------------------------------
 alter table public.certifications enable row level security;
 
+drop policy if exists "certifications_select_published" on public.certifications;
 create policy "certifications_select_published"
   on public.certifications for select
   using (published = true or public.is_admin());
 
+drop policy if exists "certifications_admin_insert" on public.certifications;
 create policy "certifications_admin_insert"
   on public.certifications for insert
   with check (public.is_admin());
 
+drop policy if exists "certifications_admin_update" on public.certifications;
 create policy "certifications_admin_update"
   on public.certifications for update
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists "certifications_admin_delete" on public.certifications;
 create policy "certifications_admin_delete"
   on public.certifications for delete
   using (public.is_admin());
@@ -150,19 +168,23 @@ create policy "certifications_admin_delete"
 -- ---------------------------------------------------------------------------
 alter table public.achievements enable row level security;
 
+drop policy if exists "achievements_select_published" on public.achievements;
 create policy "achievements_select_published"
   on public.achievements for select
   using (published = true or public.is_admin());
 
+drop policy if exists "achievements_admin_insert" on public.achievements;
 create policy "achievements_admin_insert"
   on public.achievements for insert
   with check (public.is_admin());
 
+drop policy if exists "achievements_admin_update" on public.achievements;
 create policy "achievements_admin_update"
   on public.achievements for update
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists "achievements_admin_delete" on public.achievements;
 create policy "achievements_admin_delete"
   on public.achievements for delete
   using (public.is_admin());
@@ -176,20 +198,24 @@ create policy "achievements_admin_delete"
 -- ---------------------------------------------------------------------------
 alter table public.contact_messages enable row level security;
 
+drop policy if exists "contact_messages_public_insert" on public.contact_messages;
 create policy "contact_messages_public_insert"
   on public.contact_messages for insert
   to anon, authenticated
   with check (spam = false);
 
+drop policy if exists "contact_messages_admin_select" on public.contact_messages;
 create policy "contact_messages_admin_select"
   on public.contact_messages for select
   using (public.is_admin());
 
+drop policy if exists "contact_messages_admin_update" on public.contact_messages;
 create policy "contact_messages_admin_update"
   on public.contact_messages for update
   using (public.is_admin())
   with check (public.is_admin());
 
+drop policy if exists "contact_messages_admin_delete" on public.contact_messages;
 create policy "contact_messages_admin_delete"
   on public.contact_messages for delete
   using (public.is_admin());
