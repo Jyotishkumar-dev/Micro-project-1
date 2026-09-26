@@ -162,9 +162,9 @@ export function SkillsSection({ skills = fallbackSkills }: SkillsSectionProps) {
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h4 className="font-semibold text-sm text-slate-900 dark:text-white truncate">
+                          <h3 className="font-semibold text-sm text-slate-900 dark:text-white truncate">
                             {skill.name}
-                          </h4>
+                          </h3>
                           {skill.highlight && (
                             <Badge variant={getBadgeVariant(skill.category)} size="sm">
                               Core

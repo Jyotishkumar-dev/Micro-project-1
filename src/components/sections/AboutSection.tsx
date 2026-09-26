@@ -97,7 +97,7 @@ export function AboutSection() {
                 <p className="font-semibold text-slate-900 dark:text-white">
                   {personalData.education.institution}
                 </p>
-                <p className="text-slate-500">
+                <p className="text-slate-600 dark:text-slate-400">
                   Powered by {personalData.education.poweredBy}
                 </p>
               </div>

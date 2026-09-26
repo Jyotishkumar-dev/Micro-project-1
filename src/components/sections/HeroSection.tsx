@@ -85,7 +85,7 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
       className="relative min-h-screen flex items-center justify-center pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden z-10"
     >
       {/* Three.js Interactive Background */}
-      <div className="absolute inset-0 z-0" aria-hidden="true">
+      <div className="absolute inset-0 z-0">
         <HeroVisual />
       </div>
 

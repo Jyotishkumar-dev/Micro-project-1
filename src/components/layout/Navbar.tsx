@@ -59,7 +59,7 @@ export function Navbar({ onOpenResume }: NavbarProps) {
             : "py-5 bg-transparent"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between flex-wrap gap-4">
           {/* Logo / Personal Brand */}
           <a
             href="#home"
@@ -67,7 +67,7 @@ export function Navbar({ onOpenResume }: NavbarProps) {
               e.preventDefault();
               scrollToSection("#home");
             }}
-            className="flex items-center gap-2.5 group focus:outline-none"
+            className="flex items-center gap-2.5 group focus:outline-none flex-shrink-0"
           >
             <div className="w-8 h-8 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-bold text-sm flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
               JK
@@ -83,7 +83,7 @@ export function Navbar({ onOpenResume }: NavbarProps) {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 dark:bg-slate-900/70 px-2 py-1.5 rounded-2xl border border-slate-200/70 dark:border-slate-800/70 backdrop-blur-md">
+          <nav role="navigation" aria-label="Main navigation" className="hidden md:flex items-center gap-1 bg-slate-100/80 dark:bg-slate-900/70 px-2 py-1.5 rounded-2xl border border-slate-200/70 dark:border-slate-800/70 backdrop-blur-md md:flex-1 md:justify-center">
             {navItems.map((item) => {
               const sectionId = item.href.replace("#", "");
               const isActive = activeSection === sectionId;
@@ -109,7 +109,7 @@ export function Navbar({ onOpenResume }: NavbarProps) {
           </nav>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 flex-shrink-0">
             {/* Resume Button */}
             <button
               onClick={onOpenResume}

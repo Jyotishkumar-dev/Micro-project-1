@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Jyotish Kumar" }],
   creator: "Jyotish Kumar",
+  alternates: {
+    canonical: "https://jyotishkumar.dev",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

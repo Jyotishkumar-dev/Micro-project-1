@@ -122,9 +122,9 @@ export function ContactSection() {
                     <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-brand-500 transition-colors" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                       LinkedIn
-                    </h4>
+                    </h3>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
                       Professional profile
                     </p>
@@ -145,12 +145,12 @@ export function ContactSection() {
                     </div>
                     <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-brand-500 transition-colors" />
                   </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+<div>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                       GitHub
-                    </h4>
+                    </h3>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Repositories &amp; code
+                      Repositories & code
                     </p>
                   </div>
                 </GlowCard>

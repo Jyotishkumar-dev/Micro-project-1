@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 
 interface ProjectsSectionProps {
-  /** Supabase rows when available; falls back to the bundled copy. */
   projects?: Project[];
 }
 
@@ -28,8 +27,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
   const sectionRef = useRef<HTMLElement | null>(null);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Revalidate whenever the row set changes, and drop stale refs so a removed
-  // project cannot keep animating a DOM node that no longer exists.
   useEffect(() => {
     projectRefs.current = projectRefs.current.slice(0, projects.length);
   }, [projects.length]);
@@ -44,7 +41,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
       projectRefs.current.forEach((card, index) => {
         if (!card) return;
 
-        // Subtle ScrollTrigger reveal with gentle parallax
         gsap.from(card, {
           scrollTrigger: {
             trigger: card,
@@ -57,7 +53,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
           ease: "power3.out",
         });
 
-        // Subtle parallax movement on visual card during scroll
         const visualCard = card.querySelector(".project-visual-box");
         if (visualCard) {
           gsap.to(visualCard, {
@@ -92,11 +87,10 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badgeText="Selected Work"
-          title="Featured Projects &amp; Builds"
+          title="Featured Projects & Builds"
           subtitle="Real-world applications, hackathon prototypes, and web systems built with modern full-stack workflows."
         />
 
-        {/* Editorial Project List */}
         <div className="space-y-16 lg:space-y-24">
           {projects.map((project, index) => {
             const isReversed = index % 2 !== 0;
@@ -114,7 +108,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
                     isReversed ? "lg:flex-row-reverse" : ""
                   }`}
                 >
-                  {/* Visual / Highlights Column */}
                   <div
                     className={`lg:col-span-6 ${
                       isReversed ? "lg:order-2" : "lg:order-1"
@@ -133,15 +126,14 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
                           <span className="text-xs font-mono uppercase tracking-wider text-slate-500 font-semibold">
                             {project.category}
                           </span>
-                          <h4 className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+                          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
                             {project.title}
-                          </h4>
+                          </h3>
                           <p className="text-sm font-medium text-brand-600 dark:text-brand-400 mt-1">
                             {project.tagline}
                           </p>
                         </div>
 
-                        {/* Problem & Contribution Highlights */}
                         <div className="space-y-3 pt-2 text-xs sm:text-sm">
                           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-navy-900 border border-slate-200/60 dark:border-white/[0.06]">
                             <p className="font-semibold text-rose-500 dark:text-rose-400 mb-1">
@@ -165,7 +157,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
                     </div>
                   </div>
 
-                  {/* Project Details & Action Column */}
                   <div
                     className={`lg:col-span-6 space-y-6 ${
                       isReversed ? "lg:order-1" : "lg:order-2"
@@ -183,7 +174,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
                       </p>
                     </div>
 
-                    {/* Tech Stack Pills */}
                     <div>
                       <p className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
                         Technologies Used:
@@ -200,7 +190,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
                       </div>
                     </div>
 
-                    {/* Action CTAs */}
                     <div className="pt-4 flex items-center gap-3 flex-wrap">
                       <MagneticButton>
                         <button
@@ -243,7 +232,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
           })}
         </div>
 
-        {/* Empty state — the owner unpublished every project. */}
         {projects.length === 0 && (
           <div className="text-center py-16 px-6 rounded-3xl border border-dashed border-slate-300 dark:border-white/10">
             <Layers className="w-8 h-8 mx-auto text-slate-400 mb-4" />
@@ -256,7 +244,6 @@ export function ProjectsSection({ projects = fallbackProjects }: ProjectsSection
           </div>
         )}
 
-        {/* Project Case Study Modal */}
         <ProjectModal
           project={selectedProject}
           isOpen={isModalOpen}

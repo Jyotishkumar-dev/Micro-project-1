@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { Points } from "@react-three/drei";
 import * as THREE from "three";
-import dynamic from "next/dynamic";
 
 const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
@@ -13,8 +12,8 @@ const prefersReducedMotion = () =>
 const isMobile = () =>
   typeof window !== "undefined" && window.innerWidth < 768;
 
-const PARTICLE_COUNT = 800;
-const MOBILE_PARTICLE_COUNT = 200;
+const PARTICLE_COUNT = 600;
+const MOBILE_PARTICLE_COUNT = 150;
 
 const ParticleSystem = () => {
   const { scene, camera, viewport, gl } = useThree();
@@ -80,7 +79,9 @@ const ParticleSystem = () => {
       sizeAttenuation: true,
     });
 
-    pointsRef.current.geometry.dispose();
+    if (pointsRef.current.geometry) {
+      pointsRef.current.geometry.dispose();
+    }
     pointsRef.current.geometry = geometry;
     pointsRef.current.material = material;
 
@@ -90,26 +91,27 @@ const ParticleSystem = () => {
     };
   }, [count]);
 
-  useEffect(() => {
-    // Defined inside the effect so the listener is bound to exactly the
-    // viewport it was created for, and so the cleanup closes over the same
-    // function instance it registered.
-    const handleMouseMove = (event: MouseEvent) => {
-      mouseRef.current.x = (event.clientX / viewport.width) * 2 - 1;
-      mouseRef.current.y = -(event.clientY / viewport.height) * 2 + 1;
-    };
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    if (!viewport) return;
+    mouseRef.current.x = (event.clientX / viewport.width) * 2 - 1;
+    mouseRef.current.y = -(event.clientY / viewport.height) * 2 + 1;
+  }, [viewport]);
 
+  useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [viewport.width, viewport.height]);
+  }, [handleMouseMove, viewport?.width, viewport?.height]);
 
   useFrame((state, delta) => {
     if (!pointsRef.current || prefersReducedMotion()) return;
 
     timeRef.current += delta;
-    const positions = pointsRef.current.geometry.attributes.position.array as Float32Array;
-    const velocities = pointsRef.current.geometry.attributes.velocity.array as Float32Array;
-    const alphas = pointsRef.current.geometry.attributes.alpha.array as Float32Array;
+    const positions = pointsRef.current.geometry.attributes.position
+      .array as Float32Array;
+    const velocities = pointsRef.current.geometry.attributes.velocity
+      .array as Float32Array;
+    const alphas = pointsRef.current.geometry.attributes.alpha
+      .array as Float32Array;
 
     for (let i = 0; i < count; i++) {
       positions[i * 3] += velocities[i * 3];
@@ -130,7 +132,9 @@ const ParticleSystem = () => {
       }
 
       const radius = Math.sqrt(
-        positions[i * 3] ** 2 + positions[i * 3 + 1] ** 2 + positions[i * 3 + 2] ** 2
+        positions[i * 3] ** 2 +
+          positions[i * 3 + 1] ** 2 +
+          positions[i * 3 + 2] ** 2
       );
       if (radius > 30) {
         positions[i * 3] *= 0.95;
@@ -172,12 +176,12 @@ const FloatingGeometry = () => {
   useEffect(() => {
     if (!groupRef.current) return;
 
-    const count = isMobile() ? 8 : 15;
+    const count = isMobile() ? 6 : 12;
     const wireframeMaterial = new THREE.MeshBasicMaterial({
       color: 0x6366f1,
       wireframe: true,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.12,
     });
 
     for (let i = 0; i < count; i++) {
@@ -237,7 +241,7 @@ const FloatingGeometry = () => {
       mesh.position.z = data.orbitRadius * Math.cos(data.orbitPhi) - 5;
     });
 
-    groupRef.current.rotation.y += delta * 0.005;
+    groupRef.current.rotation.y += delta * 0.004;
   });
 
   return <group ref={groupRef} />;
@@ -246,10 +250,10 @@ const FloatingGeometry = () => {
 const AmbientLights = () => {
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={0.3} color="#6366f1" />
-      <directionalLight position={[-10, -5, 5]} intensity={0.2} color="#06b6d4" />
-      <pointLight position={[0, 0, 10]} intensity={0.1} color="#818cf8" decay={2} />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[10, 10, 5]} intensity={0.25} color="#6366f1" />
+      <directionalLight position={[-10, -5, 5]} intensity={0.15} color="#06b6d4" />
+      <pointLight position={[0, 0, 10]} intensity={0.08} color="#818cf8" decay={2} />
     </>
   );
 };
@@ -264,31 +268,105 @@ const HeroScene = () => {
   );
 };
 
-export function HeroVisual() {
-  const [mounted, setMounted] = useState(false);
+const CanvasFallback = () => {
+  return (
+    <div
+      className="absolute inset-0 bg-gradient-to-br from-brand-500/8 via-transparent to-cyan-500/8"
+      aria-hidden="true"
+    />
+  );
+};
+
+const HeroSceneWithFallback = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [webglError, setWebglError] = useState(false);
 
   useEffect(() => {
-    if (prefersReducedMotion()) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const context = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    if (!context) {
+      setWebglError(true);
+    }
+  }, []);
+
+  if (webglError) {
+    return <CanvasFallback />;
+  }
+
+  return (
+    <>
+      <Canvas
+        ref={canvasRef}
+        camera={{ position: [0, 0, 25], fov: 50 }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: 0,
+        }}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        }}
+        shadows={false}
+        onCreated={({ gl }) => {
+          // Store reference for potential cleanup
+        }}
+      >
+        <HeroScene />
+      </Canvas>
+    </>
+  );
+};
+
+const HeroSceneWithVisibility = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: "100px", threshold: 0 }
+    );
+
+    const el = sectionRef.current;
+    if (el) observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  if (!isVisible) {
+    return <CanvasFallback />;
+  }
+
+  return <HeroSceneWithFallback />;
+};
+
+export function HeroVisual() {
+  const [mounted, setMounted] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) {
+      setMounted(false);
+      return;
+    }
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    return (
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-transparent to-cyan-500/10"
-        aria-hidden="true"
-      />
-    );
+    return <CanvasFallback />;
   }
 
   return (
-    <Canvas
-      camera={{ position: [0, 0, 25], fov: 50 }}
-      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0 }}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-      shadows={false}
-    >
-      <HeroScene />
-    </Canvas>
+    <div ref={sectionRef} className="relative w-full h-full">
+      <HeroSceneWithVisibility />
+    </div>
   );
 }
