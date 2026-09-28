@@ -20,7 +20,7 @@ export const personalData = {
     location: "Indore, Madhya Pradesh",
   },
   availability: "Open to internships & collaborative projects",
-  location: "Bokaro, Jharkhand",
+  location: "Indore, India",
   timezone: "IST (GMT+5:30)",
   email: "jyotishyt58@gmail.com",
   profileImage: "/my_pic2.jpeg",

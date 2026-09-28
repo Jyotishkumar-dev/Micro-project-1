@@ -180,7 +180,7 @@ export function SettingsManager({
                     id="settings-location"
                     value={values.location}
                     onChange={(event) => set("location", event.target.value)}
-                    placeholder="Bokaro, Jharkhand"
+                    placeholder="Indore, India"
                   />
                 </Field>
               </div>

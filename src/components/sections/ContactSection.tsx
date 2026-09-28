@@ -18,7 +18,15 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-export function ContactSection() {
+type ContactSectionProps = {
+  location?: string;
+  timezone?: string;
+};
+
+export function ContactSection({
+  location = personalData.location,
+  timezone = personalData.timezone,
+}: ContactSectionProps) {
   const [copied, setCopied] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
   const leftColRef = useRef<HTMLDivElement | null>(null);
@@ -168,10 +176,10 @@ export function ContactSection() {
               </p>
               <div className="pt-2 flex items-center gap-4 text-xs text-slate-500 font-mono">
                 <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5" /> Bokaro, Jharkhand
+                  <MapPin className="w-3.5 h-3.5" /> {location}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" /> IST (GMT+5:30)
+                  <Clock className="w-3.5 h-3.5" /> {timezone}
                 </span>
               </div>
             </GlowCard>

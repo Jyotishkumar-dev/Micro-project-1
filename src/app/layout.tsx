@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { SITE_URL } from "@/lib/site-url";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jyotishkumar.dev"),
+  metadataBase: new URL(SITE_URL),
   title: "Jyotish Kumar | Developer & Product Builder",
   description:
     "Portfolio of Jyotish Kumar — a developer focused on building modern web applications, AI-powered products, and meaningful digital experiences.",
@@ -21,12 +22,12 @@ export const metadata: Metadata = {
   authors: [{ name: "Jyotish Kumar" }],
   creator: "Jyotish Kumar",
   alternates: {
-    canonical: "https://jyotishkumar.dev",
+    canonical: SITE_URL,
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://jyotishkumar.dev",
+    url: SITE_URL,
     title: "Jyotish Kumar | Developer & Product Builder",
     description:
       "I build modern digital experiences and turn ideas into real products. Explore my projects, skills, case studies, and engineering journey.",
