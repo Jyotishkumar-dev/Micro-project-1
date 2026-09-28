@@ -62,8 +62,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Jyotish Kumar",
-    url: "https://jyotishkumar.dev",
-    image: "https://jyotishkumar.dev/my_pic2.jpeg",
+    url: SITE_URL,
+    image: `${SITE_URL}/my_pic2.jpeg`,
     sameAs: [
       "https://github.com/Jyotishkumar-dev",
       "https://www.linkedin.com/in/jyotish-kumar-0601bb387/",
