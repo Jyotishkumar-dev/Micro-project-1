@@ -135,7 +135,10 @@ set request.jwt.claim.sub = '';
 select pg_temp.expect_rows($$select count(*) from public.projects$$, 2, 'anon reads the 2 published projects');
 select pg_temp.expect_rows($$select count(*) from public.skills$$, 29, 'anon reads published skills');
 select pg_temp.expect_rows($$select count(*) from public.experience$$, 5, 'anon reads published experience');
-select pg_temp.expect_rows($$select count(*) from public.contact_messages$$, 0, 'anon reads 0 messages (no SELECT policy)');
+-- anon holds INSERT only on contact_messages: the read is refused at the
+-- privilege layer, which is strictly stronger than an empty RLS result set.
+select pg_temp.expect(
+  $$select count(*) from public.contact_messages$$, false, 'anon cannot read messages (no SELECT privilege)');
 
 select pg_temp.expect($$select * from public.admin_allowlist$$, false, 'anon cannot read admin_allowlist');
 select pg_temp.expect(
@@ -163,10 +166,23 @@ reset role; reset request.jwt.claim.role; reset request.jwt.claim.sub;
 
 \echo ''
 \echo '================== 5. SIGNED-IN NON-ADMIN =================='
+-- A non-allowlisted signed-in user cannot be created through the public signup
+-- path (section 3 proved the block works), so the harness suspends the block
+-- trigger purely to obtain a non-admin account to test the policies with. The
+-- trigger is restored immediately afterwards.
+alter table auth.users disable trigger on_auth_user_before_insert;
 insert into auth.users (id, email) values ('66666666-6666-6666-6666-666666666666', 'colleague@example.com');
-select case when not is_admin then 'PASS' else 'FAIL' end as result,
-       'non-allowlisted user is_admin = false' as check from public.profiles
- where id = '66666666-6666-6666-6666-666666666666';
+alter table auth.users enable trigger on_auth_user_before_insert;
+select pg_temp.check(
+  (select is_admin = false from public.profiles
+    where id = '66666666-6666-6666-6666-666666666666'),
+  'non-allowlisted user is_admin = false');
+select pg_temp.check(
+  exists (select 1 from pg_trigger t
+          where t.tgrelid = 'auth.users'::regclass
+            and t.tgname = 'on_auth_user_before_insert'
+            and t.tgenabled = 'O'),
+  'signup block trigger is re-enabled after the fixture insert');
 
 set role authenticated;
 set request.jwt.claim.role = 'authenticated';
@@ -277,7 +293,7 @@ reset role; reset request.jwt.claim.role; reset request.jwt.claim.sub;
 \echo '================== 7. PUBLIC PROFILE VISIBILITY =================='
 update public.profiles set is_public = true, full_name = 'Jyotish Kumar' where id = '11111111-1111-1111-1111-111111111111';
 set role anon; set request.jwt.claim.role = 'anon';
-select pg_temp.expect_rows($$select count(*) from public.profiles where is_public$$$, 1, 'anon sees the public profile row');
+select pg_temp.expect_rows($$select count(*) from public.profiles where is_public$$, 1, 'anon sees the public profile row');
 select pg_temp.expect_no_effect($$update public.profiles set headline='x'$$, 'anon cannot update a profile');
 reset role; reset request.jwt.claim.role; reset request.jwt.claim.sub;
 

@@ -67,7 +67,7 @@ drop trigger on_auth_user_before_insert on auth.users;
 
 ## 5. RLS verification
 
-`tests/rls_verification.sql` contains a runnable suite (48 assertions) covering
+`tests/rls_verification.sql` contains a runnable suite (61 assertions) covering
 every case in the spec. Run it in the Supabase SQL editor. It is **destructive** —
 it inserts, updates and deletes rows — so run it against a scratch project, or
 accept that it will churn your content.
@@ -78,13 +78,30 @@ workflow is: run the four migrations on a fresh project, then run the suite once
 ```bash
 # Locally, against a plain PostgreSQL, apply the shim first so auth.* / storage.*
 # exist, then the migrations, then the suite:
-psql -f supabase/tests/local_supabase_shim.sql
-psql -f supabase/migrations/0001_schema.sql
-psql -f supabase/migrations/0002_rls.sql
-psql -f supabase/migrations/0003_storage.sql
-psql -f supabase/migrations/0004_seed.sql
-psql -f supabase/tests/rls_verification.sql
+createdb portfolio_verify
+psql -d portfolio_verify -f supabase/tests/local_supabase_shim.sql
+psql -d portfolio_verify -f supabase/migrations/0001_schema.sql
+psql -d portfolio_verify -f supabase/migrations/0002_rls.sql
+psql -d portfolio_verify -f supabase/migrations/0003_storage.sql
+psql -d portfolio_verify -f supabase/migrations/0004_seed.sql
+psql -d portfolio_verify -f supabase/tests/rls_verification.sql
 ```
+
+`tests/local_supabase_shim.sql` is a **test fixture only** — it stands up
+`auth.users`, `auth.uid()`, `auth.role()`, `storage.buckets`, `storage.objects`
+and the `anon` / `authenticated` / `service_role` roles so the migrations can be
+exercised off-platform. It is never applied to a real Supabase project, which
+already provides all of it.
+
+Two harness details worth knowing:
+
+- Section 5 needs a signed-in non-admin account, which the signup block
+  correctly prevents from being created. The suite therefore suspends
+  `on_auth_user_before_insert` for that single fixture insert and asserts the
+  trigger is re-enabled immediately afterwards.
+- `anon` holds `INSERT` only on `contact_messages`, so the "anonymous cannot
+  read messages" case is asserted as a refused statement rather than an empty
+  result set — a privilege denial is stronger than an RLS filter.
 
 What the suite covers:
 
@@ -103,7 +120,10 @@ The suite asserts **effect, not just errors**. `INSERT` raises when RLS blocks
 it, but `UPDATE`/`DELETE` quietly affect 0 rows — so the assertions check the
 row count. A suite that only checked for errors would report false confidence.
 
-Last run against PostgreSQL 16: **48 passed, 0 failed.**
+Last run against PostgreSQL 16 (shim + all four migrations + suite):
+**61 passed, 0 failed, 0 errors.** All four migrations were then re-applied to
+the same database to confirm they are safely re-runnable and that the seeds do
+not duplicate.
 
 ## 6. Storage
 
