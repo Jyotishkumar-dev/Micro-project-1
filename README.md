@@ -154,8 +154,13 @@ See [`.env.example`](./.env.example).
 | `NEXT_PUBLIC_SUPABASE_URL` | public | Project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | public | anon key; RLS-limited |
 | `SUPABASE_SERVICE_ROLE_KEY` | **server only** | Contact intake; bypasses RLS |
+| `NEXT_PUBLIC_SITE_URL` | public, optional | Canonical origin for SEO. Unset → Vercel production URL → `localhost:3000`. Set it when you attach a custom domain. |
 
 `.env` and `.env.local` are git-ignored. Never commit real values.
+
+`canonical`, `openGraph.url`, `robots.txt` and `sitemap.xml` all read the single
+`SITE_URL` constant from [`src/lib/site-url.ts`](./src/lib/site-url.ts), so they
+cannot drift apart or advertise a domain the site is not served from.
 
 ---
 
